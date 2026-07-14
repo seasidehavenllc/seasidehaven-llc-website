@@ -133,29 +133,58 @@
 
       <!-- FILTER BUTTONS -->
       <div class="filter-row">
-        <button class="filter-btn active">View All</button>
-        <button class="filter-btn">Remodeling</button>
-        <button class="filter-btn">Landscaping</button>
-        <button class="filter-btn">Rentals</button>
-        <button class="filter-btn">Vending</button>
+        <button class="filter-btn active" data-filter="all">View All</button>
+        <button class="filter-btn" data-filter="remodeling">Remodeling</button>
+        <button class="filter-btn" data-filter="landscaping">Landscaping</button>
+        <button class="filter-btn" data-filter="rentals">Rentals</button>
+        <button class="filter-btn" data-filter="vending">Vending</button>
       </div>
 
-      <!-- TESTIMONIAL CARDS -->
-      <div class="bubble-grid spotlight-container">
-        <div class="bubble-card">
+      <!-- ===========================
+           TESTIMONIAL CARDS (Dynamic)
+      ============================ -->
+      <div id="testimonialContainer" class="bubble-grid spotlight-container">
+
+        <div class="bubble-card" data-category="remodeling">
           <h3>Homeowner</h3>
           <p>“They made our remodel simple and stress-free. Honest work and great communication.”</p>
         </div>
 
-        <div class="bubble-card">
+        <div class="bubble-card" data-category="landscaping">
           <h3>Property Manager</h3>
-          <p>“One company handling landscaping, repairs, and turnovers changed everything for us.”</p>
+          <p>“Their landscaping team keeps our rentals looking sharp all year.”</p>
         </div>
 
-        <div class="bubble-card">
+        <div class="bubble-card" data-category="rentals">
+          <h3>Landlord</h3>
+          <p>“Turnovers are fast and clean. My tenants love the consistency.”</p>
+        </div>
+
+        <div class="bubble-card" data-category="vending">
           <h3>Small Business Owner</h3>
           <p>“Their vending services added convenience for customers without extra overhead.”</p>
         </div>
+
+        <div class="bubble-card" data-category="remodeling">
+          <h3>Kitchen Remodel Client</h3>
+          <p>“Our kitchen looks brand new. Quality work and great communication.”</p>
+        </div>
+
+        <div class="bubble-card" data-category="landscaping">
+          <h3>Homeowner</h3>
+          <p>“Mulch, trimming, mowing — everything is done right every time.”</p>
+        </div>
+
+        <div class="bubble-card" data-category="rentals">
+          <h3>Airbnb Host</h3>
+          <p>“They handle cleaning and turnovers flawlessly. My guests always compliment the space.”</p>
+        </div>
+
+        <div class="bubble-card" data-category="vending">
+          <h3>Office Manager</h3>
+          <p>“Employees love the vending options. Easy setup and reliable restocking.”</p>
+        </div>
+
       </div>
     </section>
 
@@ -179,51 +208,64 @@
 
   </main>
 
-<!-- ===========================
-     FOOTER
-=========================== -->
-<footer id="footer" class="site-footer">
+  <!-- ===========================
+       FOOTER
+  ============================ -->
+  <footer id="footer" class="site-footer">
+
+    <!-- ===========================
+         FOOTER COLUMNS
+    ============================ -->
+    <div class="footer-columns">
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="partner.html">Partner</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="remodeling.html">Remodeling</a></li>
+          <li><a href="landscaping.html">Landscaping</a></li>
+          <li><a href="rentals.html">Rentals</a></li>
+          <li><a href="vending.html">Vending</a></li>
+          <li><a href="laundromats.html">Laundromats</a></li>
+          <li><a href="junk-removal.html">Junk Removal</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="contact.html">Request a Quote</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- ===========================
+         FOOTER BOTTOM
+    ============================ -->
+    <div class="footer-bottom">
+      <span>© Seaside Haven LLC · All Rights Reserved</span>
+      <span>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</span>
+    </div>
+
+  </footer>
 
   <!-- ===========================
-       FOOTER COLUMNS
+       BACK TO TOP BUTTON
   ============================ -->
-  <div class="footer-columns">
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="partner.html">Partner</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="remodeling.html">Remodeling</a></li>
-        <li><a href="landscaping.html">Landscaping</a></li>
-        <li><a href="rentals.html">Rentals</a></li>
-        <li><a href="vending.html">Vending</a></li>
-        <li><a href="laundromats.html">Laundromats</a></li>
-        <li><a href="junk-removal.html">Junk Removal</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="contact.html">Request a Quote</a></li>
-      </ul>
-    </div>
-
-  </div>
+  <div id="backToTop" class="back-to-top">↑</div>
 
   <!-- ===========================
-       FOOTER BOTTOM
+       SCRIPTS
   ============================ -->
-  <div class="footer-bottom">
-    <span>© Seaside Haven LLC · All Rights Reserved</span>
-    <span>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</span>
-  </div>
+  <script src="script.js"></script>
 
-</footer>
+</body>
+</html>

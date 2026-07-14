@@ -259,43 +259,6 @@ a {
 }
 
 /* =========================================================
-   DIAGRAM SECTION
-========================================================= */
-.section-diagram .diagram-wrapper {
-  margin-top: 24px;
-  display: flex;
-  justify-content: center;
-}
-
-.diagram-center {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-  text-align: center;
-}
-
-.diagram-node {
-  padding: 10px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  font-size: 0.9rem;
-  background: rgba(5, 8, 20, 0.9);
-}
-
-.diagram-features {
-  margin-top: 24px;
-}
-
-.diagram-bottom-tags {
-  margin-top: 20px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 0.85rem;
-  opacity: 0.8;
-}
-
-/* =========================================================
    FILTER BUTTONS
 ========================================================= */
 .filter-row {
@@ -328,16 +291,6 @@ a {
   padding: 30px 20px 24px;
   background: #040611;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.footer-top {
-  max-width: 1100px;
-  margin: 0 auto 20px;
-}
-
-.footer-cta-main h3 {
-  margin: 0 0 12px;
-  font-size: 1.4rem;
 }
 
 .footer-columns {
