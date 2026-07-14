@@ -1,3 +1,6 @@
+/* =========================================================
+   GLOBAL SETTINGS
+========================================================= */
 html {
   scroll-behavior: smooth;
 }
@@ -15,7 +18,9 @@ a {
   text-decoration: none;
 }
 
-/* Header / Nav */
+/* =========================================================
+   HEADER / NAVIGATION
+========================================================= */
 .site-header {
   display: flex;
   justify-content: space-between;
@@ -25,7 +30,8 @@ a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+  backdrop-filter: blur(12px);
 }
 
 .logo {
@@ -57,7 +63,9 @@ a {
   opacity: 1;
 }
 
-/* Hero */
+/* =========================================================
+   HERO SECTION
+========================================================= */
 .hero {
   padding: 70px 20px 60px;
   background: radial-gradient(circle at top left, #1b2a5a, #050814 60%);
@@ -96,7 +104,7 @@ a {
   margin-top: 22px;
 }
 
-/* Hero image placeholder */
+/* HERO IMAGE */
 .hero-image {
   position: relative;
   border-radius: 18px;
@@ -123,7 +131,9 @@ a {
   opacity: 0.85;
 }
 
-/* Buttons */
+/* =========================================================
+   BUTTONS
+========================================================= */
 .btn-primary,
 .btn-secondary {
   display: inline-block;
@@ -154,7 +164,9 @@ a {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* Sections */
+/* =========================================================
+   SECTIONS
+========================================================= */
 .section {
   max-width: 1100px;
   margin: 0 auto;
@@ -189,7 +201,9 @@ a {
   font-size: 0.95rem;
 }
 
-/* Bubble grid */
+/* =========================================================
+   BUBBLE GRID & GLOW CARDS
+========================================================= */
 .bubble-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -197,7 +211,6 @@ a {
   margin-top: 24px;
 }
 
-/* Glow spotlight cards */
 .bubble-card {
   position: relative;
   background: #0b1022;
@@ -207,6 +220,7 @@ a {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.45);
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .bubble-card::before {
@@ -244,7 +258,9 @@ a {
   opacity: 0.85;
 }
 
-/* Diagram section */
+/* =========================================================
+   DIAGRAM SECTION
+========================================================= */
 .section-diagram .diagram-wrapper {
   margin-top: 24px;
   display: flex;
@@ -279,7 +295,9 @@ a {
   opacity: 0.8;
 }
 
-/* Filters */
+/* =========================================================
+   FILTER BUTTONS
+========================================================= */
 .filter-row {
   display: flex;
   flex-wrap: wrap;
@@ -302,7 +320,9 @@ a {
   border-color: #3b82f6;
 }
 
-/* Footer */
+/* =========================================================
+   FOOTER
+========================================================= */
 .site-footer {
   margin-top: 40px;
   padding: 30px 20px 24px;
@@ -356,7 +376,33 @@ a {
   opacity: 0.8;
 }
 
-/* Responsive */
+/* =========================================================
+   BACK TO TOP BUTTON
+========================================================= */
+.back-to-top {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: #3b82f6;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 999px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.back-to-top.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 @media (max-width: 800px) {
   .hero-inner {
     grid-template-columns: minmax(0, 1fr);
