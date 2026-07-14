@@ -8,7 +8,7 @@ html {
 body {
   margin: 0;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #050814;
+  background: #031a1a; /* deep teal-black */
   color: #f5f7ff;
   line-height: 1.6;
 }
@@ -26,13 +26,13 @@ a {
   justify-content: space-between;
   align-items: center;
   padding: 14px 20px;
-  background: rgba(6, 10, 24, 0.85);
+  background: rgba(0, 60, 60, 0.85); /* teal glass */
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: sticky;
   top: 0;
   z-index: 50;
   backdrop-filter: blur(20px);
-  border-radius: 0 0 30px 30px; /* Rounded nav bar */
+  border-radius: 0 0 30px 30px;
 }
 
 .logo {
@@ -54,7 +54,7 @@ a {
 }
 
 .nav a {
-  padding: 8px 16px; /* More rounded + padded */
+  padding: 8px 16px;
   border-radius: 999px;
   opacity: 0.85;
   transition: 0.2s ease;
@@ -66,7 +66,7 @@ a {
 }
 
 .nav a.active {
-  background: #3b82f6;
+  background: #14b8a6; /* teal accent */
   color: #f5f7ff;
   opacity: 1;
 }
@@ -76,7 +76,7 @@ a {
 ========================================================= */
 .hero {
   padding: 70px 20px 60px;
-  background: radial-gradient(circle at top left, #1b2a5a, #050814 60%);
+  background: radial-gradient(circle at top left, #0d4d4d, #031a1a 60%); /* teal → black */
 }
 
 .hero-inner {
@@ -117,7 +117,7 @@ a {
   position: relative;
   border-radius: 18px;
   overflow: hidden;
-  background: #0b1022;
+  background: #073535; /* deep teal */
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.7);
   min-height: 220px;
@@ -129,7 +129,7 @@ a {
 .hero-image-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.35), transparent 70%);
+  background: radial-gradient(circle at top left, rgba(20, 184, 166, 0.35), transparent 70%);
   opacity: 0.6;
   pointer-events: none;
 }
@@ -154,12 +154,12 @@ a {
 }
 
 .btn-primary {
-  background: #3b82f6;
+  background: #14b8a6; /* teal */
   color: #f5f7ff;
 }
 
 .btn-primary:hover {
-  background: #5a96ff;
+  background: #2dd4bf; /* lighter teal */
 }
 
 .btn-secondary {
@@ -182,7 +182,7 @@ a {
 }
 
 .section-dark {
-  background: #060a18;
+  background: #073535; /* teal-dark */
   border-radius: 18px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
   margin-top: 30px;
@@ -221,7 +221,7 @@ a {
 
 .bubble-card {
   position: relative;
-  background: #0b1022;
+  background: #0a2f2f; /* teal-black */
   border-radius: 18px;
   padding: 16px 16px 18px;
   border: 1px solid rgba(255, 255, 255, 0.06);
@@ -239,7 +239,7 @@ a {
   width: 260px;
   height: 260px;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.35), transparent 70%);
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.35), transparent 70%);
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
@@ -252,7 +252,7 @@ a {
 .bubble-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.65);
-  border-color: rgba(59, 130, 246, 0.9);
+  border-color: rgba(20, 184, 166, 0.9); /* teal glow */
 }
 
 .bubble-card h3 {
@@ -297,8 +297,8 @@ a {
 }
 
 .filter-btn.active {
-  background: #3b82f6;
-  border-color: #3b82f6;
+  background: #14b8a6;
+  border-color: #14b8a6;
 }
 
 /* =========================================================
@@ -307,7 +307,7 @@ a {
 .site-footer {
   margin-top: 40px;
   padding: 30px 20px 24px;
-  background: #040611;
+  background: #031a1a; /* black-teal */
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
@@ -354,7 +354,7 @@ a {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  background: #3b82f6;
+  background: #14b8a6;
   color: #fff;
   padding: 10px 14px;
   border-radius: 999px;
