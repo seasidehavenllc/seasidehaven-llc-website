@@ -1,0 +1,82 @@
+/* GLOBAL PAGE LAYOUT */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #222;
+  background: #f7f7f7;
+}
+
+.page {
+  width: 8.5in;
+  min-height: 11in;
+  padding: 1in;
+  background: white;
+  box-sizing: border-box;
+}
+
+/* HEADER GRADIENT */
+.header-band {
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(90deg, #000000, #149ab859);
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.header-band img {
+  height: 70px;
+  width: auto;
+  margin-right: 20px;
+}
+
+/* HEADER TEXT */
+.header-text {
+  color: white;
+  line-height: 1.4;
+}
+
+.header-text .company {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.header-text .tagline {
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* TITLE */
+.title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #0f6f86;
+  margin-bottom: 25px;
+}
+
+/* BODY CONTENT */
+.body {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* SECTION TITLES */
+.section-title {
+  font-weight: 600;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+/* FOOTER */
+.footer {
+  margin-top: 40px;
+  font-size: 0.8rem;
+  color: #777;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}

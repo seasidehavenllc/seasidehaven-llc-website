@@ -1,0 +1,16 @@
+Seaside Haven LLC
+Document Naming Standards
+
+Format:
+[Division] – [Document Type] – [Title] – [Date]
+
+Examples:
+Remodeling – Contract – Kitchen Renovation Agreement – 2026-07-14
+Landscaping – Checklist – Weekly Lawn Maintenance – 2026-07-14
+Pressure Washing – Waiver – Chemical Disclosure – 2026-07-14
+
+Rules:
+• Use YYYY-MM-DD format for dates.
+• Avoid special characters.
+• Keep names clear and descriptive.
+• Store documents in their correct division folders.
