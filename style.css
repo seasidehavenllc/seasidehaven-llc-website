@@ -62,7 +62,8 @@ a {
 
 .nav a:hover {
   opacity: 1;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.12); /* glass glow */
+  color: #fff;
 }
 
 .nav a.active {
@@ -137,6 +138,20 @@ a {
 .hero-image-fake span {
   font-size: 0.85rem;
   opacity: 0.85;
+}
+
+.badge-coming-soon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #149ab8;
+  color: #fff;
+  padding: 4px 10px;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  pointer-events: none;
 }
 
 /* =========================================================
@@ -291,6 +306,12 @@ a {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 20px;
+}
+
+.filter-btn:hover {
+  background: rgba(255, 255, 255, 0.12); /* glass glow */
+  border-color: rgba(255, 255, 255, 0.25);
+  color: #fff;
 }
 
 .filter-btn {
