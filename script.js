@@ -6,6 +6,83 @@ function toggleMobileNav() {
   mobileNav.classList.toggle("show");
 }
 
+function showPricing(type) {
+  const panel = document.getElementById("pricingPanel");
+  const title = document.getElementById("pricingTitle");
+  const intro = document.getElementById("pricingIntro");
+  const content = document.getElementById("pricingContent");
+
+  panel.style.display = "block";
+
+  // Add bubble glow animation
+  panel.querySelector(".bubble-card").style.animation = "bubbleGlow 0.4s ease";
+
+  const pricing = {
+  mowing: {
+    title: "Mowing Pricing",
+    intro: "Pricing based on yard size, terrain, and obstacles.",
+    html: `
+      <p><strong>Small Yard (0.1–0.25 acre):</strong> <span class="price-highlight">$35–$55</span></p>
+      <p><strong>Medium Yard (0.25–0.5 acre):</strong> <span class="price-highlight">$55–$75</span></p>
+      <p><strong>Large Yard (0.5–1 acre):</strong> <span class="price-highlight">$75–$120</span></p>
+      <p><strong>Over 1 acre:</strong> <span class="price-highlight">Custom Quote</span></p>
+    `
+  },
+
+  weed: {
+    title: "Weed Eating Pricing",
+    intro: "Fence lines, ditches, tight areas, and property edges.",
+    html: `
+      <p><strong>Per Linear Foot:</strong> <span class="price-highlight">$0.25–$0.45</span></p>
+      <p><strong>Heavy Overgrowth:</strong> <span class="price-highlight">+$10–$25</span></p>
+    `
+  },
+
+  edging: {
+    title: "Edging Pricing",
+    intro: "Driveways, sidewalks, patios, and walkways.",
+    html: `
+      <p><strong>Per Linear Foot:</strong> <span class="price-highlight">$0.35–$0.60</span></p>
+      <p><strong>Full Property Edge:</strong> <span class="price-highlight">$25–$60</span></p>
+    `
+  },
+
+  bush: {
+    title: "Bush Trimming Pricing",
+    intro: "Shaping, height reduction, and seasonal trimming.",
+    html: `
+      <p><strong>Small Bushes:</strong> <span class="price-highlight">$5–$12</span></p>
+      <p><strong>Medium Bushes:</strong> <span class="price-highlight">$12–$20</span></p>
+      <p><strong>Large Bushes:</strong> <span class="price-highlight">$20–$40</span></p>
+    `
+  },
+
+  treetrim: {
+    title: "Tree Trimming Pricing",
+    intro: "Branch removal, canopy shaping, and safety trimming.",
+    html: `
+      <p><strong>Small Trees (under 15ft):</strong> <span class="price-highlight">$75–$150</span></p>
+      <p><strong>Medium Trees (15–30ft):</strong> <span class="price-highlight">$150–$350</span></p>
+      <p><strong>Large Trees (30–50ft):</strong> <span class="price-highlight">$350–$800</span></p>
+    `
+  },
+
+  treeremoval: {
+    title: "Tree Removal Pricing",
+    intro: "Safe removal of small, medium, and large trees.",
+    html: `
+      <p><strong>Small Trees (under 15ft):</strong> <span class="price-highlight">$150–$300</span></p>
+      <p><strong>Medium Trees (15–30ft):</strong> <span class="price-highlight">$300–$700</span></p>
+      <p><strong>Large Trees (30–50ft):</strong> <span class="price-highlight">$700–$1500+</span></p>
+    `
+  }
+};
+
+  title.textContent = pricing[type].title;
+  intro.textContent = pricing[type].intro;
+  content.innerHTML = pricing[type].html;
+}
+
 /* =========================================================
    SPOTLIGHT GLOW EFFECT
    (Mouse‑tracking illumination on .bubble-card)

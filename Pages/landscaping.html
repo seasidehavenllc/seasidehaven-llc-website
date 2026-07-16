@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Landscaping · Seaside Haven LLC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo">
+    <a href="../index.html">
+      <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+    </a>
+  </div>
+
+  <nav class="nav">
+    <a href="../index.html">Home</a>
+    <a href="services.html">Services</a>
+    <a href="about.html">About</a>
+    <a href="partner.html">Partner</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+
+  <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="services.html"><i class="fas fa-tools"></i> Services</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="partner.html"><i class="fas fa-handshake"></i> Partner</a>
+    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="getquote.html"><i class="fas fa-file-signature"></i> Request a Quote</a>
+  </div>
+</header>
+
+<main>
+
+<!-- PAGE TITLE -->
+<section class="section section-dark">
+  <div class="section-header">
+    <p class="section-kicker">Landscaping</p>
+    <h2>Landscaping & Lawn Care</h2>
+    <p class="section-intro">
+      Full-service landscaping including mowing, weed eating, edging, bush trimming, tree trimming, and tree removal.
+    </p>
+  </div>
+</section>
+
+<!-- SERVICES GRID -->
+<section class="section section-dark">
+  <div class="bubble-grid spotlight-container">
+
+    <div class="bubble-card" onclick="showPricing('mowing')">
+      <i class="fas fa-grass service-icon"></i>
+      <h3>Mowing</h3>
+      <p>Weekly, bi-weekly, or one-time mowing services.</p>
+    </div>
+
+    <div class="bubble-card" onclick="showPricing('weed')">
+      <i class="fas fa-leaf service-icon"></i>
+      <h3>Weed Eating</h3>
+      <p>Fence lines, ditches, tight spots, and property edges.</p>
+    </div>
+
+    <div class="bubble-card" onclick="showPricing('edging')">
+      <i class="fas fa-border-style service-icon"></i>
+      <h3>Edging</h3>
+      <p>Driveways, sidewalks, patios, and walkways.</p>
+    </div>
+
+    <div class="bubble-card" onclick="showPricing('bush')">
+      <i class="fas fa-tree service-icon"></i>
+      <h3>Bush Trimming</h3>
+      <p>Shaping, height reduction, and seasonal maintenance.</p>
+    </div>
+
+    <div class="bubble-card" onclick="showPricing('treetrim')">
+      <i class="fas fa-tree service-icon"></i>
+      <h3>Tree Trimming</h3>
+      <p>Branch removal, canopy shaping, and safety trimming.</p>
+    </div>
+
+    <div class="bubble-card" onclick="showPricing('treeremoval')">
+      <i class="fas fa-tree service-icon"></i>
+      <h3>Tree Removal</h3>
+      <p>Safe removal of small, medium, and large trees.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING PANEL -->
+<section id="pricingPanel" class="section section-dark" style="display:none;">
+  <div class="bubble-card" style="max-width:900px; margin:0 auto; padding:25px;">
+    
+    <div class="section-header">
+      <p class="section-kicker">Pricing</p>
+      <h2 id="pricingTitle">Service Pricing</h2>
+      <p class="section-intro" id="pricingIntro">Detailed pricing based on your property.</p>
+    </div>
+
+    <div id="pricingContent" style="margin-top:20px; font-size:1rem; opacity:0.9;">
+      <!-- JS injects pricing here -->
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer id="footer" class="site-footer">
+  <div class="footer-columns">
+
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="partner.html">Partner</a></li>
+        <li><a href="../doclist.html">Documents</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="support.html">Support</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="remodeling.html">Remodeling</a></li>
+        <li><a href="landscaping.html">Landscaping</a></li>
+        <li><a href="rentals.html">Rentals</a></li>
+        <li><a href="vending.html">Vending</a></li>
+        <li><a href="laundromats.html">Laundromats</a></li>
+        <li><a href="junk-removal.html">Junk Removal</a></li>
+        <li><a href="pressure-washing.html">Pressure Washing</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="contact.html">Contact Us</a></li>
+        <li><a href="getquote.html">Request a Quote</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Business Info</h4>
+      <ul>
+        <li><a href="service-areas.html">Service Areas</a></li>
+        <li><a href="business-hours.html">Business Hours</a></li>
+        <li><a href="licensing.html">Licensing & Insurance</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal & Social</h4>
+      <ul>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="terms-of-service.html">Terms of Service</a></li>
+        <li><a href="social-media.html">Social Media</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <span>© Seaside Haven LLC · All Rights Reserved</span>
+    <span>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</span>
+  </div>
+</footer>
+
+<div id="backToTop" class="back-to-top">↑</div>
+
+<script src="../script.js"></script>
+
+</body>
+</html>
