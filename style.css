@@ -78,18 +78,21 @@ a {
 }
 
 .button-primary {
-  background: linear-gradient(135deg, #149ab8, #0a3a45);
-  padding: 12px 20px;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  border: none;
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: #149ab8;
+  color: #fff;
+  text-decoration: none;
   cursor: pointer;
-  transition: 0.25s;
+  transition: 0.2s ease;
 }
 
 .button-primary:hover {
-  box-shadow: 0 0 12px rgba(20,154,184,0.7);
+  box-shadow: 0 0 14px rgba(20,154,184,0.7);
+  transform: translateY(-1px);
 }
 
 .bubble-card.form-card {
@@ -147,6 +150,16 @@ a {
 /* =========================================================
    HEADER / NAVIGATION
 ========================================================= */
+
+
+.section-dark a.button-primary,
+.section-dark a.btn-primary,
+.section-dark a.btn-secondary {
+  -webkit-text-fill-color: #ffffff !important;
+  color: #ffffff !important;
+  text-shadow: none !important;
+  filter: none !important;
+}
 
 .site-header {
   display: flex;
