@@ -32,6 +32,16 @@
       <a href="partner.html">Partner</a>
       <a href="contact.html">Contact</a>
     </nav>
+    <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <div class="mobile-nav" id="mobileNav">
+      <a href="index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="partner.html">Partner</a>
+      <a href="contact.html">Contact</a>
+    </div>
   </header>
 
   <main>
@@ -62,11 +72,16 @@
         </div>
 
         <!-- HERO IMAGE -->
-        <div class="hero-image">
-          <div class="hero-image-overlay"></div>
-          <div class="hero-image-fake">
-            <span>Seaside Haven · Operations Preview</span>
-          </div>
+        <div class="hero-abstract-logo">
+          <img src="Images/logo.png" alt="Seaside Haven Logo" class="abstract-logo">
+
+          <div class="abstract-ring"></div>
+          <div class="abstract-ring ring2"></div>
+
+          <div class="abstract-bubble bubble1"></div>
+          <div class="abstract-bubble bubble2"></div>
+
+          <div class="abstract-glow"></div>
         </div>
 
       </div>
@@ -106,25 +121,6 @@
           <p>Turnovers, maintenance, inspections, and Airbnb support for property owners.</p>
         </div>
 
-        <div class="bubble-card">
-          <i class="fas fa-cookie-bite service-icon"></i>
-          <h3>Vending Machine Locations</h3>
-          <p>Expanding into vending placements for businesses, offices, and public spaces.</p>
-        </div>
-
-        <div class="bubble-card">
-          <i class="fas fa-soap service-icon"></i>
-          <h3>Laundromats</h3>
-          <span class="badge-coming-soon">Coming Soon</span>
-          <p>Community-focused laundry services being developed for multiple locations.</p>
-        </div>
-
-        <div class="bubble-card">
-          <i class="fas fa-trash-alt service-icon"></i>
-          <h3>Junk Removal</h3>
-          <p>Fast, affordable junk removal for homes, rentals, and businesses.</p>
-        </div>
-
         <!-- PARTNER CARD WITH ICON -->
         <div class="bubble-card partner-card">
           <i class="fas fa-handshake service-icon"></i>
@@ -132,6 +128,31 @@
           <p>Click to view our partner business, apps, services, and full company details.</p>
         </div>
 
+        <div class="bubble-card-wrapper">
+          <div class="bubble-card">
+            <i class="fas fa-cookie-bite service-icon"></i>
+            <h3>Vending Machine Locations</h3>
+            <p>Expanding into vending placements for businesses, offices, and public spaces.</p>
+          </div>
+          <span class="badge-coming-soon">Coming Soon</span>
+        </div>
+        <div class="bubble-card-wrapper">
+          <div class="bubble-card">
+            <i class="fas fa-soap service-icon"></i>
+            <h3>Laundromats</h3>
+            <p>Community-focused laundry services being developed.</p>
+          </div>
+          <span class="badge-coming-soon">Coming Soon</span>
+        </div>
+
+        <div class="bubble-card-wrapper">
+          <div class="bubble-card">
+            <i class="fas fa-trash-alt service-icon"></i>
+            <h3>Junk Removal</h3>
+            <p>Fast, affordable junk removal for homes, rentals, and businesses.</p>
+          </div>  
+            <span class="badge-coming-soon">Coming Soon</span>
+        </div>
       </div>
     </section>
 

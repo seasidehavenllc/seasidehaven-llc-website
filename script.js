@@ -117,3 +117,11 @@ filterButtons.forEach(btn => {
 
 // Default: show 3 random on page load
 showCards(pickRandom(testimonialCards, 3));
+
+/* =========================================================
+   MOBILE NAV TOGGLE (Hamburger Menu)
+========================================================= */
+function toggleMobileNav() {
+  const mobileNav = document.getElementById("mobileNav");
+  mobileNav.classList.toggle("show");
+}
