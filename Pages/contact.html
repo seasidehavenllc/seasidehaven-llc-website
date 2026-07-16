@@ -113,7 +113,8 @@
       <input type="text" placeholder="Your Phone Number">
 
       <label>Message</label>
-      <textarea rows="4" placeholder="How can we help you?"></textarea>
+      <textarea id="msgBox" maxlength="200" placeholder="How can we help you?" oninput="updateCount(this)"></textarea>
+      <div class="char-count" id="msgBoxCount">0 / 200</div>
 
       <button class="button-primary" style="margin-top:15px;">Send Message</button>
     </form>
@@ -148,13 +149,9 @@
         <option>Vending Route Helper</option>
       </select>
 
-      <label>Available Interview Dates</label>
-      <input type="date">
-      <input type="date" style="margin-top:10px;">
-      <input type="date" style="margin-top:10px;">
-
       <label style="margin-top:15px;">Additional Notes</label>
-      <textarea rows="4" placeholder="Anything else we should know?"></textarea>
+      <textarea id="notesBox" maxlength="200" placeholder="Anything else we should know?" oninput="updateCount(this)"></textarea>
+      <div class="char-count" id="notesBoxCount">0 / 200</div>
 
       <button class="button-primary" style="margin-top:15px;">Submit Application</button>
     </form>
@@ -192,7 +189,8 @@
       </select>
 
       <label>Additional Notes</label>
-      <textarea rows="4" placeholder="Tell us about your partnership needs"></textarea>
+      <textarea id="partnerBox" maxlength="200" placeholder="Tell us about your partnership needs" oninput="updateCount(this)"></textarea>
+      <div class="char-count" id="partnerBoxCount">0 / 200</div>
 
       <button class="button-primary" style="margin-top:15px;">Submit Partner Application</button>
     </form>
@@ -279,6 +277,14 @@ window.onclick = function(e) {
     if (e.target === modal) modal.style.display = "none";
   });
 };
+
+/* LIVE CHARACTER COUNTER */
+function updateCount(el) {
+  const max = el.getAttribute("maxlength");
+  const current = el.value.length;
+  const counter = document.getElementById(el.id + "Count");
+  if (counter) counter.textContent = current + " / " + max;
+}
 </script>
 
 </body>
