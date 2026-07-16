@@ -19,7 +19,7 @@
   </div>
 
   <nav class="nav">
-    <a href="../index.html">Home</a>
+    <a href="../index.html" class="active">Home</a>
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="partner.html">Partner</a>
@@ -31,7 +31,7 @@
   </button>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="../index.html" class="active"><i class="fas fa-home"></i> Home</a>
     <a href="services.html"><i class="fas fa-tools"></i> Services</a>
     <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
     <a href="partner.html"><i class="fas fa-handshake"></i> Partner</a>
@@ -53,57 +53,67 @@
   </div>
 </section>
 
-<!-- CONTENT SECTION -->
+<!-- SERVICES GRID -->
 <section class="section section-dark">
   <div class="bubble-grid spotlight-container">
 
-    <!-- Kitchens -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('kitchen')">
       <i class="fas fa-hammer service-icon"></i>
       <h3>Kitchens</h3>
       <p>Cabinets, countertops, backsplashes, lighting, and full kitchen transformations.</p>
     </div>
 
-    <!-- Bathrooms -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('bathroom')">
       <i class="fas fa-bath service-icon"></i>
       <h3>Bathrooms</h3>
       <p>Showers, tubs, tile work, vanities, plumbing upgrades, and full bathroom remodels.</p>
     </div>
 
-    <!-- Flooring -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('flooring')">
       <i class="fas fa-ruler-combined service-icon"></i>
       <h3>Flooring</h3>
       <p>Hardwood, laminate, vinyl plank, tile, and custom flooring installations.</p>
     </div>
 
-    <!-- Interior Painting -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('interiorpaint')">
       <i class="fas fa-paint-roller service-icon"></i>
       <h3>Interior Painting</h3>
       <p>Walls, ceilings, trim, doors, accent walls, and full interior repainting.</p>
     </div>
 
-    <!-- Exterior Painting -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('exteriorpaint')">
       <i class="fas fa-brush service-icon"></i>
       <h3>Exterior Painting</h3>
       <p>Siding, shutters, trim, porches, decks, and full exterior repainting.</p>
     </div>
 
-    <!-- Exterior Upgrades -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('exteriorupgrades')">
       <i class="fas fa-home service-icon"></i>
       <h3>Exterior Upgrades</h3>
       <p>Siding repair, deck restoration, porch rebuilds, and outdoor structural improvements.</p>
     </div>
 
-    <!-- Full Renovations -->
-    <div class="bubble-card">
+    <div class="bubble-card" onclick="showPricing('fullreno')">
       <i class="fas fa-tools service-icon"></i>
       <h3>Full Renovations</h3>
       <p>Complete home transformations, structural updates, and full interior/exterior redesigns.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRICING PANEL -->
+<section id="pricingPanel" class="section section-dark" style="display:none;">
+  <div class="bubble-card no-title-hover" style="max-width:900px; margin:0 auto; padding:25px;">
+    
+    <div class="section-header">
+      <p class="section-kicker">Pricing</p>
+      <h2 id="pricingTitle">Service Pricing</h2>
+      <p class="section-intro" id="pricingIntro">Detailed pricing based on your project.</p>
+    </div>
+
+    <div id="pricingContent" style="margin-top:20px; font-size:1rem; opacity:0.9;">
+      <!-- JS injects pricing here -->
     </div>
 
   </div>
@@ -149,15 +159,6 @@
     </div>
 
     <div class="footer-col">
-      <h4>Business Info</h4>
-      <ul>
-        <li><a href="service-areas.html">Service Areas</a></li>
-        <li><a href="business-hours.html">Business Hours</a></li>
-        <li><a href="licensing.html">Licensing & Insurance</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
       <h4>Legal & Social</h4>
       <ul>
         <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -169,8 +170,17 @@
   </div>
 
   <div class="footer-bottom">
-    <span>© Seaside Haven LLC · All Rights Reserved</span>
-    <span>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</span>
+  <div class="footer-bottom-left">
+    <br><br><br><br>
+    <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
+  </div>
+
+  <div class="footer-bottom-right" style="text-align:right; line-height:1.6;">
+      <strong>M–F 8am – 4pm</strong><br>
+      <strong>Saturday 9am – 3pm</strong><br>
+      <strong>+1 (434) - 434 - 0273</strong><br>
+      <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
+    </div>
   </div>
 </footer>
 

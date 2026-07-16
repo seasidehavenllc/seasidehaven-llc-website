@@ -1,6 +1,19 @@
 /* =========================================================
    GLOBAL SETTINGS
 ========================================================= */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 15px 0;
+  font-size: 0.9rem;
+}
+
+.footer-bottom-right {
+  text-align: right;
+  opacity: 0.85;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -17,6 +30,14 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.price-note {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  text-align: center;
+}
+
 
 /* =========================================================
    HEADER / NAVIGATION
