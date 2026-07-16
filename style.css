@@ -99,9 +99,10 @@ a {
   background: rgba(255,255,255,0.12);
 }
 
+/* FIXED DROPDOWN — FLOATS UNDER HEADER */
 .mobile-nav {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 70px;        /* sits BELOW sticky header */
   left: 20px;
   right: 20px;
 
@@ -122,7 +123,7 @@ a {
     0 12px 32px rgba(0,0,0,0.55),
     inset 0 0 22px rgba(20,154,184,0.25);
 
-  z-index: 999;
+  z-index: 1500; /* BELOW header, ABOVE page */
 }
 
 .mobile-nav a {
@@ -156,8 +157,6 @@ a {
   0% { opacity: 0; transform: translateY(-10px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-
-
 
 /* =========================================================
    HERO SECTION
