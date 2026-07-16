@@ -80,7 +80,7 @@ a {
 }
 
 /* =========================================================
-   MOBILE NAVIGATION — PREMIUM GLASS DROPDOWN
+   MOBILE NAVIGATION — COMPACT GLASS ACTION MENU
 ========================================================= */
 
 .mobile-nav-toggle {
@@ -103,52 +103,53 @@ a {
 .mobile-nav {
   display: none;
   flex-direction: column;
-  gap: 14px;
-  padding: 22px 24px;
+  gap: 10px;
 
-  /* Premium glass look */
+  /* Compact floating panel */
+  width: 88%;
+  margin: 12px auto;
+  padding: 16px;
+
   background: rgba(10, 31, 36, 0.55);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
 
-  border-radius: 0 0 26px 26px;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.12);
 
-  /* Glow */
   box-shadow:
     0 12px 32px rgba(0,0,0,0.55),
     inset 0 0 22px rgba(20,154,184,0.25);
 }
 
-/* Dropdown links */
+/* Individual menu item */
 .mobile-nav a {
-  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
   border-radius: 14px;
   font-size: 1rem;
 
-  background: linear-gradient(
-    135deg,
-    #149ab8 0%,
-    rgba(255,255,255,0.85) 55%,
-    rgba(255,255,255,0.35) 100%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  /* Glow */
-  text-shadow:
-    0 0 12px rgba(20,154,184,0.55),
-    0 2px 6px rgba(0,0,0,0.65);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
 
   transition: 0.25s ease;
 }
 
+/* Icons for each item */
+.mobile-nav a i {
+  font-size: 1.2rem;
+  color: #149ab8;
+  text-shadow:
+    0 0 8px rgba(20,154,184,0.65),
+    0 0 14px rgba(20,154,184,0.45);
+}
+
 /* Hover effect */
 .mobile-nav a:hover {
-  background: rgba(255,255,255,0.12);
-  -webkit-text-fill-color: #fff;
-  color: #fff;
+  background: rgba(255,255,255,0.14);
   box-shadow:
     0 0 14px rgba(20,154,184,0.55),
     inset 0 0 12px rgba(20,154,184,0.35);
