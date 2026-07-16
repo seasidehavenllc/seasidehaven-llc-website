@@ -30,7 +30,7 @@ a {
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 100;
   backdrop-filter: blur(20px);
   border-radius: 0 0 30px 30px;
 }
@@ -83,11 +83,27 @@ a {
    MOBILE NAV — FLOATING PANEL (NO HEADER EXPANSION)
 ========================================================= */
 
+.mobile-nav-toggle {
+  display: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #f5f7ff;
+  background: none;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 12px;
+  transition: 0.25s ease;
+}
+
+.mobile-nav-toggle:hover {
+  background: rgba(255,255,255,0.12);
+}
+
 .mobile-nav {
   position: absolute;
-  top: 100%; /* sits BELOW the header */
-  right: 20px;
+  top: 100%;
   left: 20px;
+  right: 20px;
 
   display: none;
   flex-direction: column;
@@ -95,7 +111,6 @@ a {
 
   padding: 16px;
 
-  /* Glass panel */
   background: rgba(10, 31, 36, 0.55);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
@@ -107,10 +122,9 @@ a {
     0 12px 32px rgba(0,0,0,0.55),
     inset 0 0 22px rgba(20,154,184,0.25);
 
-  z-index: 999; /* stays above content */
+  z-index: 999;
 }
 
-/* Menu items */
 .mobile-nav a {
   display: flex;
   align-items: center;
@@ -133,7 +147,6 @@ a {
     inset 0 0 12px rgba(20,154,184,0.35);
 }
 
-/* Show animation */
 .mobile-nav.show {
   display: flex;
   animation: mobileSlideDown 0.35s ease forwards;
@@ -143,7 +156,6 @@ a {
   0% { opacity: 0; transform: translateY(-10px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-
 
 /* =========================================================
    HERO SECTION
@@ -608,7 +620,6 @@ a {
     0 2px 6px rgba(0,0,0,0.7);
 }
 
-
 /* =========================================================
    SERVICE CARD ICONS
 ========================================================= */
@@ -727,7 +738,6 @@ a {
 
 @media (max-width: 800px) {
 
-  /* HERO layout becomes single column */
   .hero-inner {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -747,14 +757,28 @@ a {
   }
 }
 
+@media (min-width: 801px) {
+
+  /* Desktop only */
+  .nav {
+    display: flex;
+  }
+
+  .mobile-nav-toggle {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: none !important;
+  }
+}
+
 @media (max-width: 640px) {
 
-  /* Footer layout */
   .footer-bottom {
     flex-direction: column;
   }
 
-  /* Bubble grid = 2 per row */
   .bubble-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 14px;
