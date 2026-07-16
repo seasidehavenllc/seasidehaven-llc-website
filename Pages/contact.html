@@ -48,12 +48,12 @@
     <p class="section-kicker">Contact</p>
     <h2>Get in Touch With Seaside Haven LLC</h2>
     <p class="section-intro">
-      Choose how you'd like to reach out — message, hiring, or partnership.
+      Reach out to request services, apply for a position, or explore partnership opportunities.
     </p>
   </div>
 </section>
 
-<!-- CONTACT OPTIONS -->
+<!-- CONTACT BUBBLE CARDS -->
 <section class="section section-dark">
   <div class="bubble-grid">
 
@@ -61,21 +61,21 @@
     <div class="bubble-card small-tile" onclick="openModal('messageModal')">
       <i class="fas fa-paper-plane service-icon"></i>
       <h3 class="gradient-text">Send Message</h3>
-      <p>General questions or service inquiries.</p>
+      <p>General questions, service requests, or quick contact.</p>
     </div>
 
     <!-- Apply for Job -->
     <div class="bubble-card small-tile" onclick="openModal('hireModal')">
       <i class="fas fa-user-plus service-icon"></i>
       <h3 class="gradient-text">Apply for Job</h3>
-      <p>Submit a quick mini application.</p>
+      <p>Submit a mini application and interview availability.</p>
     </div>
 
     <!-- Partner Application -->
     <div class="bubble-card small-tile" onclick="openModal('partnerModal')">
       <i class="fas fa-handshake service-icon"></i>
       <h3 class="gradient-text">Partner Application</h3>
-      <p>Start a business partnership with us.</p>
+      <p>Tell us about your business and partnership goals.</p>
     </div>
 
   </div>
@@ -87,115 +87,120 @@
     <h3 class="gradient-text">Business Contact Information</h3>
     <p>
       <strong>Phone:</strong> +1 (434) - 434 - 0273<br>
-      <strong>Email:</strong> seasidehavenllc@gmail.com<br>
+      <strong>Email:</strong> info@seasidehavenllc.com<br>
       <strong>Service Area:</strong> Lynchburg · Roanoke · Bedford · Smith Mountain Lake<br>
       <strong>Hours:</strong> Mon–Fri 8am–4pm · Sat 9am–3pm
     </p>
   </div>
 </section>
 
-</main>
+<!-- MODALS -->
 
-<!-- MESSAGE MODAL -->
+<!-- Send Message Modal -->
 <div id="messageModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('messageModal')">&times;</span>
     <h3>Send Us a Message</h3>
-
     <form class="contact-form">
-      <label>Name</label>
-      <input type="text" placeholder="Your Name">
+      <label for="msgName">Full Name</label>
+      <input id="msgName" type="text" placeholder="Your Name" />
 
-      <label>Email</label>
-      <input type="email" placeholder="Your Email">
+      <label for="msgEmail">Email</label>
+      <input id="msgEmail" type="email" placeholder="you@example.com" />
 
-      <label>Phone Number</label>
-      <input type="text" placeholder="Your Phone Number">
+      <label for="msgPhone">Phone Number</label>
+      <input id="msgPhone" type="tel" placeholder="Your Phone Number" />
 
-      <label>Message</label>
-      <textarea id="msgBox" maxlength="200" placeholder="How can we help you?" oninput="updateCount(this)"></textarea>
-      <div class="char-count" id="msgBoxCount">0 / 200</div>
+      <label for="msgSubject">Subject</label>
+      <input id="msgSubject" type="text" placeholder="What is this regarding?" />
 
-      <button class="button-primary" style="margin-top:15px;">Send Message</button>
+      <label for="msgBody">Message</label>
+      <textarea id="msgBody" rows="4" placeholder="Tell us how we can help."></textarea>
+
+      <div style="margin-top:18px; text-align:right;">
+        <button type="button" class="button-primary">Send Message</button>
+      </div>
     </form>
   </div>
 </div>
 
-<!-- HIRE MODAL -->
+<!-- Apply for Job Modal -->
 <div id="hireModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('hireModal')">&times;</span>
     <h3>Apply for a Position</h3>
-
     <form class="contact-form">
+      <label for="hireName">Full Name</label>
+      <input id="hireName" type="text" placeholder="Your Name" />
 
-      <label>Full Name</label>
-      <input type="text" placeholder="Your Full Name">
+      <label for="hireEmail">Email</label>
+      <input id="hireEmail" type="email" placeholder="you@example.com" />
 
-      <label>Email</label>
-      <input type="email" placeholder="Your Email">
+      <label for="hirePhone">Phone Number</label>
+      <input id="hirePhone" type="tel" placeholder="Your Phone Number" />
 
-      <label>Phone Number</label>
-      <input type="text" placeholder="Your Phone Number">
-
-      <label>Position Applying For</label>
-      <select>
-        <option>Select a Position</option>
-        <option>Landscaping Technician</option>
-        <option>Remodeling Helper</option>
-        <option>Junk Removal Crew</option>
-        <option>Pressure Washing Assistant</option>
-        <option>Rental Turnover Specialist</option>
-        <option>Vending Route Helper</option>
+      <label for="hirePosition">Position Applying For</label>
+      <select id="hirePosition">
+        <option value="" disabled selected>Select a Position</option>
+        <option value="field-tech">Field Technician</option>
+        <option value="maintenance">Maintenance & Repairs</option>
+        <option value="landscaping">Landscaping Crew</option>
+        <option value="cleaning">Cleaning & Turnovers</option>
+        <option value="admin">Office / Admin Support</option>
       </select>
 
-      <label style="margin-top:15px;">Additional Notes</label>
-      <textarea id="notesBox" maxlength="200" placeholder="Anything else we should know?" oninput="updateCount(this)"></textarea>
-      <div class="char-count" id="notesBoxCount">0 / 200</div>
+      <label for="hireDates">Available Interview Dates</label>
+      <input id="hireDates" type="text" placeholder="Example: Weekdays after 3pm, Saturdays" />
 
-      <button class="button-primary" style="margin-top:15px;">Submit Application</button>
+      <label for="hireNotes">Additional Notes</label>
+      <textarea id="hireNotes" rows="3" placeholder="Anything else we should know?"></textarea>
+
+      <div style="margin-top:18px; text-align:right;">
+        <button type="button" class="button-primary">Submit Application</button>
+      </div>
     </form>
   </div>
 </div>
 
-<!-- PARTNER MODAL -->
+<!-- Partner Application Modal -->
 <div id="partnerModal" class="modal">
   <div class="modal-content">
     <span class="close" onclick="closeModal('partnerModal')">&times;</span>
     <h3>Partner Application</h3>
-
     <form class="contact-form">
+      <label for="partnerBusiness">Business / Organization Name</label>
+      <input id="partnerBusiness" type="text" placeholder="Your Business Name" />
 
-      <label>Business / Organization Name</label>
-      <input type="text" placeholder="Your Business Name">
+      <label for="partnerContact">Primary Contact Name</label>
+      <input id="partnerContact" type="text" placeholder="Contact Person" />
 
-      <label>Contact Person</label>
-      <input type="text" placeholder="Your Name">
+      <label for="partnerEmail">Email</label>
+      <input id="partnerEmail" type="email" placeholder="contact@business.com" />
 
-      <label>Email</label>
-      <input type="email" placeholder="Your Email">
+      <label for="partnerPhone">Phone Number</label>
+      <input id="partnerPhone" type="tel" placeholder="Business Phone" />
 
-      <label>Phone Number</label>
-      <input type="text" placeholder="Your Phone Number">
-
-      <label>Type of Partnership</label>
-      <select>
-        <option>Select Partnership Type</option>
-        <option>Property Owner Partnership</option>
-        <option>Contractor Collaboration</option>
-        <option>Business Service Partnership</option>
-        <option>Community Organization Partnership</option>
-        <option>Vendor / Machine Placement</option>
+      <label for="partnerType">Type of Partnership</label>
+      <select id="partnerType">
+        <option value="" disabled selected>Select Partnership Type</option>
+        <option value="service-referral">Service Referral / Subcontracting</option>
+        <option value="property-care">Property Care / Maintenance</option>
+        <option value="vending">Vending / Machines</option>
+        <option value="events">Events / Community Programs</option>
+        <option value="other">Other / Custom</option>
       </select>
 
-      <label>Additional Notes</label>
-      <textarea id="partnerBox" maxlength="200" placeholder="Tell us about your partnership needs" oninput="updateCount(this)"></textarea>
-      <div class="char-count" id="partnerBoxCount">0 / 200</div>
+      <label for="partnerDetails">Tell Us About Your Needs</label>
+      <textarea id="partnerDetails" rows="4" placeholder="Describe your business, locations, and what you’re looking for."></textarea>
 
-      <button class="button-primary" style="margin-top:15px;">Submit Partner Application</button>
+      <div style="margin-top:18px; text-align:right;">
+        <button type="button" class="button-primary">Submit Partner Request</button>
+      </div>
     </form>
   </div>
 </div>
+
+</main>
 
 <!-- FOOTER -->
 <footer id="footer" class="site-footer">
@@ -263,28 +268,21 @@
 <div id="backToTop" class="back-to-top">↑</div>
 
 <script src="../script.js"></script>
-
 <script>
-function openModal(id) {
-  document.getElementById(id).style.display = "block";
-}
-function closeModal(id) {
-  document.getElementById(id).style.display = "none";
-}
-window.onclick = function(e) {
-  ["messageModal","hireModal","partnerModal"].forEach(id => {
-    const modal = document.getElementById(id);
-    if (e.target === modal) modal.style.display = "none";
+  function openModal(id) {
+    const m = document.getElementById(id);
+    if (m) m.style.display = 'block';
+  }
+  function closeModal(id) {
+    const m = document.getElementById(id);
+    if (m) m.style.display = 'none';
+  }
+  window.addEventListener('click', function(e) {
+    ['messageModal','hireModal','partnerModal'].forEach(function(id) {
+      const m = document.getElementById(id);
+      if (m && e.target === m) m.style.display = 'none';
+    });
   });
-};
-
-/* LIVE CHARACTER COUNTER */
-function updateCount(el) {
-  const max = el.getAttribute("maxlength");
-  const current = el.value.length;
-  const counter = document.getElementById(el.id + "Count");
-  if (counter) counter.textContent = current + " / " + max;
-}
 </script>
 
 </body>

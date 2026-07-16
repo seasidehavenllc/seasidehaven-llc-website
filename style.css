@@ -44,13 +44,12 @@ a {
    CONTACT FORM + MODAL SYSTEM (RESTORE + FIXED)
 ========================================================= */
 
-/* Gradient Glass Input Fields */
 .contact-form input,
 .contact-form select,
 .contact-form textarea {
-  width: 90%;                 /* FIX: shorter inputs */
+  width: 90%;
   padding: 10px 14px;
-  margin: 6px auto;           /* FIX: centered */
+  margin: 6px auto;
   border-radius: 10px;
   border: none;
   outline: none;
@@ -71,14 +70,13 @@ a {
 }
 
 .contact-form label {
-  margin-top: 10px;           /* FIX: tighter spacing */
+  margin-top: 10px;
   margin-bottom: 4px;
   display: block;
   font-weight: bold;
   color: #eafcff;
 }
 
-/* Primary Button */
 .button-primary {
   background: linear-gradient(135deg, #149ab8, #0a3a45);
   padding: 12px 20px;
@@ -94,14 +92,12 @@ a {
   box-shadow: 0 0 12px rgba(20,154,184,0.7);
 }
 
-/* Form Card */
 .bubble-card.form-card {
   max-width: 650px !important;
   padding: 20px !important;
   margin: 0 auto 30px auto !important;
 }
 
-/* Small Tiles */
 .small-tile {
   max-width: 250px;
   text-align: center;
@@ -119,26 +115,25 @@ a {
   inset: 0;
   z-index: 9999;
   background: rgba(0,0,0,0.7);
-  overflow-y: auto; /* FIX: modal scroll if needed */
+  overflow-y: auto;
 }
 
 .modal-content {
   background: linear-gradient(135deg, rgba(10,60,70,0.85), rgba(0,0,0,0.9));
-  margin: 40px auto;          /* FIX: prevents pushing off screen */
-  padding: 30px 35px;         /* FIX: cleaner spacing */
+  margin: 40px auto;
+  padding: 30px 35px;
   border-radius: 15px;
   width: 90%;
   max-width: 600px;
   color: #eafcff;
   box-shadow: 0 0 20px rgba(20,154,184,0.6);
-
-  max-height: 80vh;           /* FIX: stays inside screen */
-  overflow-y: auto;           /* FIX: scroll inside modal */
-  scrollbar-width: none;      /* hide scrollbar (Firefox) */
+  max-height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
 
 .modal-content::-webkit-scrollbar {
-  display: none;              /* hide scrollbar (Chrome/Safari) */
+  display: none;
 }
 
 .close {
@@ -179,7 +174,6 @@ a {
   filter: drop-shadow(0 0 4px rgba(255,255,255,0.2));
 }
 
-/* Desktop nav */
 .nav {
   display: flex;
   gap: 10px;
@@ -281,6 +275,37 @@ a {
 /* =========================================================
    HERO SECTION
 ========================================================= */
+
+
+/* HERO BUTTONS */
+.btn-primary,
+.btn-secondary {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.btn-primary {
+  background: #149ab8;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #f5f7ff;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  box-shadow: 0 0 14px rgba(20,154,184,0.7);
+  transform: translateY(-1px);
+}
 
 .hero {
   padding: 70px 20px 60px;
@@ -496,7 +521,6 @@ a {
   position: relative;
 }
 
-/* Title */
 .section-header h2 {
   position: relative;
   font-size: 1.7rem;
@@ -527,7 +551,6 @@ a {
   opacity: 0.9;
 }
 
-/* Kicker */
 .section-header .section-kicker {
   position: relative;
   display: inline-block;
@@ -572,7 +595,6 @@ a {
   right: -32px;
 }
 
-/* Intro */
 .section-header .section-intro {
   position: relative;
   font-size: 0.95rem;
@@ -602,9 +624,11 @@ a {
   opacity: 0.7;
 }
 
+
 /* =========================================================
    BUBBLE GRID
 ========================================================= */
+
 .bubble-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -655,7 +679,6 @@ a {
   border-color: #149ab8;
 }
 
-/* Bubble card titles + descriptions */
 .bubble-card h3,
 .bubble-card p {
   background: linear-gradient(
@@ -669,7 +692,6 @@ a {
   -webkit-text-fill-color: transparent;
 }
 
-/* Title glow */
 .bubble-card h3 {
   font-size: 1.15rem;
   margin-bottom: 8px;
@@ -679,7 +701,6 @@ a {
     0 3px 8px rgba(0,0,0,0.8);
 }
 
-/* Description glow (lighter) */
 .bubble-card p {
   margin: 0;
   font-size: 0.9rem;
@@ -689,9 +710,11 @@ a {
     0 2px 6px rgba(0,0,0,0.7);
 }
 
+
 /* =========================================================
    SERVICE CARD ICONS
 ========================================================= */
+
 .service-icon {
   font-size: 2rem;
   margin-bottom: 10px;
@@ -699,9 +722,11 @@ a {
   display: block;
 }
 
+
 /* =========================================================
    FILTER BUTTONS
 ========================================================= */
+
 .filter-row {
   display: flex;
   flex-wrap: wrap;
@@ -731,9 +756,11 @@ a {
   color: #fff;
 }
 
+
 /* =========================================================
    FOOTER
 ========================================================= */
+
 .site-footer {
   margin-top: 40px;
   padding: 30px 20px 24px;
@@ -777,9 +804,11 @@ a {
   opacity: 0.8;
 }
 
+
 /* =========================================================
    BACK TO TOP BUTTON
 ========================================================= */
+
 .back-to-top {
   position: fixed;
   right: 20px;
@@ -801,6 +830,7 @@ a {
   visibility: visible;
 }
 
+
 /* =========================================================
    RESPONSIVE
 ========================================================= */
@@ -815,12 +845,10 @@ a {
     padding-top: 40px;
   }
 
-  /* Hide desktop nav */
   .nav {
     display: none;
   }
 
-  /* Show hamburger */
   .mobile-nav-toggle {
     display: block;
   }
@@ -828,7 +856,6 @@ a {
 
 @media (min-width: 801px) {
 
-  /* Desktop only */
   .nav {
     display: flex;
   }
@@ -858,11 +885,15 @@ a {
   }
 }
 
-/* Lock textarea size + limit characters */
+
+/* =========================================================
+   TEXTAREA LOCK
+========================================================= */
+
 .contact-form textarea {
-  resize: none;          /* prevents dragging to resize */
-  max-height: 120px;     /* keeps it visually compact */
-  min-height: 120px;     /* consistent height */
-  width: 90%;            /* matches your input width */
+  resize: none;
+  max-height: 120px;
+  min-height: 120px;
+  width: 90%;
   margin: 6px auto;
 }
