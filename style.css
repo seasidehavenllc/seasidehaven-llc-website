@@ -157,6 +157,24 @@ a {
   100% { opacity: 1; transform: translateY(0); }
 }
 
+/* Make logo always clickable */
+.logo a {
+  position: relative;
+  z-index: 2000;
+  pointer-events: auto;
+}
+
+/* Ensure header stays above dropdown */
+.site-header {
+  position: relative;
+  z-index: 1500;
+}
+
+/* Dropdown stays BELOW header */
+.mobile-nav {
+  z-index: 1000;
+}
+
 /* =========================================================
    HERO SECTION
 ========================================================= */
