@@ -76,6 +76,11 @@ a {
   font-weight: bold;
   color: #eafcff;
 }
+/* Fix unreadable dropdown options */
+.contact-form select option {
+  background: rgba(10,60,70,0.85);
+  color: #eafcff;
+}
 
 .button-primary {
   display: inline-block;
