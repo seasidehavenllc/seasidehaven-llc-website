@@ -462,7 +462,7 @@ backToTop.addEventListener("click", () => {
 ========================================================= */
 document.querySelectorAll(".partner-card").forEach((card) => {
   card.addEventListener("click", () => {
-    window.location.href = "partner.html";
+    window.location.href = "Pages/partner.html";
   });
 });
 
