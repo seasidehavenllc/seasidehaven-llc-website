@@ -835,7 +835,7 @@ a {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* MAIN COLUMNS */
+/* MAIN COLUMNS — ALWAYS 2 PER ROW */
 .footer-columns {
   max-width: 1100px;
   margin: 0 auto;
@@ -846,13 +846,13 @@ a {
 }
 
 .footer-col {
-  flex: 1 1 calc(50% - 20px); /* 2 per row */
+  flex: 0 0 calc(50% - 20px); /* ALWAYS 2 columns */
+  min-width: calc(50% - 20px);
 }
 
-/* Tiny screens: stack all */
+/* DO NOT STACK ON MOBILE — only center text */
 @media (max-width: 480px) {
   .footer-col {
-    flex: 1 1 100%;
     text-align: center;
   }
 }
@@ -886,6 +886,7 @@ a {
   opacity: 0.8;
 }
 
+/* Bottom row stacks ONLY on tiny screens */
 @media (max-width: 480px) {
   .footer-bottom {
     flex-direction: column;
@@ -893,7 +894,6 @@ a {
     gap: 20px;
   }
 }
-
 
 /* =========================================================
    BACK TO TOP BUTTON
