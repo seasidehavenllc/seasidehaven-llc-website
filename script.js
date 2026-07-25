@@ -313,7 +313,7 @@ function showPricing(type) {
         <p><strong>Mattress Removal:</strong> $75–$125</p>
       `
     },
-    
+
     appliances: {
       title: "Appliance Removal Pricing",
       intro: "Washers, dryers, fridges, stoves, and heavy appliances.",
@@ -503,6 +503,18 @@ backToTop.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+function openModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.style.display = 'block';
+  document.querySelector('.apply-floating').style.display = 'none';
+};
+
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.style.display = 'none';
+  document.querySelector('.apply-floating').style.display = 'inline-block';
+};
 
 /* =========================================================
    PARTNER CARD CLICK

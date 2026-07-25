@@ -6,6 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Floating Apply Button ONLY for Careers Page */
+    .apply-floating {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 9999;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: #149ab8;
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+      transition: 0.25s ease;
+    }
+
+    .apply-floating:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(20,154,184,0.65);
+    }
+  </style>
 </head>
 
 <body>
@@ -65,17 +87,17 @@
 
     <!-- REMODELING -->
     <div class="bubble-card small-tile">
-        <i class="fas fa-wrench service-icon"></i>
-        <h3 class="gradient-text">Remodeling</h3>
-        <p>Repairs, maintenance, installations, and property support.</p>
+      <i class="fas fa-wrench service-icon"></i>
+      <h3 class="gradient-text">Remodeling</h3>
+      <p>Repairs, maintenance, installations, and property support.</p>
     </div>
 
     <!-- LANDSCAPING -->
     <div class="bubble-card small-tile">
-            <i class="fas fa-leaf service-icon"></i>
-            <h3 class="gradient-text">Landscaping</h3>
-            <p>Mowing, trimming, mulch, edging, and seasonal cleanups.</p>
-            </div>
+      <i class="fas fa-leaf service-icon"></i>
+      <h3 class="gradient-text">Landscaping</h3>
+      <p>Mowing, trimming, mulch, edging, and seasonal cleanups.</p>
+    </div>
 
     <!-- JUNK REMOVAL -->
     <div class="bubble-card small-tile">
@@ -83,6 +105,7 @@
       <h3 class="gradient-text">Junk Removal</h3>
       <p>Residential and commercial haul-away services.</p>
     </div>
+
   </div>
 </section>
 
@@ -99,49 +122,52 @@
   <div class="bubble-grid">
 
     <!-- LANDSCAPING CREW -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-      <i class="fas fa-leaf service-icon"></i>
-      <h3 class="gradient-text">Landscaping Crew</h3>
-      <p>
-        <strong>Salary:</strong> $15–$18/hr<br>
-        <strong>Department:</strong> Landscaping<br>
-        <strong>Description:</strong> Mowing, trimming, mulch, edging, seasonal cleanups, and outdoor projects.
-      </p>
+    <div class="bubble-card-wrapper">
+      <div class="bubble-card small-tile" onclick="openModal('hireModal')">
+        <i class="fas fa-leaf service-icon"></i>
+        <h3 class="gradient-text">Landscaping Crew</h3>
+        <p>
+          <strong>Salary:</strong> $15–$18/hr<br>
+          <strong>Department:</strong> Landscaping<br>
+          <strong>Description:</strong> Mowing, trimming, mulch, edging, seasonal cleanups, and outdoor projects.
+        </p>
+      </div>
+      <span class="badge-coming-soon">Now Hiring</span>
     </div>
 
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-      <i class="fas fa-leaf service-icon"></i>
-      <h3 class="gradient-text">Landscaping Foreman</h3>
-      <p>
-        <strong>Salary:</strong> $18–$23/hr<br>
-        <strong>Department:</strong> Landscaping<br>
-        <strong>Description:</strong> Supervising landscaping crews, managing projects, and ensuring quality work.
-      </p>
+    <!-- LANDSCAPING FOREMAN -->
+    <div class="bubble-card-wrapper">
+      <div class="bubble-card small-tile" onclick="openModal('hireModal')">
+        <i class="fas fa-leaf service-icon"></i>
+        <h3 class="gradient-text">Landscaping Foreman</h3>
+        <p>
+          <strong>Salary:</strong> $18–$23/hr<br>
+          <strong>Department:</strong> Landscaping<br>
+          <strong>Description:</strong> Supervising landscaping crews, managing projects, and ensuring quality work.
+        </p>
+      </div>
+      <span class="badge-coming-soon">Now Hiring</span>
     </div>
 
-    <!-- JUNK REMOVAL -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-      <i class="fas fa-trash-alt service-icon"></i>
-      <h3 class="gradient-text">Junk Removal Specialist</h3>
-      <p>
-        <strong>Salary:</strong> $16–$24/hr<br>
-        <strong>Department:</strong> Junk Removal<br>
-        <strong>Description:</strong> Haul-away jobs, loading, sorting, disposal, and customer interaction.
-      </p>
+    <!-- JUNK REMOVAL SPECIALIST -->
+    <div class="bubble-card-wrapper">
+      <div class="bubble-card small-tile" onclick="openModal('hireModal')">
+        <i class="fas fa-trash-alt service-icon"></i>
+        <h3 class="gradient-text">Junk Removal Specialist</h3>
+        <p>
+          <strong>Salary:</strong> $16–$24/hr<br>
+          <strong>Department:</strong> Junk Removal<br>
+          <strong>Description:</strong> Haul-away jobs, loading, sorting, disposal, and customer interaction.
+        </p>
+      </div>
+      <span class="badge-coming-soon">Now Hiring</span>
     </div>
 
   </div>
 </section>
 
-<!-- APPLY BUTTON -->
-<section class="section section-dark">
-  <div class="hero-actions center">
-    <a href="#" onclick="openModal('hireModal')" class="button-primary">Apply Now</a>
-  </div>
-</section>
+<!-- FLOATING APPLY BUTTON -->
+<a href="#" onclick="openModal('hireModal')" class="button-primary apply-floating">Apply Now</a>
 
 <!-- CONTACT INFO -->
 <section class="section section-dark">
