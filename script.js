@@ -57,6 +57,7 @@ function showPricing(type) {
       `
     },
 
+    
     treetrim: {
       title: "Tree Trimming Pricing",
       intro: "Branch removal, canopy shaping, and safety trimming.",
