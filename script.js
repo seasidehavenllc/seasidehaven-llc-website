@@ -299,9 +299,9 @@ function showPricing(type) {
       title: "Basic Junk Removal Pricing",
       intro: "General household junk, bagged trash, and small items.",
       html: `
-        <p><strong>Small Load:</strong> $60–$120</p>
-        <p><strong>Medium Load:</strong> $120–$250</p>
-        <p><strong>Large Load:</strong> $250–$450</p>
+        <p><strong>1–3 Item Pick Up:</strong> Curbside $75 • Inside $95 • Heavy Item $115 • Stairs/Tight Access $95</p>
+        <p><strong>Small Load:</strong> Curbside $150 • Inside $175 • Mixed Debris $175 • Heavy Debris $200</p>
+        <p><strong>Medium Load:</strong> Curbside $300 • Inside $350 • Mixed Debris $350 • Heavy Debris $375 • Stairs/Tight Access $350</p>
       `
     },
 
@@ -309,9 +309,8 @@ function showPricing(type) {
       title: "Furniture Removal Pricing",
       intro: "Couches, mattresses, dressers, tables, and more.",
       html: `
-        <p><strong>Single Item:</strong> $40–$80</p>
-        <p><strong>Multiple Items:</strong> $80–$200</p>
-        <p><strong>Heavy Furniture:</strong> $150–$350</p>
+        <p><strong>Furniture Removal:</strong> Curbside $125 • Inside $150 • Stairs/Tight Access $200</p>
+        <p><strong>Mattress Removal:</strong> Curbside $75 • Inside $125</p>
       `
     },
 
@@ -319,9 +318,7 @@ function showPricing(type) {
       title: "Appliance Removal Pricing",
       intro: "Washers, dryers, fridges, stoves, and heavy appliances.",
       html: `
-        <p><strong>Standard Appliances:</strong> $60–$120</p>
-        <p><strong>Large Appliances:</strong> $120–$250</p>
-        <p><strong>Commercial Appliances:</strong> $250–$500+</p>
+        <p><strong>Appliance Removal:</strong> Curbside $75 • Inside $100 • Disassembly $150</p>
       `
     },
 
@@ -329,9 +326,7 @@ function showPricing(type) {
       title: "Yard Debris Removal Pricing",
       intro: "Branches, brush, storm debris, and outdoor waste.",
       html: `
-        <p><strong>Small Pile:</strong> $50–$120</p>
-        <p><strong>Medium Pile:</strong> $120–$250</p>
-        <p><strong>Large Pile:</strong> $250–$450</p>
+        <p><strong>Yard Waste Load:</strong> Bagged $125 • Loose $175 • Heavy Debris $300</p>
       `
     },
 
@@ -339,9 +334,7 @@ function showPricing(type) {
       title: "Construction Debris Pricing",
       intro: "Renovation debris, wood, drywall, flooring, and more.",
       html: `
-        <p><strong>Small Load:</strong> $80–$150</p>
-        <p><strong>Medium Load:</strong> $150–$300</p>
-        <p><strong>Large Load:</strong> $300–$600+</p>
+        <p><strong>Construction Debris Load:</strong> Clean Load $250 • Mixed Load $350 • Heavy Material $500</p>
       `
     },
 
@@ -349,9 +342,7 @@ function showPricing(type) {
       title: "Full Property Cleanout Pricing",
       intro: "Evictions, foreclosures, hoarder homes, and full cleanouts.",
       html: `
-        <p><strong>Small Cleanout:</strong> $250–$600</p>
-        <p><strong>Medium Cleanout:</strong> $600–$1,200</p>
-        <p><strong>Large Cleanout:</strong> $1,200–$3,000+</p>
+        <p><strong>Full Property Cleanout:</strong> Light $1,000 • Full $2,500+ • Hazardous Material $3,500 • Stairs/Tight Access +$150</p>
       `
     },
     driveway: {
@@ -363,7 +354,6 @@ function showPricing(type) {
         <p><strong>Large Driveway:</strong> $250–$400+</p>
       `
     },
-
     siding: {
       title: "House Siding Wash Pricing",
       intro: "Vinyl, brick, wood, and full exterior home washing.",
