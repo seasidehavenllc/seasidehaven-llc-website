@@ -730,23 +730,22 @@ a {
 
 
 /* =========================================================
-   BUBBLE GRID — FIXED FOR ALL DEVICES
+   BUBBLE GRID — RESPONSIVE 2–3 MOBILE, 3–4 DESKTOP
 ========================================================= */
 
 .bubble-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
   gap: 20px;
   margin-top: 24px;
 
-  /* FULL CENTERING ON ALL DEVICES */
   justify-content: center;
   justify-items: center;
   align-items: start;
 }
 
 /* =========================================================
-   BUBBLE CARD — FIXED WIDTH
+   BUBBLE CARD — FIXED MAX WIDTH
 ========================================================= */
 
 .bubble-card {
@@ -760,9 +759,8 @@ a {
   overflow: hidden;
   cursor: pointer;
 
-  /* RESTORED */
   width: 100%;
-  max-width: 300px;
+  max-width: 300px; /* allows 3–4 per row on desktop */
 
   box-sizing: border-box;
   text-align: center;
