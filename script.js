@@ -727,8 +727,6 @@ function selectService(service) {
 }
 
 function nextStep(step) {
-
-  // STEP 2 VALIDATION
   if (step === 3) {
     const details = document.getElementById('projectDetails').value.trim();
     if (details.length < 5) {
@@ -738,7 +736,6 @@ function nextStep(step) {
     document.getElementById('errorStep2').style.display = 'none';
   }
 
-  // STEP 4 VALIDATION
   if (step === 5) {
     const name = document.getElementById('quoteName').value.trim();
     const email = document.getElementById('quoteEmail').value.trim();
@@ -774,7 +771,6 @@ function submitQuote() {
 
   document.getElementById('errorStep5').style.display = 'none';
 
-  // Fill hidden form fields
   const form = document.getElementById('quoteSendForm');
   form.elements["Service"].value = service;
   form.elements["Details"].value = details;
@@ -782,7 +778,6 @@ function submitQuote() {
   form.elements["Email"].value = email;
   form.elements["Phone"].value = phone;
 
-  // Submit to FormSubmit (sends email to info@seasidehavenllc.com)
   form.submit();
 };
 
