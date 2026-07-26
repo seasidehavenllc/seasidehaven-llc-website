@@ -683,6 +683,29 @@ function closeModal(id) {
 };
 
 /* =========================================================
+   CAREERS — OPEN JOB MODAL WITH PREFILLED POSITION
+========================================================= */
+function openJobModal(positionName) {
+  const modal = document.getElementById('hireModal');
+  modal.style.display = 'block';
+
+  // Hide floating apply button
+  const applyBtn = document.querySelector('.apply-floating');
+  if (applyBtn) applyBtn.style.display = 'none';
+
+  // Prefill the dropdown
+  const select = document.getElementById('hirePosition');
+
+  for (let option of select.options) {
+    if (option.text === positionName) {
+      option.selected = true;
+      break;
+    }
+  }
+}
+
+
+/* =========================================================
    PARTNER CARD CLICK
 ========================================================= */
 document.querySelectorAll(".partner-card").forEach((card) => {
