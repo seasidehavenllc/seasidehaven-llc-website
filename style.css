@@ -691,62 +691,20 @@ a {
   opacity: 0.7;
 }
 
-/* FINAL FIX — Floating Apply Button Override */
-.apply-floating {
-  position: fixed;
-  bottom: 26px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-
-  /* MATCH back-to-top button EXACTLY */
-  background: #149ab8 !important;
-  color: #fff !important;
-  border-radius: 999px !important;
-
-  /* SMALLER BUTTON SIZE */
-  padding: 6px 14px !important;
-  font-size: 0.9rem !important;
-
-  /* STOP stretching */
-  width: fit-content !important;
-  min-width: fit-content !important;
-  max-width: fit-content !important;
-  display: inline-block !important;
-  white-space: nowrap !important;
-
-  /* STOP inherited transforms */
-  transform-origin: center !important;
-
-  /* STOP inherited hover animation */
-  transition: box-shadow 0.25s ease !important;
-}
-
-.apply-floating:hover {
-  /* ONLY glow — NO movement */
-  box-shadow: 0 14px 32px rgba(20,154,184,0.65) !important;
-  transform: translateX(-50%) !important; /* LOCK position */
-}
-
 
 /* =========================================================
-   BUBBLE GRID — PERFECT 2/3/4 LAYOUT
+   BUBBLE GRID
 ========================================================= */
 
 .bubble-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   margin-top: 24px;
-
-  justify-content: center;     /* center the whole grid */
-  justify-items: center;       /* center each card */
+  justify-content: center;
+  justify-items: center;
   align-items: start;
 }
-
-/* =========================================================
-   BUBBLE CARD — STOP STRETCHING
-========================================================= */
 
 .bubble-card {
   position: relative;
@@ -758,15 +716,11 @@ a {
   transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
   overflow: hidden;
   cursor: pointer;
-
-  /* THE FIX — DO NOT STRETCH */
-  width: auto;
+  width: 100%;
   max-width: 300px;
-
   box-sizing: border-box;
   text-align: center;
 }
-
 
 .bubble-card::before {
   content: "";
@@ -822,6 +776,7 @@ a {
     0 0 8px rgba(20,154,184,0.45),
     0 2px 6px rgba(0,0,0,0.7);
 }
+
 
 /* =========================================================
    SERVICE CARD ICONS
@@ -1001,6 +956,22 @@ a {
 
   .mobile-nav {
     display: none !important;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .footer-bottom {
+    flex-direction: column;
+  }
+
+  .bubble-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .bubble-card {
+    max-width: 100%;
   }
 }
 
