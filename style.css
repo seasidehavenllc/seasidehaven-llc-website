@@ -760,9 +760,9 @@ a {
   overflow: hidden;
   cursor: pointer;
 
-  /* FIX: remove width forcing */
-  width: auto;
-  max-width: none;
+  /* RESTORED */
+  width: 100%;
+  max-width: 300px;
 
   box-sizing: border-box;
   text-align: center;
