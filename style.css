@@ -720,6 +720,12 @@ a {
   max-width: 300px;
   box-sizing: border-box;
   text-align: center;
+
+   /* ⭐ ADD THESE ⭐ */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .bubble-card::before {
@@ -761,6 +767,7 @@ a {
 
 .bubble-card h3 {
   font-size: 1.15rem;
+  margin-top: 6px;
   margin-bottom: 8px;
   text-shadow:
     0 0 12px rgba(20,154,184,0.75),
