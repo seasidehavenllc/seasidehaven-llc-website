@@ -718,6 +718,75 @@ window.addEventListener("scroll", () => {
 });
 
 /* =========================================================
+   GET QUOTE FORM LOGIC
+========================================================= */
+
+function selectService(service) {
+  document.getElementById('selectedService').value = service;
+  nextStep(2);
+}
+
+function nextStep(step) {
+
+  // STEP 2 VALIDATION
+  if (step === 3) {
+    const details = document.getElementById('projectDetails').value.trim();
+    if (details.length < 5) {
+      document.getElementById('errorStep2').style.display = 'block';
+      return;
+    }
+    document.getElementById('errorStep2').style.display = 'none';
+  }
+
+  // STEP 4 VALIDATION
+  if (step === 5) {
+    const name = document.getElementById('quoteName').value.trim();
+    const email = document.getElementById('quoteEmail').value.trim();
+    const phone = document.getElementById('quotePhone').value.trim();
+
+    if (!name || !email || !phone) {
+      document.getElementById('errorStep4').style.display = 'block';
+      return;
+    }
+    document.getElementById('errorStep4').style.display = 'none';
+  }
+
+  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
+  document.getElementById('step' + step).style.display = 'block';
+}
+
+function prevStep(step) {
+  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
+  document.getElementById('step' + step).style.display = 'block';
+}
+
+function submitQuote() {
+  const service = document.getElementById('selectedService').value.trim();
+  const details = document.getElementById('projectDetails').value.trim();
+  const name = document.getElementById('quoteName').value.trim();
+  const email = document.getElementById('quoteEmail').value.trim();
+  const phone = document.getElementById('quotePhone').value.trim();
+
+  if (!service || !details || !name || !email || !phone) {
+    document.getElementById('errorStep5').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('errorStep5').style.display = 'none';
+
+  // Fill hidden form fields
+  const form = document.getElementById('quoteSendForm');
+  form.elements["Service"].value = service;
+  form.elements["Details"].value = details;
+  form.elements["Name"].value = name;
+  form.elements["Email"].value = email;
+  form.elements["Phone"].value = phone;
+
+  // Submit to FormSubmit (sends email to info@seasidehavenllc.com)
+  form.submit();
+};
+
+/* =========================================================
    DYNAMIC TESTIMONIALS
 ========================================================= */
 const testimonialContainer = document.getElementById("testimonialContainer");
