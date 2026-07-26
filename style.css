@@ -735,11 +735,12 @@ a {
 
 .bubble-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 300px));
   gap: 20px;
   margin-top: 24px;
 
   justify-content: center;
+  justify-items: center;
   align-items: start;
 }
 
@@ -759,13 +760,13 @@ a {
   overflow: hidden;
   cursor: pointer;
 
-  width: 100%;
-  max-width: none; /* IMPORTANT — remove 300px lock */
+  /* FIXED — STOP STRETCHING */
+  width: auto;
+  max-width: 300px;
 
   box-sizing: border-box;
   text-align: center;
 }
-
 
 .bubble-card::before {
   content: "";
