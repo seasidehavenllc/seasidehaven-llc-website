@@ -18,23 +18,24 @@ function showPricing(type) {
   panel.querySelector(".bubble-card").style.animation = "bubbleGlow 0.4s ease";
 
   const pricing = {
-    mowing: {
+     mowing: {
       title: "Mowing Pricing",
-      intro: "Pricing based on yard size, terrain, and obstacles.",
+      intro: "Weekly, bi-weekly, or one-time mowing services.",
       html: `
-        <p><strong>Small Yard (0.1–0.25 acre):</strong> <span class="price-highlight">$35–$55</span></p>
-        <p><strong>Medium Yard (0.25–0.5 acre):</strong> <span class="price-highlight">$55–$75</span></p>
-        <p><strong>Large Yard (0.5–1 acre):</strong> <span class="price-highlight">$75–$120</span></p>
-        <p><strong>Over 1 acre:</strong> <span class="price-highlight">Custom Quote</span></p>
+        <p><strong>Small Yard:</strong> $35–$50</p>
+        <p><strong>Medium Yard:</strong> $50–$75</p>
+        <p><strong>Large Yard:</strong> $75–$120</p>
+        <p><strong>XL / 1.5 Acre+:</strong> $120+</p>
       `
     },
 
     weed: {
       title: "Weed Eating Pricing",
-      intro: "Fence lines, ditches, tight areas, and property edges.",
+      intro: "Fence lines, ditches, tight spots, and property edges.",
       html: `
-        <p><strong>Per Linear Foot:</strong> <span class="price-highlight">$0.25–$0.45</span></p>
-        <p><strong>Heavy Overgrowth:</strong> <span class="price-highlight">+$10–$25</span></p>
+        <p><strong>Small Yard:</strong> $15–$20</p>
+        <p><strong>Medium Yard:</strong> $25–$35</p>
+        <p><strong>Large Yard:</strong> $40–$55</p>
       `
     },
 
@@ -42,28 +43,120 @@ function showPricing(type) {
       title: "Edging Pricing",
       intro: "Driveways, sidewalks, patios, and walkways.",
       html: `
-        <p><strong>Per Linear Foot:</strong> <span class="price-highlight">$0.35–$0.60</span></p>
-        <p><strong>Full Property Edge:</strong> <span class="price-highlight">$25–$60</span></p>
+        <p><strong>Small Yard:</strong> $10–$15</p>
+        <p><strong>Medium Yard:</strong> $20–$25</p>
+        <p><strong>Large Yard:</strong> $30–$40</p>
       `
     },
 
     bush: {
       title: "Bush Trimming Pricing",
-      intro: "Shaping, height reduction, and seasonal trimming.",
+      intro: "Shaping, height reduction, and seasonal maintenance.",
       html: `
-        <p><strong>Small Bushes:</strong> <span class="price-highlight">$5–$12</span></p>
-        <p><strong>Medium Bushes:</strong> <span class="price-highlight">$12–$20</span></p>
-        <p><strong>Large Bushes:</strong> <span class="price-highlight">$20–$40</span></p>
+        <p><strong>Small Yard:</strong> $20–$35</p>
+        <p><strong>Medium Yard:</strong> $35–$60</p>
+        <p><strong>Large Yard:</strong> $60–$120</p>
+        <p><strong>Full Property Trim:</strong> $120–$200</p>
+      `
+    },
+
+    aeration: {
+      title: "Aeration Pricing",
+      intro: "Core aeration for lawn health.",
+      html: `
+        <p><strong>Small Yard:</strong> $85–$110</p>
+        <p><strong>Medium Yard:</strong> $140–$170</p>
+        <p><strong>Large Yard:</strong> $200–$250</p>
+      `
+    },
+
+    fertilization: {
+      title: "Fertilization Pricing",
+      intro: "Seasonal lawn fertilization.",
+      html: `
+        <p><strong>Small Yard:</strong> $80–$100</p>
+        <p><strong>Medium Yard:</strong> $120–$150</p>
+        <p><strong>Large Yard:</strong> $150–$200</p>
+      `
+    },
+
+    overseeding: {
+      title: "Overseeding Pricing",
+      intro: "Boost lawn thickness and growth.",
+      html: `
+        <p><strong>Small Yard:</strong> $90–$120</p>
+        <p><strong>Medium Yard:</strong> $145–$175</p>
+        <p><strong>Large Yard:</strong> $200–$250</p>
+      `
+    },
+
+    leaf: {
+      title: "Leaf Removal Pricing",
+      intro: "Seasonal leaf cleanup.",
+      html: `
+        <p><strong>Regular Yard:</strong> $100–$150</p>
+        <p><strong>Medium Yard:</strong> $170–$225</p>
+        <p><strong>Large Yard:</strong> $300–$400</p>
+      `
+    },
+
+    flowerbed: {
+      title: "Flower Bed Cleanup Pricing",
+      intro: "Bed cleaning, debris removal, and overhaul.",
+      html: `
+        <p><strong>Light Cleanup:</strong> $100–$125</p>
+        <p><strong>Medium Cleanup:</strong> $150–$200</p>
+        <p><strong>Heavy Cleanup:</strong> $300–$350</p>
+        <p><strong>Bed Overhaul:</strong> $400–$500+</p>
+      `
+    },
+
+    mulch: {
+      title: "Mulch Installation Pricing",
+      intro: "Mulch installation and bed refreshing.",
+      html: `
+        <p><strong>Per Yard Install:</strong> $75–$95</p>
+        <p><strong>Full Bed Refresh:</strong> $250–$300</p>
+        <p><strong>Premium Mulch Add-on:</strong> $15–$25</p>
+      `
+    },
+
+    pine: {
+      title: "Pine Needle Installation Pricing",
+      intro: "Pine needle bedding and refresh.",
+      html: `
+        <p><strong>Per Bale Install:</strong> $15–$20</p>
+        <p><strong>Full Bed Refresh:</strong> $200–$250</p>
+      `
+    },
+
+    spring: {
+      title: "Spring Cleanup Pricing",
+      intro: "Seasonal cleanup and debris removal.",
+      html: `
+        <p><strong>Small Property:</strong> $200–$300</p>
+        <p><strong>Medium Property:</strong> $400–$550</p>
+        <p><strong>Large Property:</strong> $800–$1,000+</p>
+      `
+    },
+
+    fall: {
+      title: "Fall Cleanup Pricing",
+      intro: "Seasonal leaf and debris cleanup.",
+      html: `
+        <p><strong>Regular Property:</strong> $200–$300</p>
+        <p><strong>Medium Property:</strong> $400–$550</p>
+        <p><strong>Large Property:</strong> $800–$1,000+</p>
       `
     },
 
     treetrim: {
-      title: "Tree Trimming Pricing",
-      intro: "Branch removal, canopy shaping, and safety trimming.",
+      title: "Tree Limb Removal Pricing",
+      intro: "Safe removal of small, medium, and large limbs.",
       html: `
-        <p><strong>Small Trees (under 15ft):</strong> <span class="price-highlight">$75–$150</span></p>
-        <p><strong>Medium Trees (15–30ft):</strong> <span class="price-highlight">$150–$350</span></p>
-        <p><strong>Large Trees (30–50ft):</strong> <span class="price-highlight">$350–$800</span></p>
+        <p><strong>Small Limbs:</strong> $50–$90</p>
+        <p><strong>Medium Limbs:</strong> $130–$180</p>
+        <p><strong>Large Limbs:</strong> $250–$350+</p>
       `
     },
 
@@ -71,80 +164,154 @@ function showPricing(type) {
       title: "Tree Removal Pricing",
       intro: "Safe removal of small, medium, and large trees.",
       html: `
-        <p><strong>Small Trees (under 15ft):</strong> <span class="price-highlight">$150–$300</span></p>
-        <p><strong>Medium Trees (15–30ft):</strong> <span class="price-highlight">$300–$700</span></p>
-        <p><strong>Large Trees (30–50ft):</strong> <span class="price-highlight">$700–$1500+</span></p>
+        <p><strong>Small Tree (Under 10ft):</strong> $170–$250</p>
+        <p><strong>Medium Tree (10–20ft):</strong> $350–$500</p>
+        <p><strong>Large Tree (20–30ft):</strong> $800–$1,200+</p>
+        <p><strong>Stump Removal Add-on:</strong> $75–$150</p>
       `
     },
 
-    kitchen: {
-      title: "Kitchen Remodeling",
-      intro: "Cabinets, countertops, backsplashes, lighting, and full kitchen transformations.",
+    drywall: {
+      title: "Drywall Repair Pricing",
+      intro: "Holes, cracks, patches, and wall repairs.",
       html: `
-        <p><strong>Basic Kitchen Refresh:</strong> $4,000–$8,000</p>
-        <p><strong>Mid-Level Remodel:</strong> $8,000–$18,000</p>
-        <p><strong>Full Custom Remodel:</strong> $18,000–$35,000+</p>
+        <p><strong>Small Patch (1–4 in):</strong> $75–$125</p>
+        <p><strong>Medium Patch (4–12 in):</strong> $125–$200</p>
+        <p><strong>Large Patch (12–24 in):</strong> $200–$350</p>
+        <p><strong>Full Section Replacement:</strong> $350–$600</p>
+        <p><strong>Texture Match Add‑On:</strong> $50–$100</p>
+        <p><strong>Demo Add‑On:</strong> $75–$150</p>
       `
     },
 
-    bathroom: {
-      title: "Bathroom Remodeling",
-      intro: "Showers, tubs, tile work, vanities, plumbing upgrades, and full bathroom remodels.",
+    painting: {
+      title: "Painting & Touch-Up Pricing",
+      intro: "Walls, trim, doors, and color matching.",
       html: `
-        <p><strong>Basic Bathroom:</strong> $3,500–$7,500</p>
-        <p><strong>Mid-Level Remodel:</strong> $7,500–$15,000</p>
-        <p><strong>Luxury Remodel:</strong> $15,000–$30,000+</p>
+        <p><strong>Paint Match + Blend:</strong> $125–$200</p>
+        <p><strong>Single Wall Repaint:</strong> $150–$250</p>
+        <p><strong>Room Repaint:</strong> $350–$600</p>
+        <p><strong>Trim / Baseboards:</strong> $150–$300</p>
+        <p><strong>Door Painting:</strong> $75–$150</p>
       `
     },
 
     flooring: {
-      title: "Flooring Installation",
-      intro: "Hardwood, laminate, vinyl plank, tile, and custom flooring installations.",
+      title: "Flooring Installation Pricing",
+      intro: "Vinyl, laminate, plank flooring installs.",
       html: `
-        <p><strong>Laminate:</strong> $2–$4 per sq ft</p>
-        <p><strong>Vinyl Plank:</strong> $3–$6 per sq ft</p>
-        <p><strong>Hardwood:</strong> $6–$12 per sq ft</p>
-        <p><strong>Tile:</strong> $8–$15 per sq ft</p>
+        <p><strong>Small Room (up to 120 sq ft):</strong> $450–$700</p>
+        <p><strong>Medium Room (120–200 sq ft):</strong> $700–$900</p>
+        <p><strong>Large Room (200–300 sq ft):</strong> $900–$1,000</p>
+        <p><strong>Flooring Demo Add‑On:</strong> $150–$350</p>
       `
     },
 
-    interiorpaint: {
-      title: "Interior Painting",
-      intro: "Walls, ceilings, trim, doors, accent walls, and full interior repainting.",
+    vanity: {
+      title: "Vanity Replacement Pricing",
+      intro: "Bathroom vanity swap and plumbing reconnection.",
       html: `
-        <p><strong>Walls:</strong> $1.50–$3.50 per sq ft</p>
-        <p><strong>Ceilings:</strong> $1–$2.50 per sq ft</p>
-        <p><strong>Trim & Doors:</strong> $25–$75 each</p>
+        <p><strong>Standard Vanity:</strong> $450–$650</p>
+        <p><strong>Double Vanity:</strong> $650–$900</p>
+        <p><strong>Plumbing Adjustments:</strong> $75–$150</p>
       `
     },
 
-    exteriorpaint: {
-      title: "Exterior Painting",
-      intro: "Siding, shutters, trim, porches, decks, and full exterior repainting.",
+    lightfixtures: {
+      title: "Light Fixture & Fan Pricing",
+      intro: "Ceiling lights, fans, and wall fixtures.",
       html: `
-        <p><strong>Small Home:</strong> $2,500–$6,000</p>
-        <p><strong>Medium Home:</strong> $6,000–$12,000</p>
-        <p><strong>Large Home:</strong> $12,000–$20,000+</p>
+        <p><strong>Basic Fixture Swap:</strong> $150–$200</p>
+        <p><strong>Ceiling Fan Install:</strong> $200–$350</p>
+        <p><strong>Chandelier Install:</strong> $250–$450</p>
+        <p><strong>Dimmer Switch Install:</strong> $75–$150</p>
       `
     },
 
-    exteriorupgrades: {
-      title: "Exterior Upgrades",
-      intro: "Siding repair, deck restoration, porch rebuilds, and outdoor structural improvements.",
+    toilets: {
+      title: "Toilet Replacement Pricing",
+      intro: "Remove old toilet and install new one.",
       html: `
-        <p><strong>Siding Repair:</strong> $300–$2,500</p>
-        <p><strong>Deck Restoration:</strong> $800–$4,000</p>
-        <p><strong>Porch Rebuild:</strong> $2,500–$10,000+</p>
+        <p><strong>Standard Toilet Swap:</strong> $150–$250</p>
+        <p><strong>Wax Ring + Seal:</strong> $25–$50</p>
       `
     },
 
-    fullreno: {
-      title: "Full Renovations",
-      intro: "Complete home transformations, structural updates, and full interior/exterior redesigns.",
+    faucets: {
+      title: "Faucet Replacement Pricing",
+      intro: "Kitchen, bathroom, and utility faucets.",
       html: `
-        <p><strong>Interior Renovation:</strong> $15,000–$60,000+</p>
-        <p><strong>Exterior Renovation:</strong> $10,000–$50,000+</p>
-        <p><strong>Full Home Transformation:</strong> $40,000–$150,000+</p>
+        <p><strong>Bathroom Faucet:</strong> $125–$200</p>
+        <p><strong>Kitchen Faucet:</strong> $150–$250</p>
+      `
+    },
+
+    doors: {
+      title: "Door Replacement Pricing",
+      intro: "Interior and exterior door swaps.",
+      html: `
+        <p><strong>Interior Door:</strong> $150–$300</p>
+        <p><strong>Exterior Door:</strong> $300–$600</p>
+        <p><strong>Door Trim Replacement:</strong> $100–$200</p>
+      `
+    },
+
+    trim: {
+      title: "Trim & Baseboard Pricing",
+      intro: "Install, replace, or repair trim.",
+      html: `
+        <p><strong>Small Room:</strong> $150–$250</p>
+        <p><strong>Medium Room:</strong> $250–$400</p>
+        <p><strong>Large Room:</strong> $400–$600</p>
+      `
+    },
+
+    backsplash: {
+      title: "Backsplash Installation Pricing",
+      intro: "Kitchen or bathroom backsplash installs.",
+      html: `
+        <p><strong>Small Area:</strong> $250–$450</p>
+        <p><strong>Full Kitchen:</strong> $450–$900</p>
+        <p><strong>Tile Demo Add‑On:</strong> $150–$300</p>
+      `
+    },
+
+    shelving: {
+      title: "Shelving & Mounting Pricing",
+      intro: "Floating shelves, TV mounts, and wall installs.",
+      html: `
+        <p><strong>Floating Shelves:</strong> $75–$150</p>
+        <p><strong>TV Mount Install:</strong> $125–$200</p>
+        <p><strong>Heavy-Duty Mount:</strong> $200–$300</p>
+      `
+    },
+
+    caulking: {
+      title: "Caulking & Sealing Pricing",
+      intro: "Bathrooms, kitchens, windows, and trim.",
+      html: `
+        <p><strong>Bathroom Caulk:</strong> $75–$150</p>
+        <p><strong>Window/Trim Caulk:</strong> $100–$200</p>
+      `
+    },
+
+    demo: {
+      title: "Demolition Pricing",
+      intro: "Remove old materials before installation.",
+      html: `
+        <p><strong>Small Demo:</strong> $75–$150</p>
+        <p><strong>Medium Demo:</strong> $150–$350</p>
+        <p><strong>Large Demo:</strong> $350–$600</p>
+      `
+    },
+
+    haulaway: {
+      title: "Remodeling Haul-Away Pricing",
+      intro: "Debris, old materials, and construction waste.",
+      html: `
+        <p><strong>Small Load:</strong> $75–$150</p>
+        <p><strong>Medium Load:</strong> $150–$300</p>
+        <p><strong>Large Load:</strong> $300–$500</p>
       `
     },
     turnover: {
@@ -298,9 +465,9 @@ function showPricing(type) {
       title: "Basic Junk Removal Pricing",
       intro: "General household junk, bagged trash, and small items.",
       html: `
-        <p><strong>Small Load:</strong> $60–$120</p>
-        <p><strong>Medium Load:</strong> $120–$250</p>
-        <p><strong>Large Load:</strong> $250–$450</p>
+        <p><strong>1–3 Item Pick Up:</strong> $75–$115</p>
+        <p><strong>Small Load:</strong> $150–$200</p>
+        <p><strong>Medium Load:</strong> $300–$375</p>
       `
     },
 
@@ -308,9 +475,8 @@ function showPricing(type) {
       title: "Furniture Removal Pricing",
       intro: "Couches, mattresses, dressers, tables, and more.",
       html: `
-        <p><strong>Single Item:</strong> $40–$80</p>
-        <p><strong>Multiple Items:</strong> $80–$200</p>
-        <p><strong>Heavy Furniture:</strong> $150–$350</p>
+        <p><strong>Furniture Removal:</strong> $125–$200</p>
+        <p><strong>Mattress Removal:</strong> $75–$125</p>
       `
     },
 
@@ -318,9 +484,7 @@ function showPricing(type) {
       title: "Appliance Removal Pricing",
       intro: "Washers, dryers, fridges, stoves, and heavy appliances.",
       html: `
-        <p><strong>Standard Appliances:</strong> $60–$120</p>
-        <p><strong>Large Appliances:</strong> $120–$250</p>
-        <p><strong>Commercial Appliances:</strong> $250–$500+</p>
+        <p><strong>Appliance Removal:</strong> $75–$150</p>
       `
     },
 
@@ -328,9 +492,7 @@ function showPricing(type) {
       title: "Yard Debris Removal Pricing",
       intro: "Branches, brush, storm debris, and outdoor waste.",
       html: `
-        <p><strong>Small Pile:</strong> $50–$120</p>
-        <p><strong>Medium Pile:</strong> $120–$250</p>
-        <p><strong>Large Pile:</strong> $250–$450</p>
+        <p><strong>Yard Waste Load:</strong> $125–$300</p>
       `
     },
 
@@ -338,9 +500,7 @@ function showPricing(type) {
       title: "Construction Debris Pricing",
       intro: "Renovation debris, wood, drywall, flooring, and more.",
       html: `
-        <p><strong>Small Load:</strong> $80–$150</p>
-        <p><strong>Medium Load:</strong> $150–$300</p>
-        <p><strong>Large Load:</strong> $300–$600+</p>
+        <p><strong>Construction Debris Load:</strong> $250–$500</p>
       `
     },
 
@@ -348,9 +508,7 @@ function showPricing(type) {
       title: "Full Property Cleanout Pricing",
       intro: "Evictions, foreclosures, hoarder homes, and full cleanouts.",
       html: `
-        <p><strong>Small Cleanout:</strong> $250–$600</p>
-        <p><strong>Medium Cleanout:</strong> $600–$1,200</p>
-        <p><strong>Large Cleanout:</strong> $1,200–$3,000+</p>
+        <p><strong>Full Property Cleanout:</strong> $1,000–$3,500+</p>
       `
     },
     driveway: {
@@ -362,7 +520,6 @@ function showPricing(type) {
         <p><strong>Large Driveway:</strong> $250–$400+</p>
       `
     },
-
     siding: {
       title: "House Siding Wash Pricing",
       intro: "Vinyl, brick, wood, and full exterior home washing.",
@@ -513,6 +670,41 @@ backToTop.addEventListener("click", () => {
   });
 });
 
+function openModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.style.display = 'block';
+  document.querySelector('.apply-floating').style.display = 'none';
+};
+
+function closeModal(id) {
+  const m = document.getElementById(id);
+  if (m) m.style.display = 'none';
+  document.querySelector('.apply-floating').style.display = 'inline-block';
+};
+
+/* =========================================================
+   CAREERS — OPEN JOB MODAL WITH PREFILLED POSITION
+========================================================= */
+function openJobModal(positionName) {
+  const modal = document.getElementById('hireModal');
+  modal.style.display = 'block';
+
+  // Hide floating apply button
+  const applyBtn = document.querySelector('.apply-floating');
+  if (applyBtn) applyBtn.style.display = 'none';
+
+  // Prefill the dropdown
+  const select = document.getElementById('hirePosition');
+
+  for (let option of select.options) {
+    if (option.text === positionName) {
+      option.selected = true;
+      break;
+    }
+  }
+}
+
+
 /* =========================================================
    PARTNER CARD CLICK
 ========================================================= */
@@ -547,6 +739,70 @@ window.addEventListener("scroll", () => {
     header.style.boxShadow = "none";
   }
 });
+
+/* =========================================================
+   GET QUOTE FORM LOGIC
+========================================================= */
+
+function selectService(service) {
+  document.getElementById('selectedService').value = service;
+  nextStep(2);
+}
+
+function nextStep(step) {
+  if (step === 3) {
+    const details = document.getElementById('projectDetails').value.trim();
+    if (details.length < 5) {
+      document.getElementById('errorStep2').style.display = 'block';
+      return;
+    }
+    document.getElementById('errorStep2').style.display = 'none';
+  }
+
+  if (step === 5) {
+    const name = document.getElementById('quoteName').value.trim();
+    const email = document.getElementById('quoteEmail').value.trim();
+    const phone = document.getElementById('quotePhone').value.trim();
+
+    if (!name || !email || !phone) {
+      document.getElementById('errorStep4').style.display = 'block';
+      return;
+    }
+    document.getElementById('errorStep4').style.display = 'none';
+  }
+
+  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
+  document.getElementById('step' + step).style.display = 'block';
+}
+
+function prevStep(step) {
+  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
+  document.getElementById('step' + step).style.display = 'block';
+}
+
+function submitQuote() {
+  const service = document.getElementById('selectedService').value.trim();
+  const details = document.getElementById('projectDetails').value.trim();
+  const name = document.getElementById('quoteName').value.trim();
+  const email = document.getElementById('quoteEmail').value.trim();
+  const phone = document.getElementById('quotePhone').value.trim();
+
+  if (!service || !details || !name || !email || !phone) {
+    document.getElementById('errorStep5').style.display = 'block';
+    return;
+  }
+
+  document.getElementById('errorStep5').style.display = 'none';
+
+  const form = document.getElementById('quoteSendForm');
+  form.elements["Service"].value = service;
+  form.elements["Details"].value = details;
+  form.elements["Name"].value = name;
+  form.elements["Email"].value = email;
+  form.elements["Phone"].value = phone;
+
+  form.submit();
+};
 
 /* =========================================================
    DYNAMIC TESTIMONIALS

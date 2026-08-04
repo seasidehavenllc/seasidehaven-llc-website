@@ -6,6 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* Floating Apply Button ONLY for Careers Page */
+    .apply-floating {
+      position: fixed;
+      bottom: 22px;
+      right: 22px;
+      z-index: 9999;
+      padding: 12px 22px;
+      border-radius: 999px;
+      background: #149ab8;
+      color: #fff;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.55);
+      transition: 0.25s ease;
+    }
+
+    .apply-floating:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px rgba(20,154,184,0.65);
+    }
+  </style>
 </head>
 
 <body>
@@ -13,7 +35,9 @@
 <!-- HEADER -->
 <header class="site-header">
   <div class="logo">
-    <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+    <a href="../index.html">
+      <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+    </a>
   </div>
 
   <nav class="nav">
@@ -57,47 +81,31 @@
     <p class="section-kicker">Departments</p>
     <h2>Where You Can Work</h2>
     <p class="section-intro">
-      Explore openings across field operations, landscaping, junk removal, pressure washing, and vending services.
+      Explore openings across remodeling, landscaping and junk removal
     </p>
   </div>
 
   <div class="bubble-grid">
 
-    <!-- FIELD OPERATIONS -->
+    <!-- REMODELING -->
     <div class="bubble-card small-tile">
-        <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-        <i class="fas fa-wrench service-icon"></i>
-        <h3 class="gradient-text">Field Operations</h3>
-        <p>Repairs, maintenance, installations, and property support.</p>
+      <i class="fas fa-wrench service-icon"></i>
+      <h3 class="gradient-text">Remodeling</h3>
+      <p>Repairs, maintenance, installations, and property support.</p>
     </div>
 
     <!-- LANDSCAPING -->
     <div class="bubble-card small-tile">
-            <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-            <i class="fas fa-leaf service-icon"></i>
-            <h3 class="gradient-text">Landscaping</h3>
-            <p>Mowing, trimming, mulch, edging, and seasonal cleanups.</p>
-            </div>
+      <i class="fas fa-leaf service-icon"></i>
+      <h3 class="gradient-text">Landscaping</h3>
+      <p>Mowing, trimming, mulch, edging, and seasonal cleanups.</p>
+    </div>
 
     <!-- JUNK REMOVAL -->
     <div class="bubble-card small-tile">
       <i class="fas fa-trash-alt service-icon"></i>
       <h3 class="gradient-text">Junk Removal</h3>
       <p>Residential and commercial haul-away services.</p>
-    </div>
-
-    <!-- PRESSURE WASHING -->
-    <div class="bubble-card small-tile">
-      <i class="fas fa-water service-icon"></i>
-      <h3 class="gradient-text">Pressure Washing</h3>
-      <p>Driveways, siding, decks, patios, and storefronts.</p>
-    </div>
-
-    <!-- VENDING (Optional) -->
-    <div class="bubble-card small-tile">
-      <i class="fas fa-cookie-bite service-icon"></i>
-      <h3 class="gradient-text">Vending Services</h3>
-      <p>Machine placement, stocking, and route operations.</p>
     </div>
 
   </div>
@@ -115,72 +123,53 @@
 
   <div class="bubble-grid">
 
-    <!-- FIELD TECH -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-      <i class="fas fa-tools service-icon"></i>
-      <h3 class="gradient-text">Field Technician</h3>
-      <p>
-        <strong>Salary:</strong> $18–$26/hr<br>
-        <strong>Department:</strong> Field Operations<br>
-        <strong>Description:</strong> Repairs, maintenance, installations, troubleshooting, and property support.
-      </p>
-    </div>
-
     <!-- LANDSCAPING CREW -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <span class="badge-coming-soon" style="background:#149ab8;">Now Hiring</span>
-      <i class="fas fa-leaf service-icon"></i>
-      <h3 class="gradient-text">Landscaping Crew</h3>
-      <p>
-        <strong>Salary:</strong> $15–$22/hr<br>
-        <strong>Department:</strong> Landscaping<br>
-        <strong>Description:</strong> Mowing, trimming, mulch, edging, seasonal cleanups, and outdoor projects.
-      </p>
+    <div class="bubble-card-wrapper">
+      <div class="bubble-card small-tile" onclick="openJobModal('Landscaping Crew')">
+        <i class="fas fa-leaf service-icon"></i>
+        <h3 class="gradient-text">Landscaping Crew</h3>
+        <p>
+          <strong>Salary:</strong> $15–$18/hr<br>
+          <strong>Department:</strong> Landscaping<br>
+          <strong>Description:</strong> Mowing, trimming, mulch, edging, seasonal cleanups, and outdoor projects.
+        </p>
+      </div>
+      <span class="badge-coming-soon">Now Hiring</span>
     </div>
 
-    <!-- JUNK REMOVAL -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <i class="fas fa-trash-alt service-icon"></i>
-      <h3 class="gradient-text">Junk Removal Specialist</h3>
-      <p>
-        <strong>Salary:</strong> $16–$24/hr<br>
-        <strong>Department:</strong> Junk Removal<br>
-        <strong>Description:</strong> Haul-away jobs, loading, sorting, disposal, and customer interaction.
-      </p>
+    <!-- LANDSCAPING FOREMAN -->
+    <div class="bubble-card-wrapper">
+      <div class="bubble-card small-tile" onclick="openJobModal('Landscaping Foreman')">
+        <i class="fas fa-leaf service-icon"></i>
+        <h3 class="gradient-text">Landscaping Foreman</h3>
+        <p>
+          <strong>Salary:</strong> $18–$23/hr<br>
+          <strong>Department:</strong> Landscaping<br>
+          <strong>Description:</strong> Supervising landscaping crews, managing projects, and ensuring quality work.
+        </p>
+      </div>
+      <span class="badge-coming-soon">Now Hiring</span>
     </div>
 
-    <!-- PRESSURE WASHING -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <i class="fas fa-water service-icon"></i>
-      <h3 class="gradient-text">Pressure Washing Tech</h3>
-      <p>
-        <strong>Salary:</strong> $17–$25/hr<br>
-        <strong>Department:</strong> Pressure Washing<br>
-        <strong>Description:</strong> Cleaning driveways, siding, decks, patios, and storefronts.
-      </p>
-    </div>
-
-    <!-- VENDING ROUTE (Optional) -->
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <i class="fas fa-cookie-bite service-icon"></i>
-      <h3 class="gradient-text">Vending Route Operator</h3>
-      <p>
-        <strong>Salary:</strong> $15–$20/hr<br>
-        <strong>Department:</strong> Vending<br>
-        <strong>Description:</strong> Stocking machines, route driving, customer service, and inventory.
-      </p>
+    <!-- JUNK REMOVAL SPECIALIST -->
+    <div class="bubble-card-wrapper">
+      <div class="bubble-card small-tile" onclick="openJobModal('Junk Removal Specialist')">
+        <i class="fas fa-trash-alt service-icon"></i>
+        <h3 class="gradient-text">Junk Removal Specialist</h3>
+        <p>
+          <strong>Salary:</strong> $16–$24/hr<br>
+          <strong>Department:</strong> Junk Removal<br>
+          <strong>Description:</strong> Haul-away jobs, loading, sorting, disposal, and customer interaction.
+        </p>
+      </div>
+      <span class="badge-coming-soon">Now Hiring</span>
     </div>
 
   </div>
 </section>
 
-<!-- APPLY BUTTON -->
-<section class="section section-dark">
-  <div class="hero-actions center">
-    <a href="#" onclick="openModal('hireModal')" class="button-primary">Apply Now</a>
-  </div>
-</section>
+<!-- FLOATING APPLY BUTTON -->
+<a href="#" onclick="openModal('hireModal')" class="button-primary apply-floating">Apply Now</a>
 
 <!-- CONTACT INFO -->
 <section class="section section-dark">
@@ -213,11 +202,10 @@
       <label for="hirePosition">Position Applying For</label>
       <select id="hirePosition">
         <option value="" disabled selected>Select a Position</option>
-        <option value="field-tech">Field Technician</option>
-        <option value="maintenance">Maintenance & Repairs</option>
-        <option value="landscaping">Landscaping Crew</option>
-        <option value="cleaning">Cleaning & Turnovers</option>
-        <option value="admin">Office / Admin Support</option>
+        <option value="junk-removal-spec">Junk Removal Specialist</option>
+        <option value="remodeling-tech">Remodeling Technician</option>
+        <option value="landscape-crew">Landscaping Crew</option>
+        <option value="landscape-foreman">Landscaping Foreman</option>
       </select>
 
       <label for="hireDates">Available Interview Dates</label>
@@ -256,11 +244,7 @@
       <ul>
         <li><a href="remodeling.html">Remodeling</a></li>
         <li><a href="landscaping.html">Landscaping</a></li>
-        <li><a href="rentals.html">Rentals</a></li>
-        <li><a href="vending.html">Vending</a></li>
-        <li><a href="laundromats.html">Laundromats</a></li>
-        <li><a href="junk-removal.html">Junk Removal</a></li>
-        <li><a href="pressure-washing.html">Pressure Washing</a></li>
+        <li><a href="junkremoval.html">Junk Removal</a></li>
       </ul>
     </div>
 

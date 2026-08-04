@@ -13,7 +13,9 @@
 <!-- HEADER -->
 <header class="site-header">
   <div class="logo">
-    <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+    <a href="../index.html">
+      <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+    </a>
   </div>
 
   <nav class="nav">
@@ -75,16 +77,6 @@
         <div class="bubble-card small-tile" onclick="selectService('Junk Removal')">
           <i class="fas fa-trash-alt service-icon"></i>
           <h3 class="gradient-text">Junk Removal</h3>
-        </div>
-
-        <div class="bubble-card small-tile" onclick="selectService('Pressure Washing')">
-          <i class="fas fa-water service-icon"></i>
-          <h3 class="gradient-text">Pressure Washing</h3>
-        </div>
-
-        <div class="bubble-card small-tile" onclick="selectService('Vending Services')">
-          <i class="fas fa-cookie-bite service-icon"></i>
-          <h3 class="gradient-text">Vending</h3>
         </div>
       </div>
     </div>
@@ -182,7 +174,6 @@
 </main>
 
 <!-- FOOTER -->
-<!-- FOOTER -->
 <footer id="footer" class="site-footer">
   <div class="footer-columns">
 
@@ -192,7 +183,7 @@
         <li><a href="about.html">About Us</a></li>
         <li><a href="partner.html">Partner</a></li>
         <li><a href="../doclist.html">Documents</a></li>
-        <li><a href="careers.html">Careers</a></li>
+        <li><a href="careers.html" class="active">Careers</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
@@ -203,11 +194,7 @@
       <ul>
         <li><a href="remodeling.html">Remodeling</a></li>
         <li><a href="landscaping.html">Landscaping</a></li>
-        <li><a href="rentals.html">Rentals</a></li>
-        <li><a href="vending.html">Vending</a></li>
-        <li><a href="laundromats.html">Laundromats</a></li>
-        <li><a href="junk-removal.html">Junk Removal</a></li>
-        <li><a href="pressure-washing.html">Pressure Washing</a></li>
+        <li><a href="junkremoval.html">Junk Removal</a></li>
       </ul>
     </div>
 
@@ -231,12 +218,12 @@
   </div>
 
   <div class="footer-bottom">
-  <div class="footer-bottom-left">
-    <br><br><br><br>
-    <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
-  </div>
+    <div class="footer-bottom-left">
+      <br><br><br><br>
+      <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
+    </div>
 
-  <div class="footer-bottom-right" style="text-align:right; line-height:1.6;">
+    <div class="footer-bottom-right" style="text-align:right; line-height:1.6;">
       <strong>M–F 8am – 4pm</strong><br>
       <strong>Saturday 9am – 3pm</strong><br>
       <strong>+1 (434) - 233 - 0231</strong><br>
@@ -249,63 +236,18 @@
 
 <script src="../script.js"></script>
 
-<script>
-function selectService(service) {
-  document.getElementById('selectedService').value = service;
-  nextStep(2);
-}
+<!-- HIDDEN EMAIL FORM (FormSubmit) -->
+<form id="quoteSendForm" action="https://formsubmit.co/admin@seasidehavenllc.com" method="POST" style="display:none;">
+  <input type="hidden" name="Service">
+  <input type="hidden" name="Details">
+  <input type="hidden" name="Name">
+  <input type="hidden" name="Email">
+  <input type="hidden" name="Phone">
 
-function nextStep(step) {
-
-  // STEP 2 VALIDATION
-  if (step === 3) {
-    const details = document.getElementById('projectDetails').value.trim();
-    if (details.length < 5) {
-      document.getElementById('errorStep2').style.display = 'block';
-      return;
-    }
-    document.getElementById('errorStep2').style.display = 'none';
-  }
-
-  // STEP 4 VALIDATION
-  if (step === 5) {
-    const name = document.getElementById('quoteName').value.trim();
-    const email = document.getElementById('quoteEmail').value.trim();
-    const phone = document.getElementById('quotePhone').value.trim();
-
-    if (!name || !email || !phone) {
-      document.getElementById('errorStep4').style.display = 'block';
-      return;
-    }
-    document.getElementById('errorStep4').style.display = 'none';
-  }
-
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  document.getElementById('step' + step).style.display = 'block';
-}
-
-function prevStep(step) {
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  document.getElementById('step' + step).style.display = 'block';
-}
-
-function submitQuote() {
-  const service = document.getElementById('selectedService').value.trim();
-  const details = document.getElementById('projectDetails').value.trim();
-  const name = document.getElementById('quoteName').value.trim();
-  const email = document.getElementById('quoteEmail').value.trim();
-  const phone = document.getElementById('quotePhone').value.trim();
-
-  if (!service || !details || !name || !email || !phone) {
-    document.getElementById('errorStep5').style.display = 'block';
-    return;
-  }
-
-  document.getElementById('errorStep5').style.display = 'none';
-
-  alert("Your quote request has been submitted!");
-}
-</script>
+  <input type="hidden" name="_subject" value="New Quote Request · Seaside Haven LLC">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+</form>
 
 </body>
 </html>
