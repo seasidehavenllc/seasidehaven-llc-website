@@ -704,6 +704,28 @@ function openJobModal(positionName) {
   }
 }
 
+/* =========================================================
+   ADDRESS AUTOCOMPLETE (Google Places)
+========================================================= */
+
+function initAddressAutocomplete() {
+  const input = document.getElementById("quoteAddress");
+  if (!input) return;
+
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ["address"],
+    componentRestrictions: { country: "us" }
+  });
+
+  autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
+    if (place && place.formatted_address) {
+      input.value = place.formatted_address;
+    }
+  });
+}
+
+document.addEventListener("DOMContentLoaded", initAddressAutocomplete);
 
 /* =========================================================
    PARTNER CARD CLICK

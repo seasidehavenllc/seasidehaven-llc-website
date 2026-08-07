@@ -71,7 +71,7 @@
 
         <div class="bubble-card small-tile" onclick="selectService('Landscaping')">
           <i class="fas fa-leaf service-icon"></i>
-          <h3 class="gradient-text">Landscaping</h3>
+          <h3 class="gradient-gradient">Landscaping</h3>
         </div>
 
         <div class="bubble-card small-tile" onclick="selectService('Junk Removal')">
@@ -123,8 +123,14 @@
       <h4 class="gradient-text">Your Contact Information</h4>
       <form class="contact-form">
 
-        <label>Your Name</label>
-        <input id="quoteName" type="text" placeholder="Your Name" />
+        <label>First Name</label>
+        <input id="quoteFirstName" type="text" placeholder="First Name" />
+
+        <label>Last Name</label>
+        <input id="quoteLastName" type="text" placeholder="Last Name" />
+
+        <label>Address</label>
+        <input id="quoteAddress" type="text" placeholder="Street, City, State" />
 
         <label>Email</label>
         <input id="quoteEmail" type="email" placeholder="you@example.com" />
@@ -236,11 +242,18 @@
 
 <script src="../script.js"></script>
 
+<!-- GOOGLE PLACES AUTOCOMPLETE -->
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=places"></script>
+
 <!-- HIDDEN EMAIL FORM (FormSubmit) -->
 <form id="quoteSendForm" action="https://formsubmit.co/admin@seasidehavenllc.com" method="POST" style="display:none;">
   <input type="hidden" name="Service">
   <input type="hidden" name="Details">
-  <input type="hidden" name="Name">
+
+  <input type="hidden" name="First Name">
+  <input type="hidden" name="Last Name">
+  <input type="hidden" name="Address">
+
   <input type="hidden" name="Email">
   <input type="hidden" name="Phone">
 
