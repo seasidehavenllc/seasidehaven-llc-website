@@ -53,7 +53,7 @@ if ("IntersectionObserver" in window && !prefersReducedMotion) {
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  }, { threshold: 0, rootMargin: "0px 0px 10% 0px" }); // start just before it scrolls into view
   revealEls.forEach(el => io.observe(el));
 } else {
   revealEls.forEach(el => el.classList.add("in"));

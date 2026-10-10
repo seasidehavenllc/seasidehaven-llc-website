@@ -2,19 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>document.documentElement.classList.add("js")</script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terms of service · Seaside Haven LLC</title>
-  <meta name="description" content="The rules, expectations, and agreements for using Seaside Haven LLC services." />
+  <title>Get a Free Quote · Seaside Haven LLC</title>
+  <meta name="description" content="Request a free quote for home repairs, landscaping, or junk removal. Add photos for a faster price. Most quotes go out the same day." />
   <meta name="theme-color" content="#0A1A2F" />
-  <link rel="canonical" href="https://seasidehavenllc.com/Pages/terms-of-service.html" />
-  <meta property="og:title" content="Terms of service · Seaside Haven LLC" />
-  <meta property="og:description" content="The rules, expectations, and agreements for using Seaside Haven LLC services." />
+  <link rel="canonical" href="https://seasidehavenllc.com/Pages/getquote.html" />
+  <meta property="og:title" content="Get a Free Quote · Seaside Haven LLC" />
+  <meta property="og:description" content="Request a free quote for home repairs, landscaping, or junk removal. Add photos for a faster price. Most quotes go out the same day." />
   <meta property="og:image" content="https://seasidehavenllc.com/Images/logo.png" />
   <link rel="icon" href="../Images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" />
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../style.css?v=3.2" />
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -56,16 +57,104 @@
 <section class="page-hero">
   <div class="grid-bg" style="position:absolute;inset:0" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div>
   <div class="wrap hero-anim">
-    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Terms of service</span></nav>
-    <h1 class="glow-text">Terms of service</h1>
-    <p class="lead">The rules, expectations, and agreements for using Seaside Haven LLC services.</p>
-    <p class="muted" style="margin:0">Last updated: October 10, 2026</p>
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Get a quote</span></nav>
+    <h1 class="glow-text">Get a free quote</h1>
+    <p class="lead">Five quick steps, no account needed. Want to pick a day instead? <button class="text-link" style="background:none;border:0;padding:0;font:inherit;font-weight:700;cursor:pointer" type="button" data-chat="book">Book with chat</button> or call <a href="tel:+14342330231" style="color:#fff">(434) 233-0231</a>.</p>
+    
   </div>
   <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
 </section>
 
-<section class="section tight">
-  <div class="wrap doc reveal"><ol><li><h2>Service agreement</h2><p>By requesting services, you agree to our policies, scheduling rules, and communication terms.</p></li><li><h2>Quotes & estimates</h2><p>Quotes are based on the information provided and may change if project details differ on-site.</p></li><li><h2>Payments</h2><p>Payment is due upon completion unless otherwise arranged. Deposits may be required for larger projects.</p></li><li><h2>Scheduling</h2><p>Appointment times may change due to weather, workload, or unforeseen delays. We’ll notify you of any changes.</p></li><li><h2>Cancellations</h2><p>Please notify us at least 24 hours in advance to cancel or reschedule without fees.</p></li><li><h2>Property access</h2><p>You must provide safe access to the work area. Hazards or blocked access may delay service.</p></li><li><h2>Liability</h2><p>We are insured, but not responsible for pre-existing damage or unsafe conditions on the property.</p></li><li><h2>Service limitations</h2><p>Some services may be unavailable due to weather, safety concerns, or equipment restrictions.</p></li><li><h2>Changes to terms</h2><p>These terms may be updated as needed. The latest revision date is posted above.</p></li><li><h2>Contact us</h2><p>Email <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a> or call <a href="tel:+14342330231">(434) 233-0231</a>.</p></li></ol></div>
+<section class="section tight" id="quoteWizard">
+  <div class="wrap wizard">
+    <ol class="progress" aria-label="Quote progress">
+      <li class="current">Service</li><li>Project</li><li>Photos</li><li>Contact</li><li>Review</li>
+    </ol>
+
+    <div class="form-card glass">
+      <!-- One real form: FormSubmit emails every request (with photos) to info@seasidehavenllc.com -->
+      <form id="quoteForm" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST" enctype="multipart/form-data">
+          <input type="hidden" name="_subject" value="New Quote Request · Seaside Haven LLC">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://seasidehavenllc.com/Pages/getquote.html?success=true">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+        <div class="quote-step" id="step1">
+          <h2>What do you need help with?</h2>
+          <p>Choose a service to get started.</p>
+          <div class="choice-grid">
+            <button class="choice glass" type="button" onclick="selectService('Remodeling')">
+              <span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M246.9 18.3 271 3.8c21.6-13 46.3-19.8 71.5-19.8 36.8 0 72.2 14.6 98.2 40.7l63.9 63.9c15 15 23.4 35.4 23.4 56.6v30.9l19.7 19.7c15.6-15.6 40.9-15.6 56.6 0s15.6 40.9 0 56.6l-64 64c-15.6 15.6-40.9 15.6-56.6 0s-15.6-40.9 0-56.6L464 240h-30.9c-21.2 0-41.6-8.4-56.6-23.4l-49.1-49.1c-15-15-23.4-35.4-23.4-56.6V98.2c0-11.2-5.9-21.7-15.5-27.4l-41.6-25c-10.4-6.2-10.4-21.2 0-27.4zM50.7 402.7l222.1-222.1 90.5 90.5-222.1 222.1c-25 25-65.5 25-90.5 0s-25-65.5 0-90.5"/></svg></span>
+              <span><strong>Home repairs & remodeling</strong><br><span class="sub">Drywall, paint, fixtures, flooring</span></span>
+            </button>
+            <button class="choice glass" type="button" onclick="selectService('Landscaping')">
+              <span class="icon-chip"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M471.3 6.7c6.4-6.1 15.7-8.3 24.3-5.5C505.4 4.5 512 13.7 512 24v186.9C512 342.1 403.9 448 273.2 448c-77 0-143.4-49.5-167.5-118.7C70.3 360.1 48 405.4 48 456c0 13.3-10.7 24-24 24S0 469.3 0 456c0-74.9 38.2-140.9 96.1-179.7C131.4 252.7 173.5 240 216 240h80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-80c-39.7 0-77.3 8.8-111 24.5C128.3 146.5 194.2 96 272 96c66.4 0 115.8-22.1 148.7-44 19.2-12.8 35.5-28.1 50.7-45.3z"/></svg></span>
+              <span><strong>Landscaping & lawn care</strong><br><span class="sub">Mowing, mulch, cleanups, trees</span></span>
+            </button>
+            <button class="choice glass" type="button" onclick="selectService('Junk Removal')">
+              <span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="m363.8 96 57.6 96H288V96zM496 192 418.6 63.1C407.1 43.8 386.2 32 363.8 32H256c-17.7 0-32 14.3-32 32v128H80c-26.5 0-48 21.5-48 48v80c-17.7 0-32 14.3-32 32s14.3 32 32 32h32.4c-.2 2.6-.4 5.3-.4 8 0 48.6 39.4 88 88 88s88-39.4 88-88c0-2.7-.1-5.4-.4-8h160.7c-.2 2.6-.4 5.3-.4 8 0 48.6 39.4 88 88 88s88-39.4 88-88c0-2.7-.1-5.4-.4-8h32.4c17.7 0 32-14.3 32-32s-14.3-32-32-32v-80c0-26.5-21.5-48-48-48h-64zM112 392a40 40 0 1 1 80 0 40 40 0 1 1-80 0m376-40a40 40 0 1 1 0 80 40 40 0 1 1 0-80"/></svg></span>
+              <span><strong>Junk removal</strong><br><span class="sub">Furniture, appliances, cleanouts</span></span>
+            </button>
+          </div>
+        </div>
+
+        <div class="quote-step" id="step2" hidden>
+          <h2>Tell us about the project</h2>
+          <p>A few sentences is plenty — sizes, number of items, and timing all help.</p>
+          <div class="field"><label for="selectedService">Service</label><input id="selectedService" name="Service" type="text" readonly></div>
+          <div class="field"><label for="projectDetails">Project details</label><textarea id="projectDetails" name="Project Details" placeholder="Example: Patch two fist-sized holes in a hallway and repaint that wall."></textarea></div>
+          <p id="errorStep2" class="form-error" role="alert">Add a short description of the project to continue.</p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" onclick="prevStep(1)">Back</button>
+            <button type="button" class="btn btn-teal" onclick="nextStep(3)">Continue</button>
+          </div>
+        </div>
+
+        <div class="quote-step" id="step3" hidden>
+          <h2>Add photos <span style="font-weight:600; color:var(--slate); font-size:1rem">(optional)</span></h2>
+          <p>Photos help us give you an accurate price faster. Up to 10MB total.</p>
+          <div class="form-grid">
+            <div class="field"><label for="projectPhoto1">Photo 1</label><input id="projectPhoto1" name="Photo 1" type="file" accept="image/*"></div>
+            <div class="field"><label for="projectPhoto2">Photo 2</label><input id="projectPhoto2" name="Photo 2" type="file" accept="image/*"></div>
+          </div>
+          <p id="errorStep3" class="form-error" role="alert">These photos are over 10MB together. Choose smaller photos or just one.</p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" onclick="prevStep(2)">Back</button>
+            <button type="button" class="btn btn-teal" onclick="nextStep(4)">Continue</button>
+          </div>
+        </div>
+
+        <div class="quote-step" id="step4" hidden>
+          <h2>How can we reach you?</h2>
+          <p>We’ll send your quote by email or text.</p>
+          <div class="form-grid">
+            <div class="field"><label for="quoteFirstName">First name</label><input id="quoteFirstName" name="First Name" type="text" autocomplete="given-name"></div>
+            <div class="field"><label for="quoteLastName">Last name</label><input id="quoteLastName" name="Last Name" type="text" autocomplete="family-name"></div>
+            <div class="field full"><label for="quoteAddress">Service address</label><input id="quoteAddress" name="Address" type="text" placeholder="Street, city, state" autocomplete="street-address"></div>
+            <div class="field"><label for="quoteEmail">Email</label><input id="quoteEmail" name="email" type="email" autocomplete="email"></div>
+            <div class="field"><label for="quotePhone">Phone</label><input id="quotePhone" name="Phone" type="tel" autocomplete="tel"></div>
+          </div>
+          <p id="errorStep4" class="form-error" role="alert">Fill in every field, with a valid email address, to continue.</p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" onclick="prevStep(3)">Back</button>
+            <button type="button" class="btn btn-teal" onclick="nextStep(5)">Review request</button>
+          </div>
+        </div>
+
+        <div class="quote-step" id="step5" hidden>
+          <h2>Review and send</h2>
+          <p>Check your details. We usually reply the same day or within 24 hours.</p>
+          <dl id="quoteReview" class="review-box"></dl>
+          <p id="errorStep5" class="form-error" role="alert">Some required details are missing. Go back and fill them in.</p>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" onclick="prevStep(4)">Back</button>
+            <button type="button" id="quoteSubmitBtn" class="btn btn-teal" onclick="submitQuote()">Send quote request</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
 </section>
 </main>
 
@@ -117,7 +206,8 @@
   <div class="footer-word" aria-hidden="true">Seaside Haven</div>
 </footer>
 
-<script src="../script.js"></script>
-<script src="../chat.js"></script>
+<script src="../script.js?v=3.2"></script>
+<script src="../chat.js?v=3.2"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsn92PnDaxMZbdQjGYYYe9WxjgHGevV5Q&libraries=places"></script>
 </body>
 </html>
