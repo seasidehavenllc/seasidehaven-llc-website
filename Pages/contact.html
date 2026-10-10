@@ -14,7 +14,7 @@
 <header class="site-header">
   <div class="logo">
     <a href="../index.html">
-      <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+      <img src="../Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
     </a>
   </div>
 
@@ -26,7 +26,11 @@
     <a href="contact.html" class="active">Contact</a>
   </nav>
 
-  <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
+  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
+    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
+  </a>
+
+  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
     <i class="fas fa-bars"></i>
   </button>
 
@@ -36,6 +40,7 @@
     <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
     <a href="careers.html"><i class="fas fa-user-tie"></i> Careers</a>
     <a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
   </div>
 </header>
 
@@ -82,7 +87,7 @@
   <div class="bubble-card form-card" style="max-width:700px; margin:0 auto;">
     <h3 class="gradient-text">Business Contact Information</h3>
     <p>
-      <strong>Phone:</strong> +1 (434) - 233 - 0231<br>
+      <strong>Phone:</strong> <a href="tel:+14342330231">(434) 233-0231</a><br>
       <strong>Email:</strong> info@seasidehavenllc.com<br>
       <strong>Service Area:</strong> Lynchburg · Roanoke · Bedford · Smith Mountain Lake<br>
       <strong>Hours:</strong> Mon–Fri 8am–4pm · Sat 9am–3pm
@@ -142,7 +147,7 @@
     <span class="close" onclick="closeModal('hireModal')">&times;</span>
     <h3>Apply for a Position</h3>
 
-    <form class="contact-form" action="https://formsubmit.co/hiring@seasidehavenllc.com" method="POST">
+    <form class="contact-form" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST">
 
       <input type="hidden" name="_subject" value="New Job Application">
       <input type="hidden" name="_captcha" value="false">
@@ -161,10 +166,10 @@
       <label for="hirePosition">Position Applying For</label>
       <select id="hirePosition" name="position" required>
         <option value="" disabled selected>Select a Position</option>
-        <option value="junk-removal-spec">Junk Removal Specialist</option>
-        <option value="remodeling-tech">Remodeling Technician</option>
-        <option value="landscape-crew">Landscaping Crew</option>
-        <option value="landscape-foreman">Landscaping Foreman</option>
+        <option value="Junk Removal Specialist">Junk Removal Specialist</option>
+        <option value="Landscaping Crew">Landscaping Crew</option>
+        <option value="Landscaping Foreman">Landscaping Foreman</option>
+        <option value="General Interest">Other / General Interest</option>
       </select>
 
       <label for="hireDates">Available Interview Dates</label>
@@ -186,7 +191,7 @@
     <span class="close" onclick="closeModal('partnerModal')">&times;</span>
     <h3>Partner Application</h3>
 
-    <form class="contact-form" action="https://formsubmit.co/partner@seasidehavenllc.com" method="POST">
+    <form class="contact-form" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST">
 
       <input type="hidden" name="_subject" value="New Partner Application">
       <input type="hidden" name="_captcha" value="false">
@@ -210,7 +215,6 @@
         <option value="" disabled selected>Select Partnership Type</option>
         <option value="Service Referral / Subcontracting">Service Referral / Subcontracting</option>
         <option value="Property Care / Maintenance">Property Care / Maintenance</option>
-        <option value="Vending / Machines">Vending / Machines</option>
         <option value="Events / Community Programs">Events / Community Programs</option>
         <option value="Other">Other / Custom</option>
       </select>
@@ -235,9 +239,8 @@
       <h4>Company</h4>
       <ul>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="partner.html">Partner</a></li>
-        <li><a href="../doclist.html">Documents</a></li>
-        <li><a href="careers.html" class="active">Careers</a></li>
+        <li><a href="partner.html">Partner With Us</a></li>
+        <li><a href="careers.html">Careers</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
@@ -257,15 +260,15 @@
       <ul>
         <li><a href="contact.html">Contact Us</a></li>
         <li><a href="getquote.html">Request a Quote</a></li>
+        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Legal & Social</h4>
+      <h4>Legal</h4>
       <ul>
         <li><a href="privacy-policy.html">Privacy Policy</a></li>
         <li><a href="terms-of-service.html">Terms of Service</a></li>
-        <li><a href="social-media.html">Social Media</a></li>
       </ul>
     </div>
 
@@ -273,14 +276,12 @@
 
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      <br><br><br><br>
       <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
     </div>
 
-    <div class="footer-bottom-right" style="text-align:right; line-height:1.6;">
-      <strong>M–F 8am – 4pm</strong><br>
-      <strong>Saturday 9am – 3pm</strong><br>
-      <strong>+1 (434) - 233 - 0231</strong><br>
+    <div class="footer-bottom-right">
+      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
+      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
       <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
     </div>
   </div>

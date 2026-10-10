@@ -383,7 +383,7 @@ function showPricing(type) {
       `
     },
 
-    maintenance: {
+    machinemaintenance: {
       title: "Machine Maintenance Pricing",
       intro: "Repairs, cleaning, and machine performance checks.",
       html: `
@@ -580,62 +580,6 @@ function showPricing(type) {
   `;
 }
 
-function selectService(service) {
-  document.getElementById('selectedService').value = service;
-  nextStep(2);
-}
-
-function nextStep(step) {
-  // STEP 2 VALIDATION
-  if (step === 3) {
-    const details = document.getElementById('projectDetails').value.trim();
-    if (details.length < 5) {
-      document.getElementById('errorStep2').style.display = 'block';
-      return;
-    }
-    document.getElementById('errorStep2').style.display = 'none';
-  }
-
-  // STEP 4 VALIDATION
-  if (step === 5) {
-    const name = document.getElementById('quoteName').value.trim();
-    const email = document.getElementById('quoteEmail').value.trim();
-    const phone = document.getElementById('quotePhone').value.trim();
-
-    if (!name || !email || !phone) {
-      document.getElementById('errorStep4').style.display = 'block';
-      return;
-    }
-    document.getElementById('errorStep4').style.display = 'none';
-  }
-
-  // SHOW NEXT STEP
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  document.getElementById('step' + step).style.display = 'block';
-}
-
-function prevStep(step) {
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  document.getElementById('step' + step).style.display = 'block';
-}
-
-function submitQuote() {
-  const service = document.getElementById('selectedService').value.trim();
-  const details = document.getElementById('projectDetails').value.trim();
-  const name = document.getElementById('quoteName').value.trim();
-  const email = document.getElementById('quoteEmail').value.trim();
-  const phone = document.getElementById('quotePhone').value.trim();
-
-  if (!service || !details || !name || !email || !phone) {
-    document.getElementById('errorStep5').style.display = 'block';
-    return;
-  }
-
-  document.getElementById('errorStep5').style.display = 'none';
-
-  alert("Your quote request has been submitted!");
-}
-
 /* =========================================================
    SPOTLIGHT GLOW EFFECT
    (Mouse‑tracking illumination on .bubble-card)
@@ -655,32 +599,36 @@ document.addEventListener("mousemove", (e) => {
 ========================================================= */
 const backToTop = document.getElementById("backToTop");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 300) {
-    backToTop.classList.add("show");
-  } else {
-    backToTop.classList.remove("show");
-  }
-});
-
-backToTop.addEventListener("click", () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth",
+if (backToTop) {
+  window.addEventListener("scroll", () => {
+    backToTop.classList.toggle("show", window.scrollY > 300);
   });
-});
+
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
 
 function openModal(id) {
   const m = document.getElementById(id);
   if (m) m.style.display = 'block';
-  document.querySelector('.apply-floating').style.display = 'none';
-};
+  const applyBtn = document.querySelector('.apply-floating');
+  if (applyBtn) applyBtn.style.display = 'none';
+}
 
 function closeModal(id) {
   const m = document.getElementById(id);
   if (m) m.style.display = 'none';
-  document.querySelector('.apply-floating').style.display = 'inline-block';
-};
+  const applyBtn = document.querySelector('.apply-floating');
+  if (applyBtn) applyBtn.style.display = 'inline-block';
+}
+
+// Close a modal when tapping the dark area outside it
+window.addEventListener('click', (e) => {
+  if (e.target.classList && e.target.classList.contains('modal')) {
+    closeModal(e.target.id);
+  }
+});
 
 /* =========================================================
    CAREERS — OPEN JOB MODAL WITH PREFILLED POSITION
@@ -695,6 +643,7 @@ function openJobModal(positionName) {
 
   // Prefill the dropdown
   const select = document.getElementById('hirePosition');
+  if (!select) return;
 
   for (let option of select.options) {
     if (option.text === positionName) {
@@ -710,7 +659,7 @@ function openJobModal(positionName) {
 
 function initAddressAutocomplete() {
   const input = document.getElementById("quoteAddress");
-  if (!input) return;
+  if (!input || typeof google === "undefined" || !google.maps || !google.maps.places) return;
 
   const autocomplete = new google.maps.places.Autocomplete(input, {
     types: ["address"],
@@ -725,7 +674,7 @@ function initAddressAutocomplete() {
   });
 }
 
-document.addEventListener("DOMContentLoaded", initAddressAutocomplete);
+window.addEventListener("load", initAddressAutocomplete);
 
 /* =========================================================
    PARTNER CARD CLICK
@@ -763,100 +712,189 @@ window.addEventListener("scroll", () => {
 });
 
 /* =========================================================
-   GET QUOTE FORM LOGIC
+   GET QUOTE WIZARD
+   One real form (#quoteForm) split into steps. It posts to
+   FormSubmit, which emails the request (and photos) to you.
 ========================================================= */
 
+const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // FormSubmit limit: 10MB total
+
+function showStep(step) {
+  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
+  const target = document.getElementById('step' + step);
+  if (target) target.style.display = 'block';
+  const wizard = document.getElementById('quoteWizard');
+  if (wizard) wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setError(id, show, text) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (text) el.textContent = text;
+  el.style.display = show ? 'block' : 'none';
+}
+
 function selectService(service) {
-  document.getElementById('selectedService').value = service;
-  nextStep(2);
+  const field = document.getElementById('selectedService');
+  if (!field) return;
+  field.value = service;
+  showStep(2);
+}
+
+function totalUploadSize() {
+  let total = 0;
+  document.querySelectorAll('#quoteForm input[type="file"]').forEach(input => {
+    Array.from(input.files || []).forEach(f => total += f.size);
+  });
+  return total;
+}
+
+function val(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : '';
 }
 
 function nextStep(step) {
+  // Leaving step 2: need a project description
   if (step === 3) {
-    const details = document.getElementById('projectDetails').value.trim();
-    if (details.length < 5) {
-      document.getElementById('errorStep2').style.display = 'block';
+    if (val('projectDetails').length < 5) {
+      setError('errorStep2', true);
       return;
     }
-    document.getElementById('errorStep2').style.display = 'none';
+    setError('errorStep2', false);
   }
 
+  // Leaving step 3: photos must fit the 10MB limit
+  if (step === 4) {
+    if (totalUploadSize() > MAX_UPLOAD_BYTES) {
+      setError('errorStep3', true);
+      return;
+    }
+    setError('errorStep3', false);
+  }
+
+  // Leaving step 4: need name, email, phone, and address
   if (step === 5) {
-    const name = document.getElementById('quoteName').value.trim();
-    const email = document.getElementById('quoteEmail').value.trim();
-    const phone = document.getElementById('quotePhone').value.trim();
-
-    if (!name || !email || !phone) {
-      document.getElementById('errorStep4').style.display = 'block';
+    const required = ['quoteFirstName', 'quoteLastName', 'quoteAddress', 'quoteEmail', 'quotePhone'];
+    const missing = required.some(id => !val(id));
+    const email = document.getElementById('quoteEmail');
+    if (missing || (email && !email.checkValidity())) {
+      setError('errorStep4', true);
       return;
     }
-    document.getElementById('errorStep4').style.display = 'none';
+    setError('errorStep4', false);
+    fillQuoteReview();
   }
 
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  document.getElementById('step' + step).style.display = 'block';
+  showStep(step);
 }
 
 function prevStep(step) {
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  document.getElementById('step' + step).style.display = 'block';
+  showStep(step);
+}
+
+function fillQuoteReview() {
+  const box = document.getElementById('quoteReview');
+  if (!box) return;
+  const photos = Array.from(document.querySelectorAll('#quoteForm input[type="file"]'))
+    .reduce((n, input) => n + (input.files ? input.files.length : 0), 0);
+  const esc = (t) => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  box.innerHTML = `
+    <strong>Service:</strong> ${esc(val('selectedService'))}<br>
+    <strong>Project:</strong> ${esc(val('projectDetails'))}<br>
+    <strong>Photos:</strong> ${photos ? photos + ' attached' : 'None'}<br>
+    <strong>Name:</strong> ${esc(val('quoteFirstName'))} ${esc(val('quoteLastName'))}<br>
+    <strong>Address:</strong> ${esc(val('quoteAddress'))}<br>
+    <strong>Email:</strong> ${esc(val('quoteEmail'))}<br>
+    <strong>Phone:</strong> ${esc(val('quotePhone'))}
+  `;
 }
 
 function submitQuote() {
-  const service = document.getElementById('selectedService').value.trim();
-  const details = document.getElementById('projectDetails').value.trim();
-  const name = document.getElementById('quoteName').value.trim();
-  const email = document.getElementById('quoteEmail').value.trim();
-  const phone = document.getElementById('quotePhone').value.trim();
+  const form = document.getElementById('quoteForm');
+  if (!form) return;
 
-  if (!service || !details || !name || !email || !phone) {
-    document.getElementById('errorStep5').style.display = 'block';
+  const required = ['selectedService', 'projectDetails', 'quoteFirstName', 'quoteLastName', 'quoteAddress', 'quoteEmail', 'quotePhone'];
+  if (required.some(id => !val(id))) {
+    setError('errorStep5', true);
     return;
   }
+  setError('errorStep5', false);
 
-  document.getElementById('errorStep5').style.display = 'none';
-
-  const form = document.getElementById('quoteSendForm');
-  form.elements["Service"].value = service;
-  form.elements["Details"].value = details;
-  form.elements["Name"].value = name;
-  form.elements["Email"].value = email;
-  form.elements["Phone"].value = phone;
-
+  const btn = document.getElementById('quoteSubmitBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+  }
   form.submit();
-};
-
-/* =========================================================
-   DYNAMIC TESTIMONIALS
-========================================================= */
-const testimonialContainer = document.getElementById("testimonialContainer");
-const testimonialCards = Array.from(testimonialContainer.children);
-const filterButtons = document.querySelectorAll(".filter-btn");
-
-function showCards(cards) {
-  testimonialContainer.innerHTML = "";
-  cards.forEach(card => testimonialContainer.appendChild(card));
 }
 
-function pickRandom(cards, count) {
-  const shuffled = [...cards].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, count);
-}
-
-filterButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    filterButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-
-    const filter = btn.dataset.filter;
-
-    if (filter === "all") {
-      showCards(pickRandom(testimonialCards, 3));
-    } else {
-      const filtered = testimonialCards.filter(card => card.dataset.category === filter);
-      showCards(filtered);
-    }
-  });
+// Stop the Enter key from submitting the wizard early
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && e.target.closest && e.target.closest('#quoteForm') && e.target.tagName === 'INPUT') {
+    e.preventDefault();
+  }
 });
 
-showCards(pickRandom(testimonialCards, 3));
+// Pre-select a service from links like getquote.html?service=Landscaping
+(function preselectService() {
+  if (!document.getElementById('quoteForm')) return;
+  const service = new URLSearchParams(window.location.search).get('service');
+  const allowed = ['Remodeling', 'Landscaping', 'Junk Removal'];
+  if (service && allowed.includes(service)) selectService(service);
+})();
+
+/* =========================================================
+   "THANK YOU" BANNER AFTER A FORM IS SENT
+   Forms redirect back with ?success=true
+========================================================= */
+(function showSuccess() {
+  if (new URLSearchParams(window.location.search).get('success') !== 'true') return;
+  const modal = document.getElementById('successModal');
+  if (modal) {
+    modal.style.display = 'block';
+    return;
+  }
+  const main = document.querySelector('main');
+  if (!main) return;
+  const banner = document.createElement('div');
+  banner.className = 'success-banner';
+  banner.innerHTML = '<strong>Thank you!</strong> Your request was sent. We\'ll get back to you shortly.';
+  main.prepend(banner);
+})();
+
+/* =========================================================
+   TESTIMONIALS (home page only)
+========================================================= */
+const testimonialContainer = document.getElementById("testimonialContainer");
+
+if (testimonialContainer) {
+  const testimonialCards = Array.from(testimonialContainer.children);
+  const filterButtons = document.querySelectorAll(".filter-btn");
+
+  const showCards = (cards) => {
+    testimonialContainer.innerHTML = "";
+    cards.forEach(card => testimonialContainer.appendChild(card));
+  };
+
+  const pickRandom = (cards, count) => {
+    const shuffled = [...cards].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  };
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+
+      const filter = btn.dataset.filter;
+      if (filter === "all") {
+        showCards(pickRandom(testimonialCards, 3));
+      } else {
+        showCards(testimonialCards.filter(card => card.dataset.category === filter));
+      }
+    });
+  });
+
+  showCards(pickRandom(testimonialCards, 3));
+}

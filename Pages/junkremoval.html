@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Junk Removal · Seaside Haven LLC</title>
+  <title>Junk Removal · Seaside Haven LLC · Lynchburg, Bedford & Smith Mountain Lake</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,28 +14,33 @@
 <header class="site-header">
   <div class="logo">
     <a href="../index.html">
-      <img src="../Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
+      <img src="../Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
     </a>
   </div>
 
   <nav class="nav">
-    <a href="../index.html" class="active">Home</a>
-    <a href="services.html">Services</a>
-    <a href="about.html"">About</a>
+    <a href="../index.html">Home</a>
+    <a href="services.html" class="active">Services</a>
+    <a href="about.html">About</a>
     <a href="careers.html">Careers</a>
     <a href="contact.html">Contact</a>
   </nav>
 
-  <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
+  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
+    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
+  </a>
+
+  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
     <i class="fas fa-bars"></i>
   </button>
 
   <div class="mobile-nav" id="mobileNav">
-    <a href="../index.html" class="active"><i class="fas fa-home"></i> Home</a>
-    <a href="services.html"><i class="fas fa-tools"></i> Services</a>
-    <a href="about.html""><i class="fas fa-info-circle"></i> About</a>
+    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+    <a href="services.html" class="active"><i class="fas fa-tools"></i> Services</a>
+    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
     <a href="careers.html"><i class="fas fa-user-tie"></i> Careers</a>
     <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
   </div>
 </header>
 
@@ -95,6 +100,17 @@
   </div>
 </section>
 
+<!-- TAP-TO-SEE-PRICES HINT -->
+<section class="section section-dark" style="padding-top:0;">
+  <p class="section-intro" style="text-align:center; opacity:0.85; margin:0;">
+    <i class="fas fa-hand-pointer"></i> Tap any service above to see starting prices.
+  </p>
+  <div class="hero-actions center">
+    <a href="getquote.html?service=Junk%20Removal" class="btn-primary">Get a Free Quote</a>
+    <a href="tel:+14342330231" class="btn-secondary">Call (434) 233-0231</a>
+  </div>
+</section>
+
 <!-- PRICING PANEL -->
 <section id="pricingPanel" class="section section-dark" style="display:none;">
   <div class="bubble-card no-title-hover" style="max-width:900px; margin:0 auto; padding:25px;">
@@ -122,9 +138,8 @@
       <h4>Company</h4>
       <ul>
         <li><a href="about.html">About Us</a></li>
-        <li><a href="partner.html">Partner</a></li>
-        <li><a href="../doclist.html">Documents</a></li>
-        <li><a href="careers.html" class="active">Careers</a></li>
+        <li><a href="partner.html">Partner With Us</a></li>
+        <li><a href="careers.html">Careers</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="support.html">Support</a></li>
       </ul>
@@ -144,15 +159,15 @@
       <ul>
         <li><a href="contact.html">Contact Us</a></li>
         <li><a href="getquote.html">Request a Quote</a></li>
+        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
       </ul>
     </div>
 
     <div class="footer-col">
-      <h4>Legal & Social</h4>
+      <h4>Legal</h4>
       <ul>
         <li><a href="privacy-policy.html">Privacy Policy</a></li>
         <li><a href="terms-of-service.html">Terms of Service</a></li>
-        <li><a href="social-media.html">Social Media</a></li>
       </ul>
     </div>
 
@@ -160,14 +175,12 @@
 
   <div class="footer-bottom">
     <div class="footer-bottom-left">
-      <br><br><br><br>
       <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
     </div>
 
-    <div class="footer-bottom-right" style="text-align:right; line-height:1.6;">
-      <strong>M–F 8am – 4pm</strong><br>
-      <strong>Saturday 9am – 3pm</strong><br>
-      <strong>+1 (434) - 233 - 0231</strong><br>
+    <div class="footer-bottom-right">
+      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
+      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
       <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
     </div>
   </div>
