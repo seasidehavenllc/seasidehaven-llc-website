@@ -2,255 +2,192 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Home Repairs & Remodeling · Seaside Haven LLC · Lynchburg, Bedford & Smith Mountain Lake</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ · Seaside Haven LLC</title>
+  <meta name="description" content="Answers about service areas, quotes, scheduling, payment, deposits, and insurance from Seaside Haven LLC." />
+  <meta name="theme-color" content="#0A1A2F" />
+  <link rel="canonical" href="https://seasidehavenllc.com/Pages/faq.html" />
+  <meta property="og:title" content="FAQ · Seaside Haven LLC" />
+  <meta property="og:description" content="Answers about service areas, quotes, scheduling, payment, deposits, and insurance from Seaside Haven LLC." />
+  <meta property="og:image" content="https://seasidehavenllc.com/Images/logo.png" />
+  <link rel="icon" href="../Images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" />
   <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- HEADER -->
 <header class="site-header">
-  <div class="logo">
-    <a href="../index.html">
-      <img src="../Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="Seaside Haven LLC home">
+      <img src="../Images/logo.png" alt="" width="35" height="38" />
+      <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
     </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost header-phone" href="tel:+14342330231" aria-label="Call (434) 233-0231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg><span class="label">(434) 233-0231</span></a>
+      <button class="btn btn-teal btn-quote" type="button" data-chat="book">Book a visit</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-
-  <nav class="nav">
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
     <a href="../index.html">Home</a>
-    <a href="services.html" class="active">Services</a>
+    <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="careers.html">Careers</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html" aria-current="page">Contact</a>
+    <div class="btn-row">
+      <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+      <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> Call</a>
+    </div>
   </nav>
-
-  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
-    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
-  </a>
-
-  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <div class="mobile-nav" id="mobileNav">
-    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="services.html" class="active"><i class="fas fa-tools"></i> Services</a>
-    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-    <a href="careers.html"><i class="fas fa-user-tie"></i> Careers</a>
-    <a href="contact.html"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
-  </div>
 </header>
 
-<main>
+<main id="main">
 
-<!-- PAGE TITLE -->
-<section class="section section-dark">
-  <div class="section-header">
-    <p class="section-kicker">Remodeling</p>
-    <h2>Home Repairs & Remodeling</h2>
-    <p class="section-intro">
-      Drywall, painting, flooring, fixtures, trim, and more — the repairs and upgrades that make a home feel new again.
-    </p>
-  </div>
-</section>
-
-<!-- SERVICES GRID -->
-<section class="section section-dark">
-  <div class="bubble-grid spotlight-container">
-
-    <!-- Drywall -->
-    <div class="bubble-card" onclick="showPricing('drywall')">
-      <i class="fas fa-border-all service-icon"></i>
-      <h3>Drywall Repair</h3>
-      <p>Patching, repairs, texture match, and wall restoration.</p>
-    </div>
-
-    <!-- Painting -->
-    <div class="bubble-card" onclick="showPricing('painting')">
-      <i class="fas fa-paint-roller service-icon"></i>
-      <h3>Painting</h3>
-      <p>Walls, trim, doors, color matching, and full repaints.</p>
-    </div>
-
-    <!-- Flooring -->
-    <div class="bubble-card" onclick="showPricing('flooring')">
-      <i class="fas fa-ruler-combined service-icon"></i>
-      <h3>Flooring</h3>
-      <p>Vinyl, laminate, plank installs, and floor demo.</p>
-    </div>
-
-    <!-- Vanity -->
-    <div class="bubble-card" onclick="showPricing('vanity')">
-      <i class="fas fa-bath service-icon"></i>
-      <h3>Vanity Replacement</h3>
-      <p>Bathroom vanity swaps and plumbing reconnection.</p>
-    </div>
-
-    <!-- Light Fixtures -->
-    <div class="bubble-card" onclick="showPricing('lightfixtures')">
-      <i class="fas fa-lightbulb service-icon"></i>
-      <h3>Light Fixtures</h3>
-      <p>Ceiling lights, fans, chandeliers, and dimmers.</p>
-    </div>
-
-    <!-- Toilets -->
-    <div class="bubble-card" onclick="showPricing('toilets')">
-      <i class="fas fa-toilet service-icon"></i>
-      <h3>Toilet Replacement</h3>
-      <p>Toilet swaps, seals, and bathroom fixture upgrades.</p>
-    </div>
-
-    <!-- Faucets -->
-    <div class="bubble-card" onclick="showPricing('faucets')">
-      <i class="fas fa-faucet service-icon"></i>
-      <h3>Faucet Replacement</h3>
-      <p>Kitchen, bathroom, and utility faucet installs.</p>
-    </div>
-
-    <!-- Doors -->
-    <div class="bubble-card" onclick="showPricing('doors')">
-      <i class="fas fa-door-closed service-icon"></i>
-      <h3>Door Replacement</h3>
-      <p>Interior, exterior, and trim replacement.</p>
-    </div>
-
-    <!-- Trim -->
-    <div class="bubble-card" onclick="showPricing('trim')">
-      <i class="fas fa-stream service-icon"></i>
-      <h3>Trim & Baseboards</h3>
-      <p>Install, replace, or repair trim and baseboards.</p>
-    </div>
-
-    <!-- Backsplash -->
-    <div class="bubble-card" onclick="showPricing('backsplash')">
-      <i class="fas fa-th service-icon"></i>
-      <h3>Backsplash Installation</h3>
-      <p>Kitchen and bathroom tile backsplash installs.</p>
-    </div>
-
-    <!-- Shelving -->
-    <div class="bubble-card" onclick="showPricing('shelving')">
-      <i class="fas fa-layer-group service-icon"></i>
-      <h3>Shelving & Mounting</h3>
-      <p>Floating shelves, TV mounts, and wall installs.</p>
-    </div>
-
-    <!-- Caulking -->
-    <div class="bubble-card" onclick="showPricing('caulking')">
-      <i class="fas fa-water service-icon"></i>
-      <h3>Caulking & Sealing</h3>
-      <p>Bathrooms, kitchens, windows, and trim sealing.</p>
-    </div>
-
-    <!-- Demo -->
-    <div class="bubble-card" onclick="showPricing('demo')">
-      <i class="fas fa-trash service-icon"></i>
-      <h3>Demolition</h3>
-      <p>Small, medium, and large demo before remodeling.</p>
-    </div>
-
-    <!-- Haul Away -->
-    <div class="bubble-card" onclick="showPricing('haulaway')">
-      <i class="fas fa-dumpster service-icon"></i>
-      <h3>Haul-Away</h3>
-      <p>Debris removal, old materials, and construction waste.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- TAP-TO-SEE-PRICES HINT -->
-<section class="section section-dark" style="padding-top:0;">
-  <p class="section-intro" style="text-align:center; opacity:0.85; margin:0;">
-    <i class="fas fa-hand-pointer"></i> Tap any service above to see starting prices.
-  </p>
-  <div class="hero-actions center">
-    <a href="getquote.html?service=Remodeling" class="btn-primary">Get a Free Quote</a>
-    <a href="tel:+14342330231" class="btn-secondary">Call (434) 233-0231</a>
-  </div>
-</section>
-
-<!-- PRICING PANEL -->
-<section id="pricingPanel" class="section section-dark" style="display:none;">
-  <div class="bubble-card no-title-hover" style="max-width:900px; margin:0 auto; padding:25px;">
+<section class="page-hero">
+  <div class="grid-bg" style="position:absolute;inset:0" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div>
+  <div class="wrap hero-anim">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">FAQ</span></nav>
+    <h1 class="glow-text">Frequently asked questions</h1>
+    <p class="lead">Quick answers about our service area, quotes, scheduling, and payment. Can’t find it? Ask our chat assistant.</p>
     
-    <div class="section-header">
-      <p class="section-kicker">Pricing</p>
-      <h2 id="pricingTitle">Service Pricing</h2>
-      <p class="section-intro" id="pricingIntro">Detailed pricing based on your project.</p>
-    </div>
-
-    <div id="pricingContent" style="margin-top:20px; font-size:1rem; opacity:0.9;">
-      <!-- JS injects pricing here -->
-    </div>
-
   </div>
+  <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
 </section>
 
+<section class="section tight">
+  <div class="wrap with-aside">
+    <div class="glass price-table reveal">
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-0" id="faq-q-0">
+          <span class="q">What areas do you serve?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-0" role="region" aria-labelledby="faq-q-0"><div><div class="acc-body"><p>Lynchburg, Roanoke, Bedford, Smith Mountain Lake, Moneta, Goodview, and the surrounding areas. Not sure if you’re in range? Call or send us a message and we’ll confirm.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">
+          <span class="q">How fast can I get a quote?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-1" role="region" aria-labelledby="faq-q-1"><div><div class="acc-body"><p>Most quotes go out the same day or within 24 hours, depending on the service. Photos help us price it faster.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">
+          <span class="q">Do you offer same-day service?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-2" role="region" aria-labelledby="faq-q-2"><div><div class="acc-body"><p>Sometimes — it depends on the job and our schedule that day. Call us and we’ll tell you the soonest opening.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">
+          <span class="q">Do you offer recurring lawn care?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-3" role="region" aria-labelledby="faq-q-3"><div><div class="acc-body"><p>Yes. Mowing and lawn care can be scheduled weekly or bi-weekly, plus seasonal spring and fall cleanups.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-q-4">
+          <span class="q">Do you offer emergency services?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-4" role="region" aria-labelledby="faq-q-4"><div><div class="acc-body"><p>We have limited emergency availability for urgent repairs, property issues, and safety concerns.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-q-5">
+          <span class="q">What payment methods do you accept?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-5" role="region" aria-labelledby="faq-q-5"><div><div class="acc-body"><p>Cash, card, digital payments, and business invoicing, depending on the service.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-q-6">
+          <span class="q">Do you require deposits?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-6" role="region" aria-labelledby="faq-q-6"><div><div class="acc-body"><p>Some larger or scheduled projects require a small deposit. We’ll tell you up front if yours does.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-7" id="faq-q-7">
+          <span class="q">Can I book online?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-7" role="region" aria-labelledby="faq-q-7"><div><div class="acc-body"><p>Yes. Tap “Book a visit” to use our chat assistant: pick a service and a day that works, and we’ll call or text to confirm the time. You can also request a <a href="getquote.html">written quote</a> or call us.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-8" id="faq-q-8">
+          <span class="q">Are your services insured?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-8" role="region" aria-labelledby="faq-q-8"><div><div class="acc-body"><p>Yes — Seaside Haven LLC is fully insured for all services we provide.</p></div></div></div>
+      </div>
+    </div>
+    
+    <aside class="aside-card glass reveal">
+      <h3>Still have a question?</h3>
+      <p>Ask our chat assistant, or call — a real person from our family will answer.</p>
+      <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+      <a class="btn btn-ghost" href="getquote.html">Get a written quote</a>
+      <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> (434) 233-0231</a>
+      <dl>
+        <dt>Hours</dt><dd>Mon–Fri 8am–4pm · Sat 9am–3pm</dd>
+        <dt>Email</dt><dd><a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></dd>
+        <dt>Service area</dt><dd>Lynchburg, Roanoke, Bedford &amp; Smith Mountain Lake</dd>
+      </dl>
+    </aside>
+  </div>
+</section>
 </main>
 
-<!-- FOOTER -->
-<footer id="footer" class="site-footer">
-  <div class="footer-columns">
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="partner.html">Partner With Us</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="support.html">Support</a></li>
-      </ul>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html">
+          <img src="../Images/logo.png" alt="" width="35" height="38" />
+          <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
+        </a>
+        <p>Home repairs, lawn care, and junk removal for Lynchburg, Roanoke, Bedford, and Smith Mountain Lake.</p>
+        <a class="footer-call" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg>(434) 233-0231</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="remodeling.html">Home repairs &amp; remodeling</a></li>
+          <li><a href="landscaping.html">Landscaping &amp; lawn care</a></li>
+          <li><a href="junkremoval.html">Junk removal</a></li>
+          <li><a href="getquote.html">Get a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="partner.html">Partner with us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon–Fri: 8am – 4pm</li>
+          <li>Saturday: 9am – 3pm</li>
+          <li>Sunday: Closed</li>
+          <li><a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="remodeling.html">Remodeling</a></li>
-        <li><a href="landscaping.html">Landscaping</a></li>
-        <li><a href="junkremoval.html">Junk Removal</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="getquote.html">Request a Quote</a></li>
-        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="terms-of-service.html">Terms of Service</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
-    </div>
-
-    <div class="footer-bottom-right">
-      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
-      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
-      <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Seaside Haven LLC. All rights reserved.</span>
+      <span><a href="privacy-policy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="terms-of-service.html">Terms of service</a></span>
     </div>
   </div>
+  <div class="footer-word" aria-hidden="true">Seaside Haven</div>
 </footer>
 
-<div id="backToTop" class="back-to-top">↑</div>
-
 <script src="../script.js"></script>
-
+<script src="../chat.js"></script>
 </body>
 </html>

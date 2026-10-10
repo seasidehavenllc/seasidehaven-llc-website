@@ -1,900 +1,328 @@
 /* =========================================================
-   MOBILE NAV TOGGLE (Hamburger Menu)
+   SEASIDE HAVEN LLC — SITE SCRIPT
 ========================================================= */
-function toggleMobileNav() {
-  const mobileNav = document.getElementById("mobileNav");
-  mobileNav.classList.toggle("show");
-}
+document.documentElement.classList.add("js");
 
-function showPricing(type) {
-  const panel = document.getElementById("pricingPanel");
-  const title = document.getElementById("pricingTitle");
-  const intro = document.getElementById("pricingIntro");
-  const content = document.getElementById("pricingContent");
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  panel.style.display = "block";
-
-  // Add bubble glow animation
-  panel.querySelector(".bubble-card").style.animation = "bubbleGlow 0.4s ease";
-
-  const pricing = {
-     mowing: {
-      title: "Mowing Pricing",
-      intro: "Weekly, bi-weekly, or one-time mowing services.",
-      html: `
-        <p><strong>Small Yard:</strong> $35–$50</p>
-        <p><strong>Medium Yard:</strong> $50–$75</p>
-        <p><strong>Large Yard:</strong> $75–$120</p>
-        <p><strong>XL / 1.5 Acre+:</strong> $120+</p>
-      `
-    },
-
-    weed: {
-      title: "Weed Eating Pricing",
-      intro: "Fence lines, ditches, tight spots, and property edges.",
-      html: `
-        <p><strong>Small Yard:</strong> $15–$20</p>
-        <p><strong>Medium Yard:</strong> $25–$35</p>
-        <p><strong>Large Yard:</strong> $40–$55</p>
-      `
-    },
-
-    edging: {
-      title: "Edging Pricing",
-      intro: "Driveways, sidewalks, patios, and walkways.",
-      html: `
-        <p><strong>Small Yard:</strong> $10–$15</p>
-        <p><strong>Medium Yard:</strong> $20–$25</p>
-        <p><strong>Large Yard:</strong> $30–$40</p>
-      `
-    },
-
-    bush: {
-      title: "Bush Trimming Pricing",
-      intro: "Shaping, height reduction, and seasonal maintenance.",
-      html: `
-        <p><strong>Small Yard:</strong> $20–$35</p>
-        <p><strong>Medium Yard:</strong> $35–$60</p>
-        <p><strong>Large Yard:</strong> $60–$120</p>
-        <p><strong>Full Property Trim:</strong> $120–$200</p>
-      `
-    },
-
-    aeration: {
-      title: "Aeration Pricing",
-      intro: "Core aeration for lawn health.",
-      html: `
-        <p><strong>Small Yard:</strong> $85–$110</p>
-        <p><strong>Medium Yard:</strong> $140–$170</p>
-        <p><strong>Large Yard:</strong> $200–$250</p>
-      `
-    },
-
-    fertilization: {
-      title: "Fertilization Pricing",
-      intro: "Seasonal lawn fertilization.",
-      html: `
-        <p><strong>Small Yard:</strong> $80–$100</p>
-        <p><strong>Medium Yard:</strong> $120–$150</p>
-        <p><strong>Large Yard:</strong> $150–$200</p>
-      `
-    },
-
-    overseeding: {
-      title: "Overseeding Pricing",
-      intro: "Boost lawn thickness and growth.",
-      html: `
-        <p><strong>Small Yard:</strong> $90–$120</p>
-        <p><strong>Medium Yard:</strong> $145–$175</p>
-        <p><strong>Large Yard:</strong> $200–$250</p>
-      `
-    },
-
-    leaf: {
-      title: "Leaf Removal Pricing",
-      intro: "Seasonal leaf cleanup.",
-      html: `
-        <p><strong>Regular Yard:</strong> $100–$150</p>
-        <p><strong>Medium Yard:</strong> $170–$225</p>
-        <p><strong>Large Yard:</strong> $300–$400</p>
-      `
-    },
-
-    flowerbed: {
-      title: "Flower Bed Cleanup Pricing",
-      intro: "Bed cleaning, debris removal, and overhaul.",
-      html: `
-        <p><strong>Light Cleanup:</strong> $100–$125</p>
-        <p><strong>Medium Cleanup:</strong> $150–$200</p>
-        <p><strong>Heavy Cleanup:</strong> $300–$350</p>
-        <p><strong>Bed Overhaul:</strong> $400–$500+</p>
-      `
-    },
-
-    mulch: {
-      title: "Mulch Installation Pricing",
-      intro: "Mulch installation and bed refreshing.",
-      html: `
-        <p><strong>Per Yard Install:</strong> $75–$95</p>
-        <p><strong>Full Bed Refresh:</strong> $250–$300</p>
-        <p><strong>Premium Mulch Add-on:</strong> $15–$25</p>
-      `
-    },
-
-    pine: {
-      title: "Pine Needle Installation Pricing",
-      intro: "Pine needle bedding and refresh.",
-      html: `
-        <p><strong>Per Bale Install:</strong> $15–$20</p>
-        <p><strong>Full Bed Refresh:</strong> $200–$250</p>
-      `
-    },
-
-    spring: {
-      title: "Spring Cleanup Pricing",
-      intro: "Seasonal cleanup and debris removal.",
-      html: `
-        <p><strong>Small Property:</strong> $200–$300</p>
-        <p><strong>Medium Property:</strong> $400–$550</p>
-        <p><strong>Large Property:</strong> $800–$1,000+</p>
-      `
-    },
-
-    fall: {
-      title: "Fall Cleanup Pricing",
-      intro: "Seasonal leaf and debris cleanup.",
-      html: `
-        <p><strong>Regular Property:</strong> $200–$300</p>
-        <p><strong>Medium Property:</strong> $400–$550</p>
-        <p><strong>Large Property:</strong> $800–$1,000+</p>
-      `
-    },
-
-    treetrim: {
-      title: "Tree Limb Removal Pricing",
-      intro: "Safe removal of small, medium, and large limbs.",
-      html: `
-        <p><strong>Small Limbs:</strong> $50–$90</p>
-        <p><strong>Medium Limbs:</strong> $130–$180</p>
-        <p><strong>Large Limbs:</strong> $250–$350+</p>
-      `
-    },
-
-    treeremoval: {
-      title: "Tree Removal Pricing",
-      intro: "Safe removal of small, medium, and large trees.",
-      html: `
-        <p><strong>Small Tree (Under 10ft):</strong> $170–$250</p>
-        <p><strong>Medium Tree (10–20ft):</strong> $350–$500</p>
-        <p><strong>Large Tree (20–30ft):</strong> $800–$1,200+</p>
-        <p><strong>Stump Removal Add-on:</strong> $75–$150</p>
-      `
-    },
-
-    drywall: {
-      title: "Drywall Repair Pricing",
-      intro: "Holes, cracks, patches, and wall repairs.",
-      html: `
-        <p><strong>Small Patch (1–4 in):</strong> $75–$125</p>
-        <p><strong>Medium Patch (4–12 in):</strong> $125–$200</p>
-        <p><strong>Large Patch (12–24 in):</strong> $200–$350</p>
-        <p><strong>Full Section Replacement:</strong> $350–$600</p>
-        <p><strong>Texture Match Add‑On:</strong> $50–$100</p>
-        <p><strong>Demo Add‑On:</strong> $75–$150</p>
-      `
-    },
-
-    painting: {
-      title: "Painting & Touch-Up Pricing",
-      intro: "Walls, trim, doors, and color matching.",
-      html: `
-        <p><strong>Paint Match + Blend:</strong> $125–$200</p>
-        <p><strong>Single Wall Repaint:</strong> $150–$250</p>
-        <p><strong>Room Repaint:</strong> $350–$600</p>
-        <p><strong>Trim / Baseboards:</strong> $150–$300</p>
-        <p><strong>Door Painting:</strong> $75–$150</p>
-      `
-    },
-
-    flooring: {
-      title: "Flooring Installation Pricing",
-      intro: "Vinyl, laminate, plank flooring installs.",
-      html: `
-        <p><strong>Small Room (up to 120 sq ft):</strong> $450–$700</p>
-        <p><strong>Medium Room (120–200 sq ft):</strong> $700–$900</p>
-        <p><strong>Large Room (200–300 sq ft):</strong> $900–$1,000</p>
-        <p><strong>Flooring Demo Add‑On:</strong> $150–$350</p>
-      `
-    },
-
-    vanity: {
-      title: "Vanity Replacement Pricing",
-      intro: "Bathroom vanity swap and plumbing reconnection.",
-      html: `
-        <p><strong>Standard Vanity:</strong> $450–$650</p>
-        <p><strong>Double Vanity:</strong> $650–$900</p>
-        <p><strong>Plumbing Adjustments:</strong> $75–$150</p>
-      `
-    },
-
-    lightfixtures: {
-      title: "Light Fixture & Fan Pricing",
-      intro: "Ceiling lights, fans, and wall fixtures.",
-      html: `
-        <p><strong>Basic Fixture Swap:</strong> $150–$200</p>
-        <p><strong>Ceiling Fan Install:</strong> $200–$350</p>
-        <p><strong>Chandelier Install:</strong> $250–$450</p>
-        <p><strong>Dimmer Switch Install:</strong> $75–$150</p>
-      `
-    },
-
-    toilets: {
-      title: "Toilet Replacement Pricing",
-      intro: "Remove old toilet and install new one.",
-      html: `
-        <p><strong>Standard Toilet Swap:</strong> $150–$250</p>
-        <p><strong>Wax Ring + Seal:</strong> $25–$50</p>
-      `
-    },
-
-    faucets: {
-      title: "Faucet Replacement Pricing",
-      intro: "Kitchen, bathroom, and utility faucets.",
-      html: `
-        <p><strong>Bathroom Faucet:</strong> $125–$200</p>
-        <p><strong>Kitchen Faucet:</strong> $150–$250</p>
-      `
-    },
-
-    doors: {
-      title: "Door Replacement Pricing",
-      intro: "Interior and exterior door swaps.",
-      html: `
-        <p><strong>Interior Door:</strong> $150–$300</p>
-        <p><strong>Exterior Door:</strong> $300–$600</p>
-        <p><strong>Door Trim Replacement:</strong> $100–$200</p>
-      `
-    },
-
-    trim: {
-      title: "Trim & Baseboard Pricing",
-      intro: "Install, replace, or repair trim.",
-      html: `
-        <p><strong>Small Room:</strong> $150–$250</p>
-        <p><strong>Medium Room:</strong> $250–$400</p>
-        <p><strong>Large Room:</strong> $400–$600</p>
-      `
-    },
-
-    backsplash: {
-      title: "Backsplash Installation Pricing",
-      intro: "Kitchen or bathroom backsplash installs.",
-      html: `
-        <p><strong>Small Area:</strong> $250–$450</p>
-        <p><strong>Full Kitchen:</strong> $450–$900</p>
-        <p><strong>Tile Demo Add‑On:</strong> $150–$300</p>
-      `
-    },
-
-    shelving: {
-      title: "Shelving & Mounting Pricing",
-      intro: "Floating shelves, TV mounts, and wall installs.",
-      html: `
-        <p><strong>Floating Shelves:</strong> $75–$150</p>
-        <p><strong>TV Mount Install:</strong> $125–$200</p>
-        <p><strong>Heavy-Duty Mount:</strong> $200–$300</p>
-      `
-    },
-
-    caulking: {
-      title: "Caulking & Sealing Pricing",
-      intro: "Bathrooms, kitchens, windows, and trim.",
-      html: `
-        <p><strong>Bathroom Caulk:</strong> $75–$150</p>
-        <p><strong>Window/Trim Caulk:</strong> $100–$200</p>
-      `
-    },
-
-    demo: {
-      title: "Demolition Pricing",
-      intro: "Remove old materials before installation.",
-      html: `
-        <p><strong>Small Demo:</strong> $75–$150</p>
-        <p><strong>Medium Demo:</strong> $150–$350</p>
-        <p><strong>Large Demo:</strong> $350–$600</p>
-      `
-    },
-
-    haulaway: {
-      title: "Remodeling Haul-Away Pricing",
-      intro: "Debris, old materials, and construction waste.",
-      html: `
-        <p><strong>Small Load:</strong> $75–$150</p>
-        <p><strong>Medium Load:</strong> $150–$300</p>
-        <p><strong>Large Load:</strong> $300–$500</p>
-      `
-    },
-    turnover: {
-      title: "Rental Turnover Pricing",
-      intro: "Full clean, reset, and prep between tenants or guests.",
-      html: `
-        <p><strong>Basic Turnover:</strong> $75–$150</p>
-        <p><strong>Deep Turnover:</strong> $150–$300</p>
-        <p><strong>Full Airbnb Reset:</strong> $120–$250</p>
-      `
-    },
-
-    cleaning: {
-      title: "Cleaning Service Pricing",
-      intro: "Standard, deep, and move-out cleaning options.",
-      html: `
-        <p><strong>Standard Clean:</strong> $60–$120</p>
-        <p><strong>Deep Clean:</strong> $120–$250</p>
-        <p><strong>Move-Out Clean:</strong> $150–$350</p>
-      `
-    },
-
-    inspection: {
-      title: "Property Inspection Pricing",
-      intro: "Routine, move-in, and move-out inspections.",
-      html: `
-        <p><strong>Basic Inspection:</strong> $50–$100</p>
-        <p><strong>Move-In/Move-Out:</strong> $75–$150</p>
-        <p><strong>Full Report:</strong> $150–$300</p>
-      `
-    },
-
-    maintenance: {
-      title: "Maintenance & Repair Pricing",
-      intro: "General repairs, fixes, and rental upkeep.",
-      html: `
-        <p><strong>Minor Repairs:</strong> $50–$150</p>
-        <p><strong>Medium Repairs:</strong> $150–$400</p>
-        <p><strong>Major Repairs:</strong> Custom Quote</p>
-      `
-    },
-
-    airbnb: {
-      title: "Airbnb Support Pricing",
-      intro: "Guest prep, cleaning, restocking, and hosting assistance.",
-      html: `
-        <p><strong>Guest Prep:</strong> $40–$100</p>
-        <p><strong>Airbnb Cleaning:</strong> $75–$150</p>
-        <p><strong>Restocking:</strong> $20–$60</p>
-      `
-    },
-    placement: {
-      title: "Machine Placement Pricing",
-      intro: "We place machines in offices, stores, and public locations.",
-      html: `
-        <p><strong>Standard Placement:</strong> $0–$150</p>
-        <p><strong>High-Traffic Placement:</strong> $150–$300</p>
-        <p><strong>Custom Location Setup:</strong> $300–$600+</p>
-      `
-    },
-
-    stocking: {
-      title: "Product Stocking Pricing",
-      intro: "Snacks, drinks, and custom product stocking options.",
-      html: `
-        <p><strong>Snack Stocking:</strong> $40–$120</p>
-        <p><strong>Drink Stocking:</strong> $50–$150</p>
-        <p><strong>Full Machine Restock:</strong> $120–$300</p>
-      `
-    },
-
-    machinemaintenance: {
-      title: "Machine Maintenance Pricing",
-      intro: "Repairs, cleaning, and machine performance checks.",
-      html: `
-        <p><strong>Basic Maintenance:</strong> $40–$100</p>
-        <p><strong>Repairs:</strong> $75–$250</p>
-        <p><strong>Full Service:</strong> $150–$400</p>
-      `
-    },
-
-    collection: {
-      title: "Money Collection Pricing",
-      intro: "Secure cash collection and digital sales reporting.",
-      html: `
-        <p><strong>Standard Collection:</strong> $20–$60</p>
-        <p><strong>Digital Sales Report:</strong> $15–$40</p>
-        <p><strong>Full Accounting Package:</strong> $60–$150</p>
-      `
-    },
-
-    custom: {
-      title: "Custom Vending Pricing",
-      intro: "Specialty machines for snacks, drinks, or unique products.",
-      html: `
-        <p><strong>Snack Machine:</strong> $1,500–$3,500</p>
-        <p><strong>Drink Machine:</strong> $2,000–$4,500</p>
-        <p><strong>Specialty Machine:</strong> $3,500–$8,000+</p>
-      `
-    },
-    washfold: {
-      title: "Wash & Fold Pricing",
-      intro: "Drop-off laundry service with fast turnaround.",
-      html: `
-        <p><strong>Standard Load:</strong> $1.25–$2.00 per lb</p>
-        <p><strong>Large Load:</strong> $2.00–$3.00 per lb</p>
-        <p><strong>Express Service:</strong> +$10–$20</p>
-      `
-    },
-
-    machineRepair: {
-      title: "Machine Repair Pricing",
-      intro: "Washer and dryer diagnostics, repair, and servicing.",
-      html: `
-        <p><strong>Diagnostics:</strong> $40–$80</p>
-        <p><strong>Minor Repairs:</strong> $75–$150</p>
-        <p><strong>Major Repairs:</strong> $150–$400+</p>
-      `
-    },
-
-    restocking: {
-      title: "Restocking Supplies Pricing",
-      intro: "Detergent, softener, vending items, and facility supplies.",
-      html: `
-        <p><strong>Detergent & Softener:</strong> $20–$60</p>
-        <p><strong>Vending Items:</strong> $40–$120</p>
-        <p><strong>Facility Supplies:</strong> $30–$100</p>
-      `
-    },
-
-    facilityClean: {
-      title: "Facility Cleaning Pricing",
-      intro: "Daily, weekly, or deep cleaning for laundromat facilities.",
-      html: `
-        <p><strong>Daily Cleaning:</strong> $40–$80</p>
-        <p><strong>Weekly Cleaning:</strong> $80–$150</p>
-        <p><strong>Deep Cleaning:</strong> $150–$300</p>
-      `
-    },
-
-    management: {
-      title: "Facility Management Pricing",
-      intro: "Full operational support for laundromat owners.",
-      html: `
-        <p><strong>Basic Management:</strong> $300–$600/mo</p>
-        <p><strong>Full Management:</strong> $600–$1,200/mo</p>
-        <p><strong>Custom Operations:</strong> Quote Required</p>
-      `
-    },
-    basicjunk: {
-      title: "Basic Junk Removal Pricing",
-      intro: "General household junk, bagged trash, and small items.",
-      html: `
-        <p><strong>1–3 Item Pick Up:</strong> $75–$115</p>
-        <p><strong>Small Load:</strong> $150–$200</p>
-        <p><strong>Medium Load:</strong> $300–$375</p>
-      `
-    },
-
-    furniture: {
-      title: "Furniture Removal Pricing",
-      intro: "Couches, mattresses, dressers, tables, and more.",
-      html: `
-        <p><strong>Furniture Removal:</strong> $125–$200</p>
-        <p><strong>Mattress Removal:</strong> $75–$125</p>
-      `
-    },
-
-    appliances: {
-      title: "Appliance Removal Pricing",
-      intro: "Washers, dryers, fridges, stoves, and heavy appliances.",
-      html: `
-        <p><strong>Appliance Removal:</strong> $75–$150</p>
-      `
-    },
-
-    yardjunk: {
-      title: "Yard Debris Removal Pricing",
-      intro: "Branches, brush, storm debris, and outdoor waste.",
-      html: `
-        <p><strong>Yard Waste Load:</strong> $125–$300</p>
-      `
-    },
-
-    construction: {
-      title: "Construction Debris Pricing",
-      intro: "Renovation debris, wood, drywall, flooring, and more.",
-      html: `
-        <p><strong>Construction Debris Load:</strong> $250–$500</p>
-      `
-    },
-
-    fullcleanout: {
-      title: "Full Property Cleanout Pricing",
-      intro: "Evictions, foreclosures, hoarder homes, and full cleanouts.",
-      html: `
-        <p><strong>Full Property Cleanout:</strong> $1,000–$3,500+</p>
-      `
-    },
-    driveway: {
-      title: "Driveway Cleaning Pricing",
-      intro: "Concrete, asphalt, stains, and full driveway restoration.",
-      html: `
-        <p><strong>Small Driveway:</strong> $75–$150</p>
-        <p><strong>Medium Driveway:</strong> $150–$250</p>
-        <p><strong>Large Driveway:</strong> $250–$400+</p>
-      `
-    },
-    siding: {
-      title: "House Siding Wash Pricing",
-      intro: "Vinyl, brick, wood, and full exterior home washing.",
-      html: `
-        <p><strong>Single Story:</strong> $150–$300</p>
-        <p><strong>Two Story:</strong> $300–$500</p>
-        <p><strong>Large Home:</strong> $500–$800+</p>
-      `
-    },
-
-    deck: {
-      title: "Deck & Patio Cleaning Pricing",
-      intro: "Wood, composite, concrete, and outdoor living spaces.",
-      html: `
-        <p><strong>Small Deck/Patio:</strong> $75–$150</p>
-        <p><strong>Medium Deck/Patio:</strong> $150–$300</p>
-        <p><strong>Large Deck/Patio:</strong> $300–$500+</p>
-      `
-    },
-
-    roof: {
-      title: "Roof Soft Wash Pricing",
-      intro: "Safe soft-wash for shingles, metal roofs, and stain removal.",
-      html: `
-        <p><strong>Small Roof:</strong> $150–$300</p>
-        <p><strong>Medium Roof:</strong> $300–$500</p>
-        <p><strong>Large Roof:</strong> $500–$800+</p>
-      `
-    },
-
-    gutter: {
-      title: "Gutter Cleaning Pricing",
-      intro: "Debris removal, flushing, and exterior gutter brightening.",
-      html: `
-        <p><strong>Standard Cleaning:</strong> $75–$150</p>
-        <p><strong>Gutter Brightening:</strong> $100–$200</p>
-        <p><strong>Full Gutter Package:</strong> $150–$300</p>
-      `
-    },
-
-    commercialpw: {
-      title: "Commercial Pressure Washing Pricing",
-      intro: "Storefronts, parking lots, walkways, and business exteriors.",
-      html: `
-        <p><strong>Storefront:</strong> $150–$350</p>
-        <p><strong>Parking Lot:</strong> $300–$800+</p>
-        <p><strong>Full Exterior:</strong> $500–$1,500+</p>
-      `
-    }
-  };
-
-  title.textContent = pricing[type].title;
-  intro.textContent = pricing[type].intro;
-
-  // Add universal "prices may vary" note
-  content.innerHTML = pricing[type].html + `
-    <p class="price-note">Prices may vary based on project size, materials, and complexity.</p>
-  `;
-}
-
-/* =========================================================
-   SPOTLIGHT GLOW EFFECT
-   (Mouse‑tracking illumination on .bubble-card)
-========================================================= */
-document.addEventListener("mousemove", (e) => {
-  document.querySelectorAll(".bubble-card").forEach((card) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
-  });
-});
-
-/* =========================================================
-   BACK TO TOP BUTTON
-========================================================= */
-const backToTop = document.getElementById("backToTop");
-
-if (backToTop) {
-  window.addEventListener("scroll", () => {
-    backToTop.classList.toggle("show", window.scrollY > 300);
-  });
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
-function openModal(id) {
-  const m = document.getElementById(id);
-  if (m) m.style.display = 'block';
-  const applyBtn = document.querySelector('.apply-floating');
-  if (applyBtn) applyBtn.style.display = 'none';
-}
-
-function closeModal(id) {
-  const m = document.getElementById(id);
-  if (m) m.style.display = 'none';
-  const applyBtn = document.querySelector('.apply-floating');
-  if (applyBtn) applyBtn.style.display = 'inline-block';
-}
-
-// Close a modal when tapping the dark area outside it
-window.addEventListener('click', (e) => {
-  if (e.target.classList && e.target.classList.contains('modal')) {
-    closeModal(e.target.id);
-  }
-});
-
-/* =========================================================
-   CAREERS — OPEN JOB MODAL WITH PREFILLED POSITION
-========================================================= */
-function openJobModal(positionName) {
-  const modal = document.getElementById('hireModal');
-  modal.style.display = 'block';
-
-  // Hide floating apply button
-  const applyBtn = document.querySelector('.apply-floating');
-  if (applyBtn) applyBtn.style.display = 'none';
-
-  // Prefill the dropdown
-  const select = document.getElementById('hirePosition');
-  if (!select) return;
-
-  for (let option of select.options) {
-    if (option.text === positionName) {
-      option.selected = true;
-      break;
-    }
-  }
-}
-
-/* =========================================================
-   ADDRESS AUTOCOMPLETE (Google Places)
-========================================================= */
-
-function initAddressAutocomplete() {
-  const input = document.getElementById("quoteAddress");
-  if (!input || typeof google === "undefined" || !google.maps || !google.maps.places) return;
-
-  const autocomplete = new google.maps.places.Autocomplete(input, {
-    types: ["address"],
-    componentRestrictions: { country: "us" }
-  });
-
-  autocomplete.addListener("place_changed", () => {
-    const place = autocomplete.getPlace();
-    if (place && place.formatted_address) {
-      input.value = place.formatted_address;
-    }
-  });
-}
-
-window.addEventListener("load", initAddressAutocomplete);
-
-/* =========================================================
-   PARTNER CARD CLICK
-========================================================= */
-document.querySelectorAll(".partner-card").forEach((card) => {
-  card.addEventListener("click", () => {
-    window.location.href = "Pages/partner.html";
-  });
-});
-
-/* =========================================================
-   SMOOTH SCROLLING FOR INTERNAL LINKS
-========================================================= */
-document.querySelectorAll('a[href^="#"]').forEach((link) => {
-  link.addEventListener("click", (e) => {
-    const target = document.querySelector(link.getAttribute("href"));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  });
-});
-
-/* =========================================================
-   STICKY NAV SHADOW ON SCROLL
-========================================================= */
+/* ---------- Header: solid + compact after scrolling ---------- */
 const header = document.querySelector(".site-header");
+const callFab = document.querySelector(".call-fab");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 20) {
-    header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.4)";
-  } else {
-    header.style.boxShadow = "none";
+function onScroll() {
+  const y = window.scrollY;
+  if (header) header.classList.toggle("is-scrolled", y > 24);
+  if (callFab) callFab.classList.toggle("show", y > 420);
+}
+window.addEventListener("scroll", onScroll, { passive: true });
+onScroll();
+
+/* ---------- Mobile menu ---------- */
+const menuToggle = document.querySelector(".menu-toggle");
+
+function setMenu(open) {
+  document.body.classList.toggle("menu-open", open);
+  if (menuToggle) {
+    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
   }
+}
+if (menuToggle) {
+  menuToggle.addEventListener("click", () => setMenu(!document.body.classList.contains("menu-open")));
+  document.querySelectorAll(".mobile-menu a").forEach(a => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
+  window.addEventListener("resize", () => { if (window.innerWidth > 920) setMenu(false); });
+}
+
+/* ---------- Scroll reveal ---------- */
+// Children of [data-stagger] reveal one after another
+document.querySelectorAll("[data-stagger]").forEach(group => {
+  const step = parseFloat(group.dataset.stagger) || 0.08;
+  Array.from(group.children).forEach((child, i) => {
+    child.classList.add("reveal");
+    child.style.setProperty("--d", (i * step).toFixed(2) + "s");
+  });
+});
+
+const revealEls = document.querySelectorAll(".reveal");
+if ("IntersectionObserver" in window && !prefersReducedMotion) {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  revealEls.forEach(el => io.observe(el));
+} else {
+  revealEls.forEach(el => el.classList.add("in"));
+}
+
+/* ---------- "How it works" steps light up in order ---------- */
+document.querySelectorAll(".steps").forEach(list => {
+  const items = Array.from(list.children);
+  const light = () => {
+    items.forEach((li, i) => {
+      setTimeout(() => {
+        li.classList.add("lit");
+        list.style.setProperty("--progress", Math.round(((i + 1) / items.length) * 100) + "%");
+      }, prefersReducedMotion ? 0 : 250 + i * 320);
+    });
+  };
+  if (!("IntersectionObserver" in window) || prefersReducedMotion) return light();
+  const io = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { light(); io.disconnect(); }
+  }, { threshold: 0.4 });
+  io.observe(list);
+});
+
+/* ---------- Accordions (FAQ + price lists) ---------- */
+document.querySelectorAll(".acc-trigger").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const open = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!open));
+  });
+});
+
+/* ---------- Reviews carousel ---------- */
+document.querySelectorAll("[data-track]").forEach(wrap => {
+  const track = wrap.querySelector(".reviews-track");
+  const prev = wrap.querySelector(".prev");
+  const next = wrap.querySelector(".next");
+  if (!track) return;
+  const move = dir => {
+    const card = track.querySelector(".review");
+    const amount = card ? card.getBoundingClientRect().width + 20 : track.clientWidth;
+    track.scrollBy({ left: dir * amount, behavior: prefersReducedMotion ? "auto" : "smooth" });
+  };
+  if (prev) prev.addEventListener("click", () => move(-1));
+  if (next) next.addEventListener("click", () => move(1));
+});
+
+/* ---------- Tabs (contact page) ---------- */
+const tabs = Array.from(document.querySelectorAll(".tab"));
+function selectTab(id, focus) {
+  tabs.forEach(t => {
+    const on = t.dataset.tab === id;
+    t.setAttribute("aria-selected", String(on));
+    t.tabIndex = on ? 0 : -1;
+    const panel = document.getElementById(t.getAttribute("aria-controls"));
+    if (panel) panel.hidden = !on;
+    if (on && focus) t.focus();
+  });
+}
+if (tabs.length) {
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => {
+      selectTab(t.dataset.tab);
+      history.replaceState(null, "", "#" + t.dataset.tab);
+    });
+    t.addEventListener("keydown", e => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+      selectTab(n.dataset.tab, true);
+    });
+  });
+  const fromHash = window.location.hash.replace("#", "");
+  if (tabs.some(t => t.dataset.tab === fromHash)) selectTab(fromHash);
+}
+
+/* ---------- Careers: "Apply" buttons pre-fill the form ---------- */
+document.querySelectorAll("[data-apply]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const select = document.getElementById("hirePosition");
+    if (select) select.value = btn.dataset.apply;
+    const form = document.getElementById("apply");
+    if (form) form.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
+    setTimeout(() => { const n = document.getElementById("hireName"); if (n) n.focus({ preventScroll: true }); }, 600);
+  });
 });
 
 /* =========================================================
-   GET QUOTE WIZARD
-   One real form (#quoteForm) split into steps. It posts to
+   GET A QUOTE WIZARD
+   One real form (#quoteForm) split into 5 steps. It posts to
    FormSubmit, which emails the request (and photos) to you.
 ========================================================= */
-
+const quoteForm = document.getElementById("quoteForm");
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // FormSubmit limit: 10MB total
 
-function showStep(step) {
-  document.querySelectorAll('.quote-step').forEach(s => s.style.display = 'none');
-  const target = document.getElementById('step' + step);
-  if (target) target.style.display = 'block';
-  const wizard = document.getElementById('quoteWizard');
-  if (wizard) wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-function setError(id, show, text) {
+function val(id) {
   const el = document.getElementById(id);
-  if (!el) return;
-  if (text) el.textContent = text;
-  el.style.display = show ? 'block' : 'none';
+  return el ? el.value.trim() : "";
 }
-
+function setError(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = show ? "block" : "none";
+}
+function showStep(step) {
+  document.querySelectorAll(".quote-step").forEach(s => { s.hidden = s.id !== "step" + step; });
+  document.querySelectorAll(".progress li").forEach((li, i) => {
+    li.classList.toggle("done", i + 1 < step);
+    li.classList.toggle("current", i + 1 === step);
+  });
+  const wizard = document.getElementById("quoteWizard");
+  if (wizard && step > 1) wizard.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+  const first = document.querySelector("#step" + step + " textarea, #step" + step + " input:not([readonly]):not([type=hidden])");
+  if (first && step > 1) setTimeout(() => first.focus({ preventScroll: true }), 450);
+}
 function selectService(service) {
-  const field = document.getElementById('selectedService');
+  const field = document.getElementById("selectedService");
   if (!field) return;
   field.value = service;
   showStep(2);
 }
-
 function totalUploadSize() {
   let total = 0;
   document.querySelectorAll('#quoteForm input[type="file"]').forEach(input => {
-    Array.from(input.files || []).forEach(f => total += f.size);
+    Array.from(input.files || []).forEach(f => { total += f.size; });
   });
   return total;
 }
-
-function val(id) {
-  const el = document.getElementById(id);
-  return el ? el.value.trim() : '';
+function photoCount() {
+  return Array.from(document.querySelectorAll('#quoteForm input[type="file"]'))
+    .reduce((n, input) => n + (input.files ? input.files.length : 0), 0);
 }
-
+function fillQuoteReview() {
+  const box = document.getElementById("quoteReview");
+  if (!box) return;
+  const rows = [
+    ["Service", val("selectedService")],
+    ["Project", val("projectDetails")],
+    ["Photos", photoCount() ? photoCount() + " attached" : "None"],
+    ["Name", val("quoteFirstName") + " " + val("quoteLastName")],
+    ["Address", val("quoteAddress")],
+    ["Email", val("quoteEmail")],
+    ["Phone", val("quotePhone")]
+  ];
+  box.innerHTML = "";
+  rows.forEach(([k, v]) => {
+    const row = document.createElement("div");
+    const dt = document.createElement("dt");
+    const dd = document.createElement("dd");
+    dt.textContent = k;
+    dd.textContent = v;
+    row.append(dt, dd);
+    box.appendChild(row);
+  });
+}
 function nextStep(step) {
-  // Leaving step 2: need a project description
   if (step === 3) {
-    if (val('projectDetails').length < 5) {
-      setError('errorStep2', true);
-      return;
-    }
-    setError('errorStep2', false);
+    if (val("projectDetails").length < 5) return setError("errorStep2", true);
+    setError("errorStep2", false);
   }
-
-  // Leaving step 3: photos must fit the 10MB limit
   if (step === 4) {
-    if (totalUploadSize() > MAX_UPLOAD_BYTES) {
-      setError('errorStep3', true);
-      return;
-    }
-    setError('errorStep3', false);
+    if (totalUploadSize() > MAX_UPLOAD_BYTES) return setError("errorStep3", true);
+    setError("errorStep3", false);
   }
-
-  // Leaving step 4: need name, email, phone, and address
   if (step === 5) {
-    const required = ['quoteFirstName', 'quoteLastName', 'quoteAddress', 'quoteEmail', 'quotePhone'];
-    const missing = required.some(id => !val(id));
-    const email = document.getElementById('quoteEmail');
-    if (missing || (email && !email.checkValidity())) {
-      setError('errorStep4', true);
-      return;
-    }
-    setError('errorStep4', false);
+    const required = ["quoteFirstName", "quoteLastName", "quoteAddress", "quoteEmail", "quotePhone"];
+    const email = document.getElementById("quoteEmail");
+    if (required.some(id => !val(id)) || (email && !email.checkValidity())) return setError("errorStep4", true);
+    setError("errorStep4", false);
     fillQuoteReview();
   }
-
   showStep(step);
 }
-
-function prevStep(step) {
-  showStep(step);
-}
-
-function fillQuoteReview() {
-  const box = document.getElementById('quoteReview');
-  if (!box) return;
-  const photos = Array.from(document.querySelectorAll('#quoteForm input[type="file"]'))
-    .reduce((n, input) => n + (input.files ? input.files.length : 0), 0);
-  const esc = (t) => t.replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  box.innerHTML = `
-    <strong>Service:</strong> ${esc(val('selectedService'))}<br>
-    <strong>Project:</strong> ${esc(val('projectDetails'))}<br>
-    <strong>Photos:</strong> ${photos ? photos + ' attached' : 'None'}<br>
-    <strong>Name:</strong> ${esc(val('quoteFirstName'))} ${esc(val('quoteLastName'))}<br>
-    <strong>Address:</strong> ${esc(val('quoteAddress'))}<br>
-    <strong>Email:</strong> ${esc(val('quoteEmail'))}<br>
-    <strong>Phone:</strong> ${esc(val('quotePhone'))}
-  `;
-}
-
+function prevStep(step) { showStep(step); }
 function submitQuote() {
-  const form = document.getElementById('quoteForm');
-  if (!form) return;
-
-  const required = ['selectedService', 'projectDetails', 'quoteFirstName', 'quoteLastName', 'quoteAddress', 'quoteEmail', 'quotePhone'];
-  if (required.some(id => !val(id))) {
-    setError('errorStep5', true);
-    return;
-  }
-  setError('errorStep5', false);
-
-  const btn = document.getElementById('quoteSubmitBtn');
-  if (btn) {
-    btn.disabled = true;
-    btn.textContent = 'Sending…';
-  }
-  form.submit();
+  if (!quoteForm) return;
+  const required = ["selectedService", "projectDetails", "quoteFirstName", "quoteLastName", "quoteAddress", "quoteEmail", "quotePhone"];
+  if (required.some(id => !val(id))) return setError("errorStep5", true);
+  setError("errorStep5", false);
+  const btn = document.getElementById("quoteSubmitBtn");
+  if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
+  quoteForm.submit();
 }
 
-// Stop the Enter key from submitting the wizard early
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && e.target.closest && e.target.closest('#quoteForm') && e.target.tagName === 'INPUT') {
-    e.preventDefault();
-  }
-});
+if (quoteForm) {
+  // Enter key shouldn't submit the wizard early
+  quoteForm.addEventListener("keydown", e => {
+    if (e.key === "Enter" && e.target.tagName === "INPUT") e.preventDefault();
+  });
+  // Pre-select from links like getquote.html?service=Landscaping
+  const service = new URLSearchParams(window.location.search).get("service");
+  if (["Remodeling", "Landscaping", "Junk Removal"].includes(service)) selectService(service);
+}
 
-// Pre-select a service from links like getquote.html?service=Landscaping
-(function preselectService() {
-  if (!document.getElementById('quoteForm')) return;
-  const service = new URLSearchParams(window.location.search).get('service');
-  const allowed = ['Remodeling', 'Landscaping', 'Junk Removal'];
-  if (service && allowed.includes(service)) selectService(service);
-})();
+/* ---------- Address autocomplete (Google Places) ---------- */
+function initAddressAutocomplete() {
+  const input = document.getElementById("quoteAddress");
+  if (!input || typeof google === "undefined" || !google.maps || !google.maps.places) return;
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    types: ["address"],
+    componentRestrictions: { country: "us" }
+  });
+  autocomplete.addListener("place_changed", () => {
+    const place = autocomplete.getPlace();
+    if (place && place.formatted_address) input.value = place.formatted_address;
+  });
+}
+window.addEventListener("load", initAddressAutocomplete);
 
-/* =========================================================
-   "THANK YOU" BANNER AFTER A FORM IS SENT
-   Forms redirect back with ?success=true
-========================================================= */
+/* ---------- "Thank you" notice after a form is sent (?success=true) ---------- */
 (function showSuccess() {
-  if (new URLSearchParams(window.location.search).get('success') !== 'true') return;
-  const modal = document.getElementById('successModal');
-  if (modal) {
-    modal.style.display = 'block';
-    return;
-  }
-  const main = document.querySelector('main');
+  if (new URLSearchParams(window.location.search).get("success") !== "true") return;
+  const main = document.querySelector("main");
   if (!main) return;
-  const banner = document.createElement('div');
-  banner.className = 'success-banner';
-  banner.innerHTML = '<strong>Thank you!</strong> Your request was sent. We\'ll get back to you shortly.';
-  main.prepend(banner);
+  const note = document.createElement("div");
+  note.className = "wrap";
+  note.innerHTML = '<p class="notice" role="status">Thanks — your message was sent. We\'ll get back to you shortly, usually the same day.</p>';
+  const target = main.querySelector(".page-hero") ? main.querySelector(".page-hero").nextElementSibling : main.firstChild;
+  main.insertBefore(note, target);
+  note.style.paddingTop = "28px";
 })();
 
+/* ---------- Footer year ---------- */
+document.querySelectorAll("[data-year]").forEach(el => { el.textContent = new Date().getFullYear(); });
+
 /* =========================================================
-   TESTIMONIALS (home page only)
+   GLASS CARD SPOTLIGHT — glow follows the mouse
 ========================================================= */
-const testimonialContainer = document.getElementById("testimonialContainer");
+if (window.matchMedia("(hover: hover)").matches && !prefersReducedMotion) {
+  document.addEventListener("pointermove", (e) => {
+    const card = e.target.closest && e.target.closest(".glass");
+    if (!card) return;
+    const r = card.getBoundingClientRect();
+    card.style.setProperty("--mx", (e.clientX - r.left) + "px");
+    card.style.setProperty("--my", (e.clientY - r.top) + "px");
+  }, { passive: true });
+}
 
-if (testimonialContainer) {
-  const testimonialCards = Array.from(testimonialContainer.children);
-  const filterButtons = document.querySelectorAll(".filter-btn");
-
-  const showCards = (cards) => {
-    testimonialContainer.innerHTML = "";
-    cards.forEach(card => testimonialContainer.appendChild(card));
+/* =========================================================
+   PRICING SWITCHER (Home repairs / Landscaping / Junk removal)
+========================================================= */
+document.querySelectorAll(".switcher").forEach(sw => {
+  const buttons = Array.from(sw.querySelectorAll("button[role=tab]"));
+  const thumb = sw.querySelector(".thumb");
+  const moveThumb = (btn) => {
+    if (!thumb || !btn) return;
+    thumb.style.width = btn.offsetWidth + "px";
+    thumb.style.transform = "translateX(" + btn.offsetLeft + "px)";
   };
-
-  const pickRandom = (cards, count) => {
-    const shuffled = [...cards].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, count);
-  };
-
-  filterButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      filterButtons.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      const filter = btn.dataset.filter;
-      if (filter === "all") {
-        showCards(pickRandom(testimonialCards, 3));
-      } else {
-        showCards(testimonialCards.filter(card => card.dataset.category === filter));
+  const select = (btn, focus) => {
+    buttons.forEach(b => {
+      const on = b === btn;
+      b.setAttribute("aria-selected", String(on));
+      b.tabIndex = on ? 0 : -1;
+      const panel = document.getElementById(b.getAttribute("aria-controls"));
+      if (panel) {
+        panel.hidden = !on;
+        if (on) panel.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
       }
     });
+    moveThumb(btn);
+    if (focus) btn.focus();
+  };
+  buttons.forEach((b, i) => {
+    b.addEventListener("click", () => select(b));
+    b.addEventListener("keydown", e => {
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      select(buttons[(i + (e.key === "ArrowRight" ? 1 : buttons.length - 1)) % buttons.length], true);
+    });
   });
-
-  showCards(pickRandom(testimonialCards, 3));
-}
+  const current = buttons.find(b => b.getAttribute("aria-selected") === "true") || buttons[0];
+  moveThumb(current);
+  window.addEventListener("resize", () => moveThumb(buttons.find(b => b.getAttribute("aria-selected") === "true")));
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => moveThumb(buttons.find(b => b.getAttribute("aria-selected") === "true")));
+});

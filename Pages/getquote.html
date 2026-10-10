@@ -2,260 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Get a Quote · Seaside Haven LLC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terms of service · Seaside Haven LLC</title>
+  <meta name="description" content="The rules, expectations, and agreements for using Seaside Haven LLC services." />
+  <meta name="theme-color" content="#0A1A2F" />
+  <link rel="canonical" href="https://seasidehavenllc.com/Pages/terms-of-service.html" />
+  <meta property="og:title" content="Terms of service · Seaside Haven LLC" />
+  <meta property="og:description" content="The rules, expectations, and agreements for using Seaside Haven LLC services." />
+  <meta property="og:image" content="https://seasidehavenllc.com/Images/logo.png" />
+  <link rel="icon" href="../Images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" />
   <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- HEADER -->
 <header class="site-header">
-  <div class="logo">
-    <a href="../index.html">
-      <img src="../Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="Seaside Haven LLC home">
+      <img src="../Images/logo.png" alt="" width="35" height="38" />
+      <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
     </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost header-phone" href="tel:+14342330231" aria-label="Call (434) 233-0231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg><span class="label">(434) 233-0231</span></a>
+      <button class="btn btn-teal btn-quote" type="button" data-chat="book">Book a visit</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-
-  <nav class="nav">
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
     <a href="../index.html">Home</a>
     <a href="services.html">Services</a>
     <a href="about.html">About</a>
     <a href="careers.html">Careers</a>
-    <a href="contact.html" class="active">Contact</a>
+    <a href="contact.html">Contact</a>
+    <div class="btn-row">
+      <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+      <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> Call</a>
+    </div>
   </nav>
-
-  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
-    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
-  </a>
-
-  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <div class="mobile-nav" id="mobileNav">
-    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="services.html"><i class="fas fa-tools"></i> Services</a>
-    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-    <a href="careers.html"><i class="fas fa-user-tie"></i> Careers</a>
-    <a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
-  </div>
 </header>
 
-<main>
+<main id="main">
 
-<!-- HERO -->
-<section class="section section-dark">
-  <div class="section-header">
-    <p class="section-kicker">Fast & Easy</p>
-    <h2>Get a Quote</h2>
-    <p class="section-intro">
-      Five quick steps, no account needed. Prefer to talk?
-      Call <a href="tel:+14342330231">(434) 233-0231</a>.
-    </p>
+<section class="page-hero">
+  <div class="grid-bg" style="position:absolute;inset:0" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div>
+  <div class="wrap hero-anim">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">Terms of service</span></nav>
+    <h1 class="glow-text">Terms of service</h1>
+    <p class="lead">The rules, expectations, and agreements for using Seaside Haven LLC services.</p>
+    <p class="muted" style="margin:0">Last updated: October 10, 2026</p>
   </div>
+  <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
 </section>
 
-<!-- QUOTE WIZARD -->
-<section class="section section-dark" id="quoteWizard">
-  <div class="bubble-card form-card" style="max-width:1100px; margin:0 auto;">
-
-    <h3 class="gradient-text">Quote Request</h3>
-
-    <!-- One real form: FormSubmit emails every request (with photos) to info@seasidehavenllc.com -->
-    <form id="quoteForm" class="contact-form" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST" enctype="multipart/form-data">
-
-      <input type="hidden" name="_subject" value="New Quote Request · Seaside Haven LLC">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://seasidehavenllc.com/Pages/getquote.html?success=true">
-      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
-
-      <!-- STEP 1 -->
-      <div class="quote-step" id="step1">
-        <h4 class="gradient-text">Step 1 of 5 · Select a Service</h4>
-
-        <div class="bubble-grid quote-grid-2">
-          <div class="bubble-card small-tile" onclick="selectService('Remodeling')">
-            <i class="fas fa-hammer service-icon"></i>
-            <h3 class="gradient-text">Remodeling</h3>
-          </div>
-
-          <div class="bubble-card small-tile" onclick="selectService('Landscaping')">
-            <i class="fas fa-leaf service-icon"></i>
-            <h3 class="gradient-text">Landscaping</h3>
-          </div>
-
-          <div class="bubble-card small-tile" onclick="selectService('Junk Removal')">
-            <i class="fas fa-trash-alt service-icon"></i>
-            <h3 class="gradient-text">Junk Removal</h3>
-          </div>
-        </div>
-      </div>
-
-      <!-- STEP 2 -->
-      <div class="quote-step" id="step2" style="display:none;">
-        <h4 class="gradient-text">Step 2 of 5 · Describe Your Project</h4>
-
-        <label for="selectedService">Service Selected</label>
-        <input id="selectedService" name="Service" type="text" readonly />
-
-        <label for="projectDetails">Project Details</label>
-        <textarea id="projectDetails" name="Project Details" rows="4" placeholder="What do you need done? Include sizes, number of items, or timing if you know them."></textarea>
-
-        <p id="errorStep2" class="quote-error">Please describe your project.</p>
-
-        <div style="margin-top:18px; text-align:right;">
-          <button type="button" class="button-secondary" onclick="prevStep(1)">Back</button>
-          <button type="button" class="button-primary" onclick="nextStep(3)">Next</button>
-        </div>
-      </div>
-
-      <!-- STEP 3 -->
-      <div class="quote-step" id="step3" style="display:none;">
-        <h4 class="gradient-text">Step 3 of 5 · Add Photos (Optional)</h4>
-        <p class="form-hint">Photos help us give you an accurate price faster. Up to 10MB total.</p>
-
-        <label for="projectPhoto1">Photo 1</label>
-        <input id="projectPhoto1" name="Photo 1" type="file" accept="image/*" />
-
-        <label for="projectPhoto2">Photo 2</label>
-        <input id="projectPhoto2" name="Photo 2" type="file" accept="image/*" />
-
-        <p id="errorStep3" class="quote-error">Photos are over 10MB total. Please choose smaller photos or just one.</p>
-
-        <div style="margin-top:18px; text-align:right;">
-          <button type="button" class="button-secondary" onclick="prevStep(2)">Back</button>
-          <button type="button" class="button-primary" onclick="nextStep(4)">Next</button>
-        </div>
-      </div>
-
-      <!-- STEP 4 -->
-      <div class="quote-step" id="step4" style="display:none;">
-        <h4 class="gradient-text">Step 4 of 5 · Your Contact Information</h4>
-
-        <label for="quoteFirstName">First Name</label>
-        <input id="quoteFirstName" name="First Name" type="text" placeholder="First Name" autocomplete="given-name" />
-
-        <label for="quoteLastName">Last Name</label>
-        <input id="quoteLastName" name="Last Name" type="text" placeholder="Last Name" autocomplete="family-name" />
-
-        <label for="quoteAddress">Service Address</label>
-        <input id="quoteAddress" name="Address" type="text" placeholder="Street, City, State" autocomplete="street-address" />
-
-        <label for="quoteEmail">Email</label>
-        <input id="quoteEmail" name="email" type="email" placeholder="you@example.com" autocomplete="email" />
-
-        <label for="quotePhone">Phone</label>
-        <input id="quotePhone" name="Phone" type="tel" placeholder="Your Phone Number" autocomplete="tel" />
-
-        <p id="errorStep4" class="quote-error">Please fill out every field with a valid email.</p>
-
-        <div style="margin-top:18px; text-align:right;">
-          <button type="button" class="button-secondary" onclick="prevStep(3)">Back</button>
-          <button type="button" class="button-primary" onclick="nextStep(5)">Next</button>
-        </div>
-      </div>
-
-      <!-- STEP 5 -->
-      <div class="quote-step" id="step5" style="display:none;">
-        <h4 class="gradient-text">Step 5 of 5 · Review &amp; Submit</h4>
-        <p>Check your details, then press Submit. We usually reply the same day or within 24 hours.</p>
-
-        <div id="quoteReview" class="quote-review"></div>
-
-        <p id="errorStep5" class="quote-error">Missing required information.</p>
-
-        <div style="margin-top:18px; text-align:right;">
-          <button type="button" class="button-secondary" onclick="prevStep(4)">Back</button>
-          <button type="button" id="quoteSubmitBtn" class="button-primary" onclick="submitQuote()">Submit Quote</button>
-        </div>
-      </div>
-
-    </form>
-  </div>
+<section class="section tight">
+  <div class="wrap doc reveal"><ol><li><h2>Service agreement</h2><p>By requesting services, you agree to our policies, scheduling rules, and communication terms.</p></li><li><h2>Quotes & estimates</h2><p>Quotes are based on the information provided and may change if project details differ on-site.</p></li><li><h2>Payments</h2><p>Payment is due upon completion unless otherwise arranged. Deposits may be required for larger projects.</p></li><li><h2>Scheduling</h2><p>Appointment times may change due to weather, workload, or unforeseen delays. We’ll notify you of any changes.</p></li><li><h2>Cancellations</h2><p>Please notify us at least 24 hours in advance to cancel or reschedule without fees.</p></li><li><h2>Property access</h2><p>You must provide safe access to the work area. Hazards or blocked access may delay service.</p></li><li><h2>Liability</h2><p>We are insured, but not responsible for pre-existing damage or unsafe conditions on the property.</p></li><li><h2>Service limitations</h2><p>Some services may be unavailable due to weather, safety concerns, or equipment restrictions.</p></li><li><h2>Changes to terms</h2><p>These terms may be updated as needed. The latest revision date is posted above.</p></li><li><h2>Contact us</h2><p>Email <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a> or call <a href="tel:+14342330231">(434) 233-0231</a>.</p></li></ol></div>
 </section>
-
-<!-- CONTACT INFO -->
-<section class="section section-dark">
-  <div class="bubble-card form-card" style="max-width:700px; margin:0 auto;">
-    <h3 class="gradient-text">Need Help?</h3>
-    <p>
-      <strong>Phone:</strong> <a href="tel:+14342330231">(434) 233-0231</a><br>
-      <strong>Email:</strong> info@seasidehavenllc.com<br>
-      <strong>Service Area:</strong> Lynchburg · Roanoke · Bedford · Smith Mountain Lake<br>
-      <strong>Hours:</strong> Mon–Fri 8am–4pm · Sat 9am–3pm
-    </p>
-  </div>
-</section>
-
 </main>
 
-<!-- FOOTER -->
-<footer id="footer" class="site-footer">
-  <div class="footer-columns">
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="partner.html">Partner With Us</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="support.html">Support</a></li>
-      </ul>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html">
+          <img src="../Images/logo.png" alt="" width="35" height="38" />
+          <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
+        </a>
+        <p>Home repairs, lawn care, and junk removal for Lynchburg, Roanoke, Bedford, and Smith Mountain Lake.</p>
+        <a class="footer-call" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg>(434) 233-0231</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="remodeling.html">Home repairs &amp; remodeling</a></li>
+          <li><a href="landscaping.html">Landscaping &amp; lawn care</a></li>
+          <li><a href="junkremoval.html">Junk removal</a></li>
+          <li><a href="getquote.html">Get a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="partner.html">Partner with us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon–Fri: 8am – 4pm</li>
+          <li>Saturday: 9am – 3pm</li>
+          <li>Sunday: Closed</li>
+          <li><a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="remodeling.html">Remodeling</a></li>
-        <li><a href="landscaping.html">Landscaping</a></li>
-        <li><a href="junkremoval.html">Junk Removal</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="getquote.html">Request a Quote</a></li>
-        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="terms-of-service.html">Terms of Service</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
-    </div>
-
-    <div class="footer-bottom-right">
-      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
-      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
-      <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Seaside Haven LLC. All rights reserved.</span>
+      <span><a href="privacy-policy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="terms-of-service.html">Terms of service</a></span>
     </div>
   </div>
+  <div class="footer-word" aria-hidden="true">Seaside Haven</div>
 </footer>
 
-<div id="backToTop" class="back-to-top">↑</div>
-
 <script src="../script.js"></script>
-
-<!-- GOOGLE PLACES AUTOCOMPLETE -->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsn92PnDaxMZbdQjGYYYe9WxjgHGevV5Q&libraries=places"></script>
-
-
+<script src="../chat.js"></script>
 </body>
 </html>

@@ -2,319 +2,169 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Contact · Seaside Haven LLC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Us · Seaside Haven LLC · Family-Owned in Central Virginia</title>
+  <meta name="description" content="Seaside Haven LLC is a family-owned home services company providing home repairs, landscaping, and junk removal around Smith Mountain Lake, Lynchburg, Roanoke, and Bedford." />
+  <meta name="theme-color" content="#0A1A2F" />
+  <link rel="canonical" href="https://seasidehavenllc.com/Pages/about.html" />
+  <meta property="og:title" content="About Us · Seaside Haven LLC · Family-Owned in Central Virginia" />
+  <meta property="og:description" content="Seaside Haven LLC is a family-owned home services company providing home repairs, landscaping, and junk removal around Smith Mountain Lake, Lynchburg, Roanoke, and Bedford." />
+  <meta property="og:image" content="https://seasidehavenllc.com/Images/logo.png" />
+  <link rel="icon" href="../Images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" />
   <link rel="stylesheet" href="../style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-<!-- HEADER -->
 <header class="site-header">
-  <div class="logo">
-    <a href="../index.html">
-      <img src="../Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
+  <div class="wrap header-inner">
+    <a class="brand" href="../index.html" aria-label="Seaside Haven LLC home">
+      <img src="../Images/logo.png" alt="" width="35" height="38" />
+      <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
     </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="../index.html">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html" aria-current="page">About</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost header-phone" href="tel:+14342330231" aria-label="Call (434) 233-0231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg><span class="label">(434) 233-0231</span></a>
+      <button class="btn btn-teal btn-quote" type="button" data-chat="book">Book a visit</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-
-  <nav class="nav">
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
     <a href="../index.html">Home</a>
     <a href="services.html">Services</a>
-    <a href="about.html">About</a>
+    <a href="about.html" aria-current="page">About</a>
     <a href="careers.html">Careers</a>
-    <a href="contact.html" class="active">Contact</a>
+    <a href="contact.html">Contact</a>
+    <div class="btn-row">
+      <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+      <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> Call</a>
+    </div>
   </nav>
-
-  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
-    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
-  </a>
-
-  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <div class="mobile-nav" id="mobileNav">
-    <a href="../index.html"><i class="fas fa-home"></i> Home</a>
-    <a href="services.html"><i class="fas fa-tools"></i> Services</a>
-    <a href="about.html"><i class="fas fa-info-circle"></i> About</a>
-    <a href="careers.html"><i class="fas fa-user-tie"></i> Careers</a>
-    <a href="contact.html" class="active"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
-  </div>
 </header>
 
-<main>
+<main id="main">
 
-<!-- PAGE TITLE -->
-<section class="section section-dark">
-  <div class="section-header">
-    <p class="section-kicker">Contact</p>
-    <h2>Get in Touch With Seaside Haven LLC</h2>
-    <p class="section-intro">
-      Reach out to request services, apply for a position, or explore partnership opportunities.
-    </p>
+<section class="page-hero">
+  <div class="grid-bg" style="position:absolute;inset:0" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div>
+  <div class="wrap hero-anim">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="../index.html">Home</a><span aria-hidden="true">/</span><span aria-current="page">About</span></nav>
+    <h1 class="glow-text">A family business built on doing it right</h1>
+    <p class="lead">Seaside Haven is a family-owned home services company in Central Virginia. We started it to be the reliable, honest crew we always wished we could call.</p>
+    <div class="btn-row">
+        <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+        <a class="btn btn-ghost" href="getquote.html">Get a free quote</a>
+      </div>
+  </div>
+  <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
+</section>
+
+<section class="section tight">
+  <div class="wrap split">
+    <div class="glass logo-stage reveal">
+      <span class="ring r1"></span><span class="ring r2"></span>
+      <img src="../Images/logo.png" alt="Seaside Haven logo" width="520" height="560" />
+      <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
+    </div>
+    <div class="reveal" style="--d:.12s">
+      <span class="kicker">Who we are</span>
+      <h2 class="glow-text">One family. Many services. One goal.</h2>
+      <p>Seaside Haven LLC provides home repairs and remodeling, landscaping, and junk removal — one call for the jobs around your home, rental, or business.</p>
+      <p>Our mission is simple: high-quality work, honest pricing, fast turnaround, and treating every customer like a neighbor. We build long-term relationships through trust and consistent results.</p>
+      <div class="btn-row" style="margin-top:26px">
+        <a class="btn btn-teal" href="services.html">Explore services</a>
+        <a class="btn btn-ghost" href="careers.html">Join our team</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section tint">
+  <div class="wrap">
+    <div class="section-head center reveal"><span class="kicker">Our promise</span><h2 class="glow-text">What you can count on</h2></div>
+    <div class="features two" data-stagger="0.08"><div class="glass feature"><span class="icon-chip"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 0a256 256 0 1 1 0 512 256 256 0 1 1 0-512m-24 120v136c0 8 4 15.5 10.7 20l96 64c11 7.4 25.9 4.4 33.3-6.7s4.4-25.9-6.7-33.3L280 243.2V120c0-13.3-10.7-24-24-24s-24 10.7-24 24"/></svg></span><h3>Fast response</h3><p>We answer quickly and keep you updated from quote to finish.</p></div><div class="glass feature"><span class="icon-chip"><svg class="icon" viewBox="0 0 320 512" aria-hidden="true" focusable="false"><path d="M136 24c0-13.3 10.7-24 24-24s24 10.7 24 24v40h56c17.7 0 32 14.3 32 32s-14.3 32-32 32H125.1c-24.9 0-45.1 20.2-45.1 45.1 0 22.5 16.5 41.5 38.7 44.7l91.6 13.1c53.8 7.7 93.7 53.7 93.7 108 0 60.3-48.9 109.1-109.1 109.1H184v40c0 13.3-10.7 24-24 24s-24-10.7-24-24v-40H64c-17.7 0-32-14.3-32-32s14.3-32 32-32h130.9c24.9 0 45.1-20.2 45.1-45.1 0-22.5-16.5-41.5-38.7-44.7l-91.6-13.1c-53.8-7.6-93.7-53.7-93.7-108C16 112.9 64.9 64 125.1 64H136z"/></svg></span><h3>Upfront pricing</h3><p>Starting prices are posted, and you approve the exact price before we start.</p></div><div class="glass feature"><span class="icon-chip"><svg class="icon" viewBox="0 0 576 512" aria-hidden="true" focusable="false"><path d="M70.8-6.7c5.4-5.4 13.8-6.2 20.2-2l118.9 79.2c8.9 5.9 14.2 15.9 14.2 26.6v49.6l90.8 90.8c33.3-15 73.9-8.9 101.2 18.5l126.1 126.1c18.7 18.7 18.7 49.1 0 67.9l-60.1 60.1c-18.7 18.7-49.1 18.7-67.9 0L288.1 384c-27.4-27.4-33.5-67.9-18.5-101.2L178.8 192h-49.6c-10.7 0-20.7-5.3-26.6-14.2L23.4 58.9c-4.2-6.3-3.4-14.8 2-20.2zm145 303.5c-6.3 36.9 2.3 75.9 26.2 107.2l-94.9 95c-28.1 28.1-73.7 28.1-101.8 0s-28.1-73.7 0-101.8l135.4-135.5 35.2 35.1zM384.1 0c20.1 0 39.4 3.7 57.1 10.5 10 3.8 11.8 16.5 4.3 24.1l-56.7 56.7c-3 3-4.7 7.1-4.7 11.3V144c0 8.8 7.2 16 16 16h41.4c4.2 0 8.3-1.7 11.3-4.7l56.7-56.7c7.6-7.5 20.3-5.7 24.1 4.3 6.8 17.7 10.5 37 10.5 57.1 0 43.2-17.2 82.3-45 111.1L450 222c-33.1-33-78.5-45.7-121.1-38.4l-56.8-56.8V97.1l-.2-5c-.8-12.4-4.4-24.3-10.5-34.9C290.8 22.2 334.8 0 384.1-.1z"/></svg></span><h3>One call, many jobs</h3><p>Repairs, yard work, and hauling — handled by the same trusted crew.</p></div><div class="glass feature"><span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M320 16a104 104 0 1 1 0 208 104 104 0 1 1 0-208M96 88a72 72 0 1 1 0 144 72 72 0 1 1 0-144M0 416c0-70.7 57.3-128 128-128 12.8 0 25.2 1.9 36.9 5.4C132 330.2 112 378.8 112 432v16c0 11.4 2.4 22.2 6.7 32H32c-17.7 0-32-14.3-32-32zm521.3 64c4.3-9.8 6.7-20.6 6.7-32v-16c0-53.2-20-101.8-52.9-138.6 11.7-3.5 24.1-5.4 36.9-5.4 70.7 0 128 57.3 128 128v32c0 17.7-14.3 32-32 32zM472 160a72 72 0 1 1 144 0 72 72 0 1 1-144 0M160 432c0-88.4 71.6-160 160-160s160 71.6 160 160v16c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32z"/></svg></span><h3>Family-owned</h3><p>We treat every home like our own, and we stand behind our work.</p></div></div>
+  </div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="kicker">Service area</span><h2 class="glow-text">Serving the lake and the towns around it</h2><p>If your town isn’t listed, ask — we often travel a little farther.</p></div>
+    <div class="towns-grid" data-stagger="0.06"><div class="glass town"><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Lynchburg</div><div class="glass town"><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Roanoke</div><div class="glass town"><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Bedford</div><div class="glass town"><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Smith Mountain Lake</div><div class="glass town"><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Moneta</div><div class="glass town"><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Goodview</div></div>
   </div>
 </section>
 
-<!-- CONTACT BUBBLE CARDS -->
-<section class="section section-dark">
-  <div class="bubble-grid">
-
-    <div class="bubble-card small-tile" onclick="openModal('messageModal')">
-      <i class="fas fa-paper-plane service-icon"></i>
-      <h3 class="gradient-text">Send Message</h3>
-      <p>General questions, service requests, or quick contact.</p>
+<section class="section">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <h2 class="glow-text">Book a visit in under a minute.</h2>
+      <p>Chat with our booking assistant, pick a day that works, and we’ll call or text to confirm. Prefer a written quote? That works too.</p>
+      <div class="btn-row center">
+        <button class="btn btn-teal" type="button" data-chat="book"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 480c141.4 0 256-107.5 256-240S397.4 0 256 0 0 107.5 0 240c0 54.3 19.2 104.3 51.6 144.5L2.8 476.8c-4.8 9-3.3 20 3.6 27.5s17.8 9.8 27.1 5.8l118.4-50.7c31.8 13.2 67 20.6 104.1 20.6M128 208a32 32 0 1 1 0 64 32 32 0 1 1 0-64m128 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64m96 32a32 32 0 1 1 64 0 32 32 0 1 1-64 0"/></svg> Book with chat</button>
+        <a class="btn btn-ghost" href="getquote.html">Get a free quote</a>
+        <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> (434) 233-0231</a>
+      </div>
+      <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
     </div>
-
-    <div class="bubble-card small-tile" onclick="openModal('hireModal')">
-      <i class="fas fa-user-plus service-icon"></i>
-      <h3 class="gradient-text">Apply for Job</h3>
-      <p>Submit a mini application and interview availability.</p>
-    </div>
-
-    <div class="bubble-card small-tile" onclick="openModal('partnerModal')">
-      <i class="fas fa-handshake service-icon"></i>
-      <h3 class="gradient-text">Partner Application</h3>
-      <p>Tell us about your business and partnership goals.</p>
-    </div>
-
   </div>
 </section>
-
-<!-- BUSINESS CONTACT INFO -->
-<section class="section section-dark">
-  <div class="bubble-card form-card" style="max-width:700px; margin:0 auto;">
-    <h3 class="gradient-text">Business Contact Information</h3>
-    <p>
-      <strong>Phone:</strong> <a href="tel:+14342330231">(434) 233-0231</a><br>
-      <strong>Email:</strong> info@seasidehavenllc.com<br>
-      <strong>Service Area:</strong> Lynchburg · Roanoke · Bedford · Smith Mountain Lake<br>
-      <strong>Hours:</strong> Mon–Fri 8am–4pm · Sat 9am–3pm
-    </p>
-  </div>
-</section>
-
-<!-- MODALS -->
-
-<!-- SUCCESS POPUP -->
-<div id="successModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('successModal')">&times;</span>
-    <h3>Thank You!</h3>
-    <p>Your submission has been sent successfully. We will get back to you shortly.</p>
-  </div>
-</div>
-
-<!-- Send Message Modal -->
-<div id="messageModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('messageModal')">&times;</span>
-    <h3>Send Us a Message</h3>
-
-    <form class="contact-form" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST">
-
-      <input type="hidden" name="_subject" value="New Message Submission">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://seasidehavenllc.com/Pages/contact.html?success=true">
-
-      <label for="msgName">Full Name</label>
-      <input id="msgName" name="name" type="text" placeholder="Your Name" required>
-
-      <label for="msgEmail">Email</label>
-      <input id="msgEmail" name="email" type="email" placeholder="you@example.com" required>
-
-      <label for="msgPhone">Phone Number</label>
-      <input id="msgPhone" name="phone" type="tel" placeholder="Your Phone Number">
-
-      <label for="msgSubject">Subject</label>
-      <input id="msgSubject" name="subject_line" type="text" placeholder="What is this regarding?" required>
-
-      <label for="msgBody">Message</label>
-      <textarea id="msgBody" name="message" rows="4" placeholder="Tell us how we can help." required></textarea>
-
-      <div style="margin-top:18px; text-align:right;">
-        <button type="submit" class="button-primary">Send Message</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Apply for Job Modal -->
-<div id="hireModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('hireModal')">&times;</span>
-    <h3>Apply for a Position</h3>
-
-    <form class="contact-form" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST">
-
-      <input type="hidden" name="_subject" value="New Job Application">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://seasidehavenllc.com/Pages/contact.html?success=true">
-
-      <label for="hireName">Full Name</label>
-      <input id="hireName" name="name" type="text" placeholder="Your Name" required>
-
-      <label for="hireEmail">Email</label>
-      <input id="hireEmail" name="email" type="email" placeholder="you@example.com" required>
-
-      <label for="hirePhone">Phone Number</label>
-      <input id="hirePhone" name="phone" type="tel" placeholder="Your Phone Number">
-
-      <label for="hirePosition">Position Applying For</label>
-      <select id="hirePosition" name="position" required>
-        <option value="" disabled selected>Select a Position</option>
-        <option value="Junk Removal Specialist">Junk Removal Specialist</option>
-        <option value="Landscaping Crew">Landscaping Crew</option>
-        <option value="Landscaping Foreman">Landscaping Foreman</option>
-        <option value="General Interest">Other / General Interest</option>
-      </select>
-
-      <label for="hireDates">Available Interview Dates</label>
-      <input id="hireDates" name="availability" type="text" placeholder="Example: Weekdays after 3pm, Saturdays">
-
-      <label for="hireNotes">Additional Notes</label>
-      <textarea id="hireNotes" name="notes" rows="3" placeholder="Anything else we should know?"></textarea>
-
-      <div style="margin-top:18px; text-align:right;">
-        <button type="submit" class="button-primary">Submit Application</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Partner Application Modal -->
-<div id="partnerModal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal('partnerModal')">&times;</span>
-    <h3>Partner Application</h3>
-
-    <form class="contact-form" action="https://formsubmit.co/info@seasidehavenllc.com" method="POST">
-
-      <input type="hidden" name="_subject" value="New Partner Application">
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_template" value="table">
-      <input type="hidden" name="_next" value="https://seasidehavenllc.com/Pages/contact.html?success=true">
-
-      <label for="partnerBusiness">Business / Organization Name</label>
-      <input id="partnerBusiness" name="business_name" type="text" placeholder="Your Business Name" required>
-
-      <label for="partnerContact">Primary Contact Name</label>
-      <input id="partnerContact" name="contact_name" type="text" placeholder="Contact Person" required>
-
-      <label for="partnerEmail">Email</label>
-      <input id="partnerEmail" name="email" type="email" placeholder="contact@business.com" required>
-
-      <label for="partnerPhone">Phone Number</label>
-      <input id="partnerPhone" name="phone" type="tel" placeholder="Business Phone">
-
-      <label for="partnerType">Type of Partnership</label>
-      <select id="partnerType" name="partnership_type" required>
-        <option value="" disabled selected>Select Partnership Type</option>
-        <option value="Service Referral / Subcontracting">Service Referral / Subcontracting</option>
-        <option value="Property Care / Maintenance">Property Care / Maintenance</option>
-        <option value="Events / Community Programs">Events / Community Programs</option>
-        <option value="Other">Other / Custom</option>
-      </select>
-
-      <label for="partnerDetails">Tell Us About Your Needs</label>
-      <textarea id="partnerDetails" name="details" rows="4" placeholder="Describe your business, locations, and what you’re looking for." required></textarea>
-
-      <div style="margin-top:18px; text-align:right;">
-        <button type="submit" class="button-primary">Submit Partner Request</button>
-      </div>
-    </form>
-  </div>
-</div>
 
 </main>
 
-<!-- FOOTER -->
-<footer id="footer" class="site-footer">
-  <div class="footer-columns">
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="partner.html">Partner With Us</a></li>
-        <li><a href="careers.html">Careers</a></li>
-        <li><a href="faq.html">FAQ</a></li>
-        <li><a href="support.html">Support</a></li>
-      </ul>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="../index.html">
+          <img src="../Images/logo.png" alt="" width="35" height="38" />
+          <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
+        </a>
+        <p>Home repairs, lawn care, and junk removal for Lynchburg, Roanoke, Bedford, and Smith Mountain Lake.</p>
+        <a class="footer-call" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg>(434) 233-0231</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="remodeling.html">Home repairs &amp; remodeling</a></li>
+          <li><a href="landscaping.html">Landscaping &amp; lawn care</a></li>
+          <li><a href="junkremoval.html">Junk removal</a></li>
+          <li><a href="getquote.html">Get a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="careers.html">Careers</a></li>
+          <li><a href="partner.html">Partner with us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon–Fri: 8am – 4pm</li>
+          <li>Saturday: 9am – 3pm</li>
+          <li>Sunday: Closed</li>
+          <li><a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></li>
+        </ul>
+      </div>
     </div>
-
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="remodeling.html">Remodeling</a></li>
-        <li><a href="landscaping.html">Landscaping</a></li>
-        <li><a href="junkremoval.html">Junk Removal</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="contact.html">Contact Us</a></li>
-        <li><a href="getquote.html">Request a Quote</a></li>
-        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="terms-of-service.html">Terms of Service</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
-    </div>
-
-    <div class="footer-bottom-right">
-      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
-      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
-      <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Seaside Haven LLC. All rights reserved.</span>
+      <span><a href="privacy-policy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="terms-of-service.html">Terms of service</a></span>
     </div>
   </div>
+  <div class="footer-word" aria-hidden="true">Seaside Haven</div>
 </footer>
 
-<div id="backToTop" class="back-to-top">↑</div>
-
 <script src="../script.js"></script>
-
-<script>
-  function openModal(id) {
-    const m = document.getElementById(id);
-    if (m) m.style.display = 'block';
-  }
-
-  function closeModal(id) {
-    const m = document.getElementById(id);
-    if (m) m.style.display = 'none';
-  }
-
-  window.addEventListener('click', function(e) {
-    ['messageModal','hireModal','partnerModal','successModal'].forEach(function(id) {
-      const m = document.getElementById(id);
-      if (m && e.target === m) m.style.display = 'none';
-    });
-  });
-
-  // SUCCESS POPUP TRIGGER
-  const urlParams = new URLSearchParams(window.location.search);
-  if (urlParams.get('success') === 'true') {
-    openModal('successModal');
-  }
-</script>
-
+<script src="../chat.js"></script>
 </body>
 </html>

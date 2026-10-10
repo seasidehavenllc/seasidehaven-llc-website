@@ -1,442 +1,440 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ===========================
-       META & GLOBAL SETTINGS
-  ============================ -->
   <meta charset="UTF-8" />
-  <title>Seaside Haven LLC · Remodeling, Landscaping & Junk Removal · Lynchburg to Smith Mountain Lake</title>
-  <meta name="description" content="Family-owned home repair, landscaping, and junk removal serving Lynchburg, Roanoke, Bedford, Moneta, and Smith Mountain Lake, VA. Free quotes — call (434) 233-0231." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Seaside Haven LLC · Home Repairs, Lawn Care &amp; Junk Removal · Smith Mountain Lake, Lynchburg &amp; Roanoke</title>
+  <meta name="description" content="Family-owned home repairs, landscaping, and junk removal serving Lynchburg, Roanoke, Bedford, Moneta, and Smith Mountain Lake, VA. Book online or call (434) 233-0231." />
+  <meta name="theme-color" content="#0A1A2F" />
+  <link rel="canonical" href="https://seasidehavenllc.com/index.html" />
+  <meta property="og:title" content="Seaside Haven LLC · Home Repairs, Lawn Care &amp; Junk Removal · Smith Mountain Lake, Lynchburg &amp; Roanoke" />
+  <meta property="og:description" content="Family-owned home repairs, landscaping, and junk removal serving Lynchburg, Roanoke, Bedford, Moneta, and Smith Mountain Lake, VA. Book online or call (434) 233-0231." />
+  <meta property="og:image" content="https://seasidehavenllc.com/Images/logo.png" />
+  <link rel="icon" href="Images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- ===========================
-       ICONS (Font Awesome)
-  ============================ -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ===========================
-       HEADER / NAVIGATION
-  ============================ -->
-  <header class="site-header">
-  <div class="logo">
-    <a href="index.html">
-      <img src="Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html" aria-label="Seaside Haven LLC home">
+      <img src="Images/logo.png" alt="" width="35" height="38" />
+      <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
     </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="Pages/services.html">Services</a>
+      <a href="Pages/about.html">About</a>
+      <a href="Pages/careers.html">Careers</a>
+      <a href="Pages/contact.html">Contact</a>
+    </nav>
+    <div class="header-actions">
+      <a class="btn btn-ghost header-phone" href="tel:+14342330231" aria-label="Call (434) 233-0231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg><span class="label">(434) 233-0231</span></a>
+      <button class="btn btn-teal btn-quote" type="button" data-chat="book">Book a visit</button>
+    </div>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu"><span></span><span></span><span></span></button>
   </div>
-
-  <nav class="nav">
-    <a href="index.html" class="active">Home</a>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+    <a href="index.html" aria-current="page">Home</a>
     <a href="Pages/services.html">Services</a>
     <a href="Pages/about.html">About</a>
     <a href="Pages/careers.html">Careers</a>
     <a href="Pages/contact.html">Contact</a>
+    <div class="btn-row">
+      <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+      <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> Call</a>
+    </div>
   </nav>
-
-  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
-    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
-  </a>
-
-  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
-    <i class="fas fa-bars"></i>
-  </button>
-
-  <div class="mobile-nav" id="mobileNav">
-    <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
-    <a href="Pages/services.html"><i class="fas fa-tools"></i> Services</a>
-    <a href="Pages/about.html"><i class="fas fa-info-circle"></i> About</a>
-    <a href="Pages/careers.html"><i class="fas fa-user-tie"></i> Careers</a>
-    <a href="Pages/contact.html"><i class="fas fa-envelope"></i> Contact</a>
-    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
-  </div>
 </header>
 
-  <main>
-
-    <!-- ===========================
-         HERO SECTION
-    ============================ -->
-    <section id="hero" class="hero">
-      <div class="hero-inner">
-
-        <!-- HERO TEXT -->
-        <div class="hero-text">
-          <h1>Seaside Haven LLC</h1>
-
-          <p class="hero-sub">
-            Serving Lynchburg, Roanoke, Bedford, and Smith Mountain Lake with dependable remodeling, landscaping,
-            and junk removal — all under one trusted family brand.
-          </p>
-
-          <div class="hero-actions">
-            <a href="Pages/services.html" class="btn-primary">Explore Services</a>
-            <a href="Pages/getquote.html" class="btn-secondary">Request a Quote</a>
-          </div>
-
-          <p class="hero-note">
-            One family. Multiple services. Built to grow with your needs.
-          </p>
-        </div>
-
-        <!-- HERO IMAGE -->
-        <div class="hero-abstract-logo">
-          <img src="Images/logo.png" alt="" aria-hidden="true" class="abstract-logo">
-
-          <div class="abstract-ring"></div>
-          <div class="abstract-ring ring2"></div>
-
-          <div class="abstract-bubble bubble1"></div>
-          <div class="abstract-bubble bubble2"></div>
-
-          <div class="abstract-glow"></div>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         SERVICE DIVISIONS
-    ============================ -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Our Divisions</p>
-        <h2>One Company · Multiple Services</h2>
-        <p class="section-intro">Everything your home or property needs — handled by one trusted team.</p>
-      </div>
-
-      <div class="bubble-grid spotlight-container">
-
-        <div class="bubble-card">
-          <i class="fas fa-tools service-icon"></i>
-          <h3>Remodeling</h3>
-          <p>Drywall, flooring, painting, fixtures, and full interior upgrades.</p>
-          <a href="Pages/remodeling.html" class="btn-secondary small-btn">View Remodeling</a>
-        </div>
-
-        <div class="bubble-card">
-          <i class="fas fa-leaf service-icon"></i>
-          <h3>Landscaping</h3>
-          <p>Mowing, trimming, mulch, aeration, leaf removal, and more.</p>
-          <a href="Pages/landscaping.html" class="btn-secondary small-btn">View Landscaping</a>
-        </div>
-
-        <div class="bubble-card">
-          <i class="fas fa-dumpster service-icon"></i>
-          <h3>Junk Removal</h3>
-          <p>Furniture, appliances, yard debris, construction waste, and cleanouts.</p>
-          <a href="Pages/junkremoval.html" class="btn-secondary small-btn">View Junk Removal</a>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         WHY CHOOSE US
-    ============================ -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Why Choose Us</p>
-        <h2>Trusted · Local · Family-Owned</h2>
-      </div>
-
-      <div class="bubble-grid spotlight-container">
-
-        <div class="bubble-card">
-          <h3>Fast Response</h3>
-          <p>We respond quickly and keep you updated every step of the way.</p>
-        </div>
-
-        <div class="bubble-card">
-          <h3>Transparent Pricing</h3>
-          <p>No surprises — clear pricing for every service.</p>
-        </div>
-
-        <div class="bubble-card">
-          <h3>Multi-Service Convenience</h3>
-          <p>One company for remodeling, landscaping, and junk removal.</p>
-        </div>
-
-        <div class="bubble-card">
-          <h3>Family-Owned</h3>
-          <p>We treat every home like our own — quality you can trust.</p>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         COVERAGE AREA
-    ============================ -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Coverage Area</p>
-        <h2>Serving Central & Southwest Virginia</h2>
-        <p class="section-intro">Local, family-owned, and close by. Not sure if you're in our area? Just ask.</p>
-      </div>
-
-      <div class="bubble-grid spotlight-container">
-        <div class="bubble-card"><h3>Lynchburg</h3></div>
-        <div class="bubble-card"><h3>Roanoke</h3></div>
-        <div class="bubble-card"><h3>Bedford</h3></div>
-        <div class="bubble-card"><h3>Smith Mountain Lake</h3></div>
-        <div class="bubble-card"><h3>Goodview</h3></div>
-        <div class="bubble-card"><h3>Moneta</h3></div>
-      </div>
-
-      <div class="hero-actions center">
-        <a href="Pages/contact.html" class="btn-secondary">Ask About Your Area</a>
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         QUICK QUOTE BUTTONS
-    ============================ -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Get Started</p>
-        <h2>Quick Quote Options</h2>
-      </div>
-
-      <div class="hero-actions center">
-        <a href="Pages/getquote.html?service=Remodeling" class="btn-primary">Remodeling Quote</a>
-        <a href="Pages/getquote.html?service=Landscaping" class="btn-secondary">Landscaping Quote</a>
-        <a href="Pages/getquote.html?service=Junk%20Removal" class="btn-secondary">Junk Removal Quote</a>
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         OUR PROCESS
-    ============================ -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Our Process</p>
-        <h2>How It Works</h2>
-      </div>
-
-      <div class="bubble-grid spotlight-container">
-        <div class="bubble-card"><h3>1. Request a Quote</h3><p class="card-sub">Tell us what you need online or by phone. Photos help.</p></div>
-        <div class="bubble-card"><h3>2. Fast Scheduling</h3><p class="card-sub">We send your price and book a time that works for you.</p></div>
-        <div class="bubble-card"><h3>3. Professional Service</h3><p class="card-sub">Our crew shows up on time and does the job right.</p></div>
-        <div class="bubble-card"><h3>4. Cleanup & Completion</h3><p class="card-sub">We clean up and walk through the finished work with you.</p></div>
-        <div class="bubble-card"><h3>5. Follow-Up Support</h3><p class="card-sub">Something not right? Call us and we'll make it right.</p></div>
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         MINI PRICING PREVIEW
-    ============================ -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Starting Prices</p>
-        <h2>Affordable · Transparent · Upfront</h2>
-      </div>
-
-      <div class="bubble-grid spotlight-container">
-        <div class="bubble-card"><h3>Mowing</h3><p>Starting at $35</p></div>
-        <div class="bubble-card"><h3>Junk Removal</h3><p>Starting at $75</p></div>
-        <div class="bubble-card"><h3>Drywall Repair</h3><p>Starting at $75</p></div>
-        <div class="bubble-card"><h3>Painting</h3><p>Starting at $125</p></div>
-      </div>
-    </section>
-
-
-    <!-- ===========================
-        FAQ PREVIEW
-    =========================== -->
-    <section class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">FAQ</p>
-        <h2>Common Questions</h2>
-      </div>
-
-      <div class="bubble-grid spotlight-container">
-
-        <div class="bubble-card">
-          <h3>Do you offer same-day service?</h3>
-          <p>Yes — depending on availability.</p>
-        </div>
-
-        <div class="bubble-card">
-          <h3>How fast can I get a quote?</h3>
-          <p>Most quotes go out the same day or within 24 hours.</p>
-        </div>
-
-        <div class="bubble-card">
-          <h3>Do you offer recurring lawn care?</h3>
-          <p>Yes — weekly or bi-weekly mowing and seasonal cleanups.</p>
-        </div>
-
-      </div>
-
-      <div class="hero-actions center">
-        <a href="Pages/faq.html" class="btn-secondary">See All FAQs</a>
-      </div>
-    </section>
-
-    <!-- ===========================
-         TESTIMONIALS SECTION
-    ============================ -->
-    <section id="testimonials" class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Testimonials</p>
-        <h2>What Our Clients Say</h2>
-        <p class="section-intro">
-          Feedback from homeowners, property managers, and business owners we've worked with.
-        </p>
-      </div>
-
-      <!-- FILTER BUTTONS -->
-      <div class="filter-row">
-        <button class="filter-btn active" data-filter="all">View All</button>
-        <button class="filter-btn" data-filter="remodeling">Remodeling</button>
-        <button class="filter-btn" data-filter="landscaping">Landscaping</button>
-        <button class="filter-btn" data-filter="junk-removal">Junk Removal</button>
-      </div>
-
-      <!-- TESTIMONIAL CARDS
-           Only post reviews from real customers (with their OK).
-           Tip: copy your best Google reviews here, with first name + town. -->
-      <div id="testimonialContainer" class="bubble-grid spotlight-container">
-
-        <div class="bubble-card" data-category="landscaping">
-          <h3>Lake House Owner</h3>
-          <p>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</p>
-        </div>
-
-        <div class="bubble-card" data-category="landscaping">
-          <h3>HOA President</h3>
-          <p>“Our neighborhood common areas look amazing thanks to their landscaping crew. Professional and dependable.”</p>
-        </div>
-
-        <div class="bubble-card" data-category="remodeling">
-          <h3>Homeowner</h3>
-          <p>“They made our remodel simple and stress-free. Honest work and great communication.”</p>
-        </div>
-
-        <div class="bubble-card" data-category="remodeling">
-          <h3>Homeowner in Bedford</h3>
-          <p>“They repaired everything perfectly and kept me updated the whole time. Reliable and professional.”</p>
-        </div>
-
-        <div class="bubble-card" data-category="remodeling">
-          <h3>Rental Property Owner</h3>
-          <p>“Their remodeling team handled repairs between tenants flawlessly. Saved me time and stress.”</p>
-        </div>
-
-
-
-
-
-        <div class="bubble-card" data-category="junk-removal">
-          <h3>Contractor</h3>
-          <p>“They cleared out a full renovation site in one afternoon. Fast, organized, and affordable.”</p>
-        </div>
-
-        <div class="bubble-card" data-category="junk-removal">
-          <h3>Apartment Manager</h3>
-          <p>“Move-out junk removal was handled quickly and professionally. Saved us hours of cleanup.”</p>
-        </div>
-
-      </div>
-    </section>
-
-
-    <!-- ===========================
-         CONTACT SECTION
-    ============================ -->
-    <section id="contact" class="section section-dark">
-      <div class="section-header">
-        <p class="section-kicker">Get Started</p>
-        <h2>Request a Quote</h2>
-        <p class="section-intro">
-          Tell us what you need — remodeling, landscaping or junk removal — and we’ll follow up quickly.
-        </p>
-      </div>
-
-      <div class="hero-actions center">
-        <a href="Pages/contact.html" class="btn-primary">Contact Us</a>
-        <a href="Pages/services.html" class="btn-secondary">View All Services</a>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ===========================
-       FOOTER
-  ============================ -->
-  <footer id="footer" class="site-footer">
-  <div class="footer-columns">
-
-    <div class="footer-col">
-      <h4>Company</h4>
-      <ul>
-        <li><a href="Pages/about.html">About Us</a></li>
-        <li><a href="Pages/partner.html">Partner With Us</a></li>
-        <li><a href="Pages/careers.html">Careers</a></li>
-        <li><a href="Pages/faq.html">FAQ</a></li>
-        <li><a href="Pages/support.html">Support</a></li>
-      </ul>
+<main id="main">
+
+<section class="hero">
+  <div class="grid-bg" style="position:absolute;inset:0" aria-hidden="true"></div><div class="orb a" aria-hidden="true"></div><div class="orb b" aria-hidden="true"></div><div class="orb c" aria-hidden="true"></div>
+  <div class="wrap hero-anim">
+    <a class="pill" href="#pricing"><b>New</b> Book a visit right from our chat assistant</a>
+    <h1 class="glow-text">Your home’s to&#8209;do list, handled.</h1>
+    <p class="hero-lead">Home repairs, lawn care, and junk removal around Smith Mountain Lake, Lynchburg, and Roanoke — from one family-owned crew with upfront prices.</p>
+    <div class="btn-row">
+      <button class="btn btn-teal" type="button" data-chat="book">Book a visit</button>
+      <a class="btn btn-ghost" href="#pricing">See pricing</a>
     </div>
-
-    <div class="footer-col">
-      <h4>Services</h4>
-      <ul>
-        <li><a href="Pages/remodeling.html">Remodeling</a></li>
-        <li><a href="Pages/landscaping.html">Landscaping</a></li>
-        <li><a href="Pages/junkremoval.html">Junk Removal</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <ul>
-        <li><a href="Pages/contact.html">Contact Us</a></li>
-        <li><a href="Pages/getquote.html">Request a Quote</a></li>
-        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="Pages/privacy-policy.html">Privacy Policy</a></li>
-        <li><a href="Pages/terms-of-service.html">Terms of Service</a></li>
-      </ul>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <div class="footer-bottom-left">
-      <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
-    </div>
-
-    <div class="footer-bottom-right">
-      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
-      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
-      <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
+    <div class="hero-picker">
+      <button class="pick glass" type="button" data-chat="book:Remodeling">
+        <span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M246.9 18.3 271 3.8c21.6-13 46.3-19.8 71.5-19.8 36.8 0 72.2 14.6 98.2 40.7l63.9 63.9c15 15 23.4 35.4 23.4 56.6v30.9l19.7 19.7c15.6-15.6 40.9-15.6 56.6 0s15.6 40.9 0 56.6l-64 64c-15.6 15.6-40.9 15.6-56.6 0s-15.6-40.9 0-56.6L464 240h-30.9c-21.2 0-41.6-8.4-56.6-23.4l-49.1-49.1c-15-15-23.4-35.4-23.4-56.6V98.2c0-11.2-5.9-21.7-15.5-27.4l-41.6-25c-10.4-6.2-10.4-21.2 0-27.4zM50.7 402.7l222.1-222.1 90.5 90.5-222.1 222.1c-25 25-65.5 25-90.5 0s-25-65.5 0-90.5"/></svg></span>
+        <span><strong>Home repairs</strong><span class="sub">Drywall, paint, fixtures</span></span>
+        <span class="go"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+      </button>
+      <button class="pick glass" type="button" data-chat="book:Landscaping">
+        <span class="icon-chip"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M471.3 6.7c6.4-6.1 15.7-8.3 24.3-5.5C505.4 4.5 512 13.7 512 24v186.9C512 342.1 403.9 448 273.2 448c-77 0-143.4-49.5-167.5-118.7C70.3 360.1 48 405.4 48 456c0 13.3-10.7 24-24 24S0 469.3 0 456c0-74.9 38.2-140.9 96.1-179.7C131.4 252.7 173.5 240 216 240h80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-80c-39.7 0-77.3 8.8-111 24.5C128.3 146.5 194.2 96 272 96c66.4 0 115.8-22.1 148.7-44 19.2-12.8 35.5-28.1 50.7-45.3z"/></svg></span>
+        <span><strong>Lawn & landscaping</strong><span class="sub">Mowing, mulch, cleanups</span></span>
+        <span class="go"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+      </button>
+      <button class="pick glass" type="button" data-chat="book:Junk Removal">
+        <span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="m363.8 96 57.6 96H288V96zM496 192 418.6 63.1C407.1 43.8 386.2 32 363.8 32H256c-17.7 0-32 14.3-32 32v128H80c-26.5 0-48 21.5-48 48v80c-17.7 0-32 14.3-32 32s14.3 32 32 32h32.4c-.2 2.6-.4 5.3-.4 8 0 48.6 39.4 88 88 88s88-39.4 88-88c0-2.7-.1-5.4-.4-8h160.7c-.2 2.6-.4 5.3-.4 8 0 48.6 39.4 88 88 88s88-39.4 88-88c0-2.7-.1-5.4-.4-8h32.4c17.7 0 32-14.3 32-32s-14.3-32-32-32v-80c0-26.5-21.5-48-48-48h-64zM112 392a40 40 0 1 1 80 0 40 40 0 1 1-80 0m376-40a40 40 0 1 1 0 80 40 40 0 1 1 0-80"/></svg></span>
+        <span><strong>Junk removal</strong><span class="sub">Furniture, appliances, loads</span></span>
+        <span class="go"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></span>
+      </button>
     </div>
   </div>
+  <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
+</section>
+
+
+<div class="town-strip marquee" style="--speed:40s" aria-label="Service area: Lynchburg, Roanoke, Bedford, Smith Mountain Lake, Moneta, Goodview">
+  <div class="marquee-track"><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Lynchburg</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Roanoke</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Bedford</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Smith Mountain Lake</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Moneta</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Goodview</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Lynchburg</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Roanoke</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Bedford</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Smith Mountain Lake</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Moneta</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Goodview</span><div aria-hidden="true" style="display:contents"><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Lynchburg</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Roanoke</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Bedford</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Smith Mountain Lake</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Moneta</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Goodview</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Lynchburg</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Roanoke</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Bedford</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Smith Mountain Lake</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Moneta</span><span><svg class="icon" viewBox="0 0 384 512" aria-hidden="true" focusable="false"><path d="M0 188.6C0 84.4 86 0 192 0s192 84.4 192 188.6c0 119.3-120.2 262.3-170.4 316.8-11.8 12.8-31.5 12.8-43.3 0C120.1 450.9-.1 307.9-.1 188.6zM192 256a64 64 0 1 0 0-128 64 64 0 1 0 0 128"/></svg>Goodview</span></div></div>
+</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head split reveal">
+      <div>
+        <span class="kicker">Services</span>
+        <h2 class="glow-text">One call for the jobs around your home</h2>
+      </div>
+      <a class="text-link" href="Pages/services.html">All services <svg class="icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a>
+    </div>
+    <div class="bento" data-stagger="0.07">
+      <a class="glass svc-card b-lg" href="Pages/remodeling.html">
+        <img class="mark" src="Images/logo.png" alt="" aria-hidden="true"><span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="M246.9 18.3 271 3.8c21.6-13 46.3-19.8 71.5-19.8 36.8 0 72.2 14.6 98.2 40.7l63.9 63.9c15 15 23.4 35.4 23.4 56.6v30.9l19.7 19.7c15.6-15.6 40.9-15.6 56.6 0s15.6 40.9 0 56.6l-64 64c-15.6 15.6-40.9 15.6-56.6 0s-15.6-40.9 0-56.6L464 240h-30.9c-21.2 0-41.6-8.4-56.6-23.4l-49.1-49.1c-15-15-23.4-35.4-23.4-56.6V98.2c0-11.2-5.9-21.7-15.5-27.4l-41.6-25c-10.4-6.2-10.4-21.2 0-27.4zM50.7 402.7l222.1-222.1 90.5 90.5-222.1 222.1c-25 25-65.5 25-90.5 0s-25-65.5 0-90.5"/></svg></span>
+        <h3>Home repairs & remodeling</h3>
+        <p>Drywall, painting, flooring, fixtures, and trim — the fixes and upgrades that make a home feel new again.</p>
+        <div class="chips"><span class="chip">Drywall</span><span class="chip">Painting</span><span class="chip">Flooring</span><span class="chip">Fixtures</span><span class="chip">Trim</span><span class="chip">TV mounting</span></div>
+        <ul class="mini-prices"><li><span>Drywall patch</span><b>from $75</b></li><li><span>Paint match & blend</span><b>from $125</b></li><li><span>Faucet replacement</span><b>from $125</b></li><li><span>TV mounting</span><b>from $125</b></li></ul>
+        <div class="from">Starting at <strong>$75</strong></div>
+      </a>
+      <a class="glass svc-card b-md" href="Pages/landscaping.html">
+        <span class="icon-chip"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M471.3 6.7c6.4-6.1 15.7-8.3 24.3-5.5C505.4 4.5 512 13.7 512 24v186.9C512 342.1 403.9 448 273.2 448c-77 0-143.4-49.5-167.5-118.7C70.3 360.1 48 405.4 48 456c0 13.3-10.7 24-24 24S0 469.3 0 456c0-74.9 38.2-140.9 96.1-179.7C131.4 252.7 173.5 240 216 240h80c13.3 0 24-10.7 24-24s-10.7-24-24-24h-80c-39.7 0-77.3 8.8-111 24.5C128.3 146.5 194.2 96 272 96c66.4 0 115.8-22.1 148.7-44 19.2-12.8 35.5-28.1 50.7-45.3z"/></svg></span>
+        <h3>Landscaping & lawn care</h3>
+        <p>Weekly mowing, trimming, mulch, cleanups, and tree work to keep your yard sharp all season.</p>
+        <div class="chips"><span class="chip">Mowing</span><span class="chip">Mulch</span><span class="chip">Cleanups</span><span class="chip">Trees</span></div>
+        
+        <div class="from">Starting at <strong>$35</strong></div>
+      </a>
+      <a class="glass svc-card b-md" href="Pages/junkremoval.html">
+        <span class="icon-chip"><svg class="icon" viewBox="0 0 640 512" aria-hidden="true" focusable="false"><path d="m363.8 96 57.6 96H288V96zM496 192 418.6 63.1C407.1 43.8 386.2 32 363.8 32H256c-17.7 0-32 14.3-32 32v128H80c-26.5 0-48 21.5-48 48v80c-17.7 0-32 14.3-32 32s14.3 32 32 32h32.4c-.2 2.6-.4 5.3-.4 8 0 48.6 39.4 88 88 88s88-39.4 88-88c0-2.7-.1-5.4-.4-8h160.7c-.2 2.6-.4 5.3-.4 8 0 48.6 39.4 88 88 88s88-39.4 88-88c0-2.7-.1-5.4-.4-8h32.4c17.7 0 32-14.3 32-32s-14.3-32-32-32v-80c0-26.5-21.5-48-48-48h-64zM112 392a40 40 0 1 1 80 0 40 40 0 1 1-80 0m376-40a40 40 0 1 1 0 80 40 40 0 1 1 0-80"/></svg></span>
+        <h3>Junk removal</h3>
+        <p>Furniture, appliances, yard debris, construction waste, and full cleanouts — loaded and hauled away.</p>
+        <div class="chips"><span class="chip">Furniture</span><span class="chip">Appliances</span><span class="chip">Cleanouts</span></div>
+        
+        <div class="from">Starting at <strong>$75</strong></div>
+      </a><div class="glass stat b-sm"><strong>24 hrs</strong><span>Most quotes go out the same day or within 24 hours.</span></div><div class="glass stat b-sm"><strong>Upfront</strong><span>Starting prices posted. You approve the exact price first.</span></div><div class="glass stat b-sm"><strong>Family-owned</strong><span>Local to Central Virginia. We treat every home like our own.</span></div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section tint" id="pricing">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">Pricing</span>
+      <h2 class="glow-text">Simple, upfront pricing</h2>
+      <p>Starting prices for the jobs we do most. Every job gets an exact price before we start — no surprises.</p>
+    </div>
+    <div class="switcher-wrap reveal"><div class="switcher" role="tablist" aria-label="Choose a service"><button type="button" role="tab" id="pt-0" aria-controls="pp-0" aria-selected="true" tabindex="0">Home repairs</button><button type="button" role="tab" id="pt-1" aria-controls="pp-1" aria-selected="false" tabindex="-1">Landscaping</button><button type="button" role="tab" id="pt-2" aria-controls="pp-2" aria-selected="false" tabindex="-1">Junk removal</button><span class="thumb" aria-hidden="true"></span></div></div>
+    <div class="price-panel" id="pp-0" role="tabpanel" aria-labelledby="pt-0"><div class="plans" data-stagger="0.1">
+        <article class="plan glass">
+          <h3>Quick repair</h3>
+          <p class="plan-desc">Holes, cracks, caulk, and small fixes around the house.</p>
+          <div class="price"><small>from</small><strong>$75</strong><em>/ job</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Small drywall patch</span><b>$75–$125</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Medium drywall patch</span><b>$125–$200</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Bathroom caulk</span><b>$75–$150</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Floating shelves</span><b>$75–$150</b></li></ul>
+          <button class="btn btn-ghost" type="button" data-chat="book:Remodeling">Book this</button>
+        </article>
+        <article class="plan glass featured">
+          <h3>Refresh a room</h3>
+          <p class="plan-desc">Paint, trim, and flooring to make a room feel new.</p>
+          <div class="price"><small>from</small><strong>$350</strong><em>/ room</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Room repaint</span><b>$350–$600</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Trim &amp; baseboards, small room</span><b>$150–$250</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Flooring, up to 120 sq ft</span><b>$450–$700</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Single wall repaint</span><b>$150–$250</b></li></ul>
+          <button class="btn btn-teal" type="button" data-chat="book:Remodeling">Book this</button>
+        </article>
+        <article class="plan glass">
+          <h3>Fixture swap</h3>
+          <p class="plan-desc">Faucets, toilets, vanities, lights, and doors.</p>
+          <div class="price"><small>from</small><strong>$125</strong><em>/ item</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Bathroom Faucet</span><b>$125–$200</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Standard Toilet Swap</span><b>$150–$250</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Ceiling Fan Install</span><b>$200–$350</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Standard Vanity</span><b>$450–$650</b></li></ul>
+          <button class="btn btn-ghost" type="button" data-chat="book:Remodeling">Book this</button>
+        </article></div></div><div class="price-panel" id="pp-1" role="tabpanel" aria-labelledby="pt-1" hidden><div class="plans" data-stagger="0.1">
+        <article class="plan glass">
+          <h3>Lawn mowing</h3>
+          <p class="plan-desc">Weekly, bi-weekly, or one-time cuts.</p>
+          <div class="price"><small>from</small><strong>$35</strong><em>/ visit</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Small Yard</span><b>$35–$50</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Medium Yard</span><b>$50–$75</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Large Yard</span><b>$75–$120</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Edging add-on</span><b>$10–$15</b></li></ul>
+          <button class="btn btn-ghost" type="button" data-chat="book:Landscaping">Book this</button>
+        </article>
+        <article class="plan glass featured">
+          <h3>Seasonal cleanup</h3>
+          <p class="plan-desc">Spring and fall cleanups, leaves, and debris hauled away.</p>
+          <div class="price"><small>from</small><strong>$200</strong><em>/ cleanup</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Small property</span><b>$200–$300</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Medium property</span><b>$400–$550</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Leaf removal</span><b>$100–$150</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Bush trimming</span><b>$20–$35</b></li></ul>
+          <button class="btn btn-teal" type="button" data-chat="book:Landscaping">Book this</button>
+        </article>
+        <article class="plan glass">
+          <h3>Beds & mulch</h3>
+          <p class="plan-desc">Fresh mulch or pine needles and clean, sharp beds.</p>
+          <div class="price"><small>from</small><strong>$75</strong><em>/ yard</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Mulch, per yard installed</span><b>$75–$95</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Full bed refresh</span><b>$250–$300</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Pine needles, per bale</span><b>$15–$20</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Light bed cleanup</span><b>$100–$125</b></li></ul>
+          <button class="btn btn-ghost" type="button" data-chat="book:Landscaping">Book this</button>
+        </article></div></div><div class="price-panel" id="pp-2" role="tabpanel" aria-labelledby="pt-2" hidden><div class="plans" data-stagger="0.1">
+        <article class="plan glass">
+          <h3>A few items</h3>
+          <p class="plan-desc">A couch, a mattress, an old fridge — gone.</p>
+          <div class="price"><small>from</small><strong>$75</strong><em>/ pickup</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>1–3 Item Pick Up</span><b>$75–$115</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Mattress Removal</span><b>$75–$125</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Appliance Removal</span><b>$75–$150</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Furniture Removal</span><b>$125–$200</b></li></ul>
+          <button class="btn btn-ghost" type="button" data-chat="book:Junk Removal">Book this</button>
+        </article>
+        <article class="plan glass featured">
+          <h3>By the load</h3>
+          <p class="plan-desc">Garage, shed, yard, or renovation debris.</p>
+          <div class="price"><small>from</small><strong>$150</strong><em>/ load</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Small Load</span><b>$150–$200</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Medium Load</span><b>$300–$375</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Yard Waste Load</span><b>$125–$300</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Construction Debris Load</span><b>$250–$500</b></li></ul>
+          <button class="btn btn-teal" type="button" data-chat="book:Junk Removal">Book this</button>
+        </article>
+        <article class="plan glass">
+          <h3>Full cleanout</h3>
+          <p class="plan-desc">Whole homes, estates, evictions, and foreclosures.</p>
+          <div class="price"><small>from</small><strong>$1,000</strong><em>/ property</em></div>
+          <ul><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Full property cleanout</span><b>$1,000–$3,500+</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Sorting &amp; loading</span><b>Included</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Disposal fees</span><b>Included in quote</b></li><li><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M434.8 70.1c14.3 10.4 17.5 30.4 7.1 44.7l-256 352c-5.5 7.6-14 12.3-23.4 13.1s-18.5-2.7-25.1-9.3l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l101.5 101.5 234-321.7c10.4-14.3 30.4-17.5 44.7-7.1z"/></svg><span>Free estimate</span><b>Yes</b></li></ul>
+          <button class="btn btn-ghost" type="button" data-chat="book:Junk Removal">Book this</button>
+        </article></div></div>
+    <p class="plan-note">Prices vary with size, materials, and access. You approve the exact price before any work starts.</p>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">How it works</span>
+      <h2 class="glow-text">From first message to finished job</h2>
+    </div>
+    <ol class="steps" data-stagger="0.08"><li class="glass"><h3>Book or request</h3><p>Chat with our assistant, fill out a quote, or call.</p></li><li class="glass"><h3>Get your price</h3><p>We confirm the details and send an upfront price.</p></li><li class="glass"><h3>We do the work</h3><p>Our crew shows up on time and does the job right.</p></li><li class="glass"><h3>Clean up</h3><p>We clean up and walk through the finished work with you.</p></li><li class="glass"><h3>Follow-up</h3><p>Something not right? Call us and we’ll make it right.</p></li></ol>
+  </div>
+</section>
+
+
+<section class="section tint">
+  <div class="wrap">
+    <div class="section-head center reveal">
+      <span class="kicker">Reviews</span>
+      <h2 class="glow-text">Neighbors who called us</h2>
+      <p>Real words from homeowners, property managers, and businesses we’ve worked with.</p>
+    </div>
+  </div>
+  <div class="review-rows reveal">
+      <div class="marquee" style="--speed:60s">
+        <div class="marquee-track"><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They made our remodel simple and stress-free. Honest work and great communication.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They cleared out a full renovation site in one afternoon. Fast, organized, and affordable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Contractor</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Our neighborhood common areas look amazing thanks to their landscaping crew. Professional and dependable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>HOA president</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They made our remodel simple and stress-free. Honest work and great communication.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They cleared out a full renovation site in one afternoon. Fast, organized, and affordable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Contractor</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Our neighborhood common areas look amazing thanks to their landscaping crew. Professional and dependable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>HOA president</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><div aria-hidden="true" style="display:contents"><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They made our remodel simple and stress-free. Honest work and great communication.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They cleared out a full renovation site in one afternoon. Fast, organized, and affordable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Contractor</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Our neighborhood common areas look amazing thanks to their landscaping crew. Professional and dependable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>HOA president</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They made our remodel simple and stress-free. Honest work and great communication.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They cleared out a full renovation site in one afternoon. Fast, organized, and affordable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Contractor</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Our neighborhood common areas look amazing thanks to their landscaping crew. Professional and dependable.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>HOA president</strong><span>Landscaping customer</span></span></figcaption>
+        </figure></div></div>
+      </div>
+      <div class="marquee reverse" style="--speed:72s">
+        <div class="marquee-track"><figure class="review-card">
+          <blockquote>“They repaired everything perfectly and kept me updated the whole time. Reliable and professional.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner in Bedford</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Move-out junk removal was handled quickly and professionally. Saved us hours of cleanup.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Apartment manager</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Their team handled repairs between tenants flawlessly. Saved me time and stress.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Rental property owner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They repaired everything perfectly and kept me updated the whole time. Reliable and professional.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner in Bedford</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Move-out junk removal was handled quickly and professionally. Saved us hours of cleanup.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Apartment manager</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Their team handled repairs between tenants flawlessly. Saved me time and stress.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Rental property owner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><div aria-hidden="true" style="display:contents"><figure class="review-card">
+          <blockquote>“They repaired everything perfectly and kept me updated the whole time. Reliable and professional.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner in Bedford</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Move-out junk removal was handled quickly and professionally. Saved us hours of cleanup.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Apartment manager</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Their team handled repairs between tenants flawlessly. Saved me time and stress.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Rental property owner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“They repaired everything perfectly and kept me updated the whole time. Reliable and professional.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Homeowner in Bedford</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Move-out junk removal was handled quickly and professionally. Saved us hours of cleanup.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Apartment manager</strong><span>Junk removal customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“Their team handled repairs between tenants flawlessly. Saved me time and stress.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Rental property owner</strong><span>Remodeling customer</span></span></figcaption>
+        </figure><figure class="review-card">
+          <blockquote>“My yard has never looked better. Clean edges, fresh mulch, and they show up on time every week.”</blockquote>
+          <figcaption><span class="avatar" aria-hidden="true"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M0 216C0 149.7 53.7 96 120 96h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64zm256 0c0-66.3 53.7-120 120-120h8c17.7 0 32 14.3 32 32s-14.3 32-32 32h-8c-30.9 0-56 25.1-56 56v8h64c35.3 0 64 28.7 64 64v64c0 35.3-28.7 64-64 64h-64c-35.3 0-64-28.7-64-64z"/></svg></span><span><strong>Lake house owner</strong><span>Landscaping customer</span></span></figcaption>
+        </figure></div></div>
+      </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="wrap with-aside faq-split">
+    <div class="section-head reveal" style="margin:0">
+      <span class="kicker">FAQ</span>
+      <h2 class="glow-text">Common questions</h2>
+      <p>Quick answers about quotes, scheduling, and payment. Or ask our chat assistant.</p>
+      <p style="margin-top:20px"><a class="text-link" href="Pages/faq.html">See all FAQs <svg class="icon" viewBox="0 0 448 512" aria-hidden="true"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg></a></p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-0" id="faq-q-0">
+          <span class="q">How fast can I get a quote?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-0" role="region" aria-labelledby="faq-q-0"><div><div class="acc-body"><p>Most quotes go out the same day or within 24 hours, depending on the service. Photos help us price it faster.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-1" id="faq-q-1">
+          <span class="q">Do you offer same-day service?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-1" role="region" aria-labelledby="faq-q-1"><div><div class="acc-body"><p>Sometimes — it depends on the job and our schedule that day. Call us and we’ll tell you the soonest opening.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q-2">
+          <span class="q">Do you offer recurring lawn care?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-2" role="region" aria-labelledby="faq-q-2"><div><div class="acc-body"><p>Yes. Mowing and lawn care can be scheduled weekly or bi-weekly, plus seasonal spring and fall cleanups.</p></div></div></div>
+      </div>
+      <div class="acc-item">
+        <button class="acc-trigger" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q-3">
+          <span class="q">What payment methods do you accept?</span><span class="chev"><svg class="icon" viewBox="0 0 448 512" aria-hidden="true" focusable="false"><path d="M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></span>
+        </button>
+        <div class="acc-panel" id="faq-3" role="region" aria-labelledby="faq-q-3"><div><div class="acc-body"><p>Cash, card, digital payments, and business invoicing, depending on the service.</p></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <h2 class="glow-text">Book a visit in under a minute.</h2>
+      <p>Chat with our booking assistant, pick a day that works, and we’ll call or text to confirm. Prefer a written quote? That works too.</p>
+      <div class="btn-row center">
+        <button class="btn btn-teal" type="button" data-chat="book"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M256 480c141.4 0 256-107.5 256-240S397.4 0 256 0 0 107.5 0 240c0 54.3 19.2 104.3 51.6 144.5L2.8 476.8c-4.8 9-3.3 20 3.6 27.5s17.8 9.8 27.1 5.8l118.4-50.7c31.8 13.2 67 20.6 104.1 20.6M128 208a32 32 0 1 1 0 64 32 32 0 1 1 0-64m128 0a32 32 0 1 1 0 64 32 32 0 1 1 0-64m96 32a32 32 0 1 1 64 0 32 32 0 1 1-64 0"/></svg> Book with chat</button>
+        <a class="btn btn-ghost" href="Pages/getquote.html">Get a free quote</a>
+        <a class="btn btn-ghost" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg> (434) 233-0231</a>
+      </div>
+      <div class="waterline" aria-hidden="true"><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w1" d="M0,50 C 240,20 480,20 720,50 S 1200,80 1440,50 S 1920,20 2160,50 S 2640,80 2880,50"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w2" d="M0,70 C 240,44 480,44 720,70 S 1200,96 1440,70 S 1920,44 2160,70 S 2640,96 2880,70"/></svg><svg viewBox="0 0 2880 130" preserveAspectRatio="none"><path class="w3" d="M0,92 C 240,74 480,74 720,92 S 1200,110 1440,92 S 1920,74 2160,92 S 2640,110 2880,92"/></svg></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="index.html">
+          <img src="Images/logo.png" alt="" width="35" height="38" />
+          <span class="brand-name">Seaside Haven<small>Family-owned in Virginia</small></span>
+        </a>
+        <p>Home repairs, lawn care, and junk removal for Lynchburg, Roanoke, Bedford, and Smith Mountain Lake.</p>
+        <a class="footer-call" href="tel:+14342330231"><svg class="icon" viewBox="0 0 512 512" aria-hidden="true" focusable="false"><path d="M160.2 25c-7.9-18.9-28.5-28.9-48.1-23.6l-5.5 1.5C42 20.5-13.2 83.1 2.9 159.3 40 334.3 177.7 472 352.7 509.1 429 525.3 491.5 470 509.1 405.4l1.5-5.5c5.4-19.7-4.7-40.3-23.5-48.1l-97.3-40.5c-16.5-6.9-35.6-2.1-47 11.8l-38.6 47.2c-70.3-34.9-126.9-93.3-159.4-165l44.2-36c13.9-11.3 18.6-30.4 11.8-47z"/></svg>(434) 233-0231</a>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="Pages/remodeling.html">Home repairs &amp; remodeling</a></li>
+          <li><a href="Pages/landscaping.html">Landscaping &amp; lawn care</a></li>
+          <li><a href="Pages/junkremoval.html">Junk removal</a></li>
+          <li><a href="Pages/getquote.html">Get a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="Pages/about.html">About us</a></li>
+          <li><a href="Pages/careers.html">Careers</a></li>
+          <li><a href="Pages/partner.html">Partner with us</a></li>
+          <li><a href="Pages/faq.html">FAQ</a></li>
+          <li><a href="Pages/support.html">Support</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul>
+          <li>Mon–Fri: 8am – 4pm</li>
+          <li>Saturday: 9am – 3pm</li>
+          <li>Sunday: Closed</li>
+          <li><a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span data-year>2026</span> Seaside Haven LLC. All rights reserved.</span>
+      <span><a href="Pages/privacy-policy.html">Privacy policy</a> &nbsp;·&nbsp; <a href="Pages/terms-of-service.html">Terms of service</a></span>
+    </div>
+  </div>
+  <div class="footer-word" aria-hidden="true">Seaside Haven</div>
 </footer>
 
-  <!-- ===========================
-       BACK TO TOP BUTTON
-  ============================ -->
-  <div id="backToTop" class="back-to-top">↑</div>
-
-  <!-- ===========================
-       SCRIPTS
-  ============================ -->
-  <script src="script.js"></script>
-
+<script src="script.js"></script>
+<script src="chat.js"></script>
 </body>
 </html>
