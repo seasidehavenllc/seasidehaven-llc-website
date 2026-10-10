@@ -1017,3 +1017,81 @@ a {
   width: 90%;
   margin: 6px auto;
 }
+
+
+/* =========================================================
+   HEADER CALL BUTTON (tap-to-call)
+========================================================= */
+
+.header-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #149ab8;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  transition: 0.2s ease;
+}
+
+.header-call:hover {
+  box-shadow: 0 0 14px rgba(20,154,184,0.65);
+}
+
+@media (max-width: 800px) {
+  .site-header { gap: 10px; }
+  .header-call { margin-left: auto; padding: 8px 12px; }
+}
+
+@media (max-width: 420px) {
+  .header-call-text { display: none; }
+}
+
+/* Footer links + small-screen alignment */
+.site-footer a:hover { color: #149ab8; }
+
+@media (max-width: 480px) {
+  .footer-bottom-right { text-align: center; }
+}
+
+/* =========================================================
+   QUOTE / FORMS — helpers
+========================================================= */
+
+.form-hint {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin: 4px 0 0;
+}
+
+.quote-review {
+  margin: 10px 0;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.success-banner {
+  max-width: 700px;
+  margin: 20px auto 0;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: rgba(20,154,184,0.25);
+  border: 1px solid rgba(20,154,184,0.6);
+  text-align: center;
+}
+
+/* Small description line under step / city cards */
+.bubble-card .card-sub {
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+.header-call-short { display: none; }
+@media (max-width: 420px) {
+  .header-call-short { display: inline; }
+}
+
+#quoteWizard { scroll-margin-top: 90px; }

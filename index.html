@@ -5,7 +5,8 @@
        META & GLOBAL SETTINGS
   ============================ -->
   <meta charset="UTF-8" />
-  <title>Seaside Haven LLC · Family-Owned Multi-Service Company</title>
+  <title>Seaside Haven LLC · Remodeling, Landscaping & Junk Removal · Lynchburg to Smith Mountain Lake</title>
+  <meta name="description" content="Family-owned home repair, landscaping, and junk removal serving Lynchburg, Roanoke, Bedford, Moneta, and Smith Mountain Lake, VA. Free quotes — call (434) 233-0231." />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 
@@ -21,30 +22,37 @@
        HEADER / NAVIGATION
   ============================ -->
   <header class="site-header">
-    <div class="logo">
-      <img src="Images/logo.png" alt="Seaside Haven Logo" class="logo-img">
-    </div>
+  <div class="logo">
+    <a href="index.html">
+      <img src="Images/logo.png" alt="Seaside Haven LLC" class="logo-img">
+    </a>
+  </div>
 
-    <nav class="nav">
-      <a href="index.html" class="active">Home</a>
-      <a href="Pages/services.html">Services</a>
-      <a href="Pages/about.html">About</a>
-      <a href="Pages/careers.html">Careers</a>
-      <a href="Pages/contact.html">Contact</a>
-    </nav>
+  <nav class="nav">
+    <a href="index.html" class="active">Home</a>
+    <a href="Pages/services.html">Services</a>
+    <a href="Pages/about.html">About</a>
+    <a href="Pages/careers.html">Careers</a>
+    <a href="Pages/contact.html">Contact</a>
+  </nav>
 
-    <button class="mobile-nav-toggle" onclick="toggleMobileNav()">
-      <i class="fas fa-bars"></i>
-    </button>
+  <a href="tel:+14342330231" class="header-call" aria-label="Call Seaside Haven LLC">
+    <i class="fas fa-phone"></i><span class="header-call-text"> (434) 233-0231</span><span class="header-call-short"> Call</span>
+  </a>
 
-    <div class="mobile-nav" id="mobileNav">
-      <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
-      <a href="Pages/services.html"><i class="fas fa-tools"></i> Services</a>
-      <a href="Pages/about.html"><i class="fas fa-info-circle"></i> About</a>
-      <a href="Pages/careers.html"><i class="fas fa-user-tie"></i> Careers</a>
-      <a href="Pages/contact.html"><i class="fas fa-envelope"></i> Contact</a>
-    </div>
-  </header>
+  <button class="mobile-nav-toggle" onclick="toggleMobileNav()" aria-label="Open menu">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <div class="mobile-nav" id="mobileNav">
+    <a href="index.html" class="active"><i class="fas fa-home"></i> Home</a>
+    <a href="Pages/services.html"><i class="fas fa-tools"></i> Services</a>
+    <a href="Pages/about.html"><i class="fas fa-info-circle"></i> About</a>
+    <a href="Pages/careers.html"><i class="fas fa-user-tie"></i> Careers</a>
+    <a href="Pages/contact.html"><i class="fas fa-envelope"></i> Contact</a>
+    <a href="tel:+14342330231"><i class="fas fa-phone"></i> Call (434) 233-0231</a>
+  </div>
+</header>
 
   <main>
 
@@ -75,7 +83,7 @@
 
         <!-- HERO IMAGE -->
         <div class="hero-abstract-logo">
-          <img src="Images/logo.png" alt="Seaside Haven Logo" class="abstract-logo">
+          <img src="Images/logo.png" alt="" aria-hidden="true" class="abstract-logo">
 
           <div class="abstract-ring"></div>
           <div class="abstract-ring ring2"></div>
@@ -169,7 +177,7 @@
       <div class="section-header">
         <p class="section-kicker">Coverage Area</p>
         <h2>Serving Central & Southwest Virginia</h2>
-        <p class="section-intro">Local service with statewide reliability.</p>
+        <p class="section-intro">Local, family-owned, and close by. Not sure if you're in our area? Just ask.</p>
       </div>
 
       <div class="bubble-grid spotlight-container">
@@ -179,6 +187,10 @@
         <div class="bubble-card"><h3>Smith Mountain Lake</h3></div>
         <div class="bubble-card"><h3>Goodview</h3></div>
         <div class="bubble-card"><h3>Moneta</h3></div>
+      </div>
+
+      <div class="hero-actions center">
+        <a href="Pages/contact.html" class="btn-secondary">Ask About Your Area</a>
       </div>
     </section>
 
@@ -193,9 +205,9 @@
       </div>
 
       <div class="hero-actions center">
-        <a href="Pages/getquote.html" class="btn-primary">Remodeling Quote</a>
-        <a href="Pages/getquote.html" class="btn-secondary">Landscaping Quote</a>
-        <a href="Pages/getquote.html" class="btn-secondary">Junk Removal Quote</a>
+        <a href="Pages/getquote.html?service=Remodeling" class="btn-primary">Remodeling Quote</a>
+        <a href="Pages/getquote.html?service=Landscaping" class="btn-secondary">Landscaping Quote</a>
+        <a href="Pages/getquote.html?service=Junk%20Removal" class="btn-secondary">Junk Removal Quote</a>
       </div>
     </section>
 
@@ -210,11 +222,11 @@
       </div>
 
       <div class="bubble-grid spotlight-container">
-        <div class="bubble-card"><h3>1. Request a Quote</h3></div>
-        <div class="bubble-card"><h3>2. Fast Scheduling</h3></div>
-        <div class="bubble-card"><h3>3. Professional Service</h3></div>
-        <div class="bubble-card"><h3>4. Cleanup & Completion</h3></div>
-        <div class="bubble-card"><h3>5. Follow-Up Support</h3></div>
+        <div class="bubble-card"><h3>1. Request a Quote</h3><p class="card-sub">Tell us what you need online or by phone. Photos help.</p></div>
+        <div class="bubble-card"><h3>2. Fast Scheduling</h3><p class="card-sub">We send your price and book a time that works for you.</p></div>
+        <div class="bubble-card"><h3>3. Professional Service</h3><p class="card-sub">Our crew shows up on time and does the job right.</p></div>
+        <div class="bubble-card"><h3>4. Cleanup & Completion</h3><p class="card-sub">We clean up and walk through the finished work with you.</p></div>
+        <div class="bubble-card"><h3>5. Follow-Up Support</h3><p class="card-sub">Something not right? Call us and we'll make it right.</p></div>
       </div>
     </section>
 
@@ -254,15 +266,19 @@
         </div>
 
         <div class="bubble-card">
-          <h3>Are you insured?</h3>
-          <p>We follow Virginia DPOR guidelines and perform projects under the $1,000 limit.</p>
+          <h3>How fast can I get a quote?</h3>
+          <p>Most quotes go out the same day or within 24 hours.</p>
         </div>
 
         <div class="bubble-card">
-          <h3>Do you handle large projects?</h3>
-          <p>Yes — remodeling, landscaping, and cleanouts.</p>
+          <h3>Do you offer recurring lawn care?</h3>
+          <p>Yes — weekly or bi-weekly mowing and seasonal cleanups.</p>
         </div>
 
+      </div>
+
+      <div class="hero-actions center">
+        <a href="Pages/faq.html" class="btn-secondary">See All FAQs</a>
       </div>
     </section>
 
@@ -274,7 +290,7 @@
         <p class="section-kicker">Testimonials</p>
         <h2>What Our Clients Say</h2>
         <p class="section-intro">
-          Real feedback from homeowners, property managers, and business owners across Virginia.
+          Feedback from homeowners, property managers, and business owners we've worked with.
         </p>
       </div>
 
@@ -286,7 +302,9 @@
         <button class="filter-btn" data-filter="junk-removal">Junk Removal</button>
       </div>
 
-      <!-- TESTIMONIAL CARDS -->
+      <!-- TESTIMONIAL CARDS
+           Only post reviews from real customers (with their OK).
+           Tip: copy your best Google reviews here, with first name + town. -->
       <div id="testimonialContainer" class="bubble-grid spotlight-container">
 
         <div class="bubble-card" data-category="landscaping">
@@ -314,25 +332,9 @@
           <p>“Their remodeling team handled repairs between tenants flawlessly. Saved me time and stress.”</p>
         </div>
 
-        <div class="bubble-card" data-category="pressure-washing">
-          <h3>Small Business Owner</h3>
-          <p>“The pressure washing service has transformed our business appearance. Clean, professional results every time.”</p>
-        </div>
 
-        <div class="bubble-card" data-category="pressure-washing">
-          <h3>Airbnb Host</h3>
-          <p>“They handle cleaning and turnovers flawlessly. My guests always compliment the space.”</p>
-        </div>
 
-        <div class="bubble-card" data-category="pressure-washing">
-          <h3>Restaurant Owner</h3>
-          <p>“Our storefront looks brand new. They pressure washed the sidewalk, siding, and patio — incredible results.”</p>
-        </div>
 
-        <div class="bubble-card" data-category="pressure-washing">
-          <h3>Homeowner</h3>
-          <p>“They removed years of grime from our driveway and deck. The difference is unbelievable.”</p>
-        </div>
 
         <div class="bubble-card" data-category="junk-removal">
           <h3>Contractor</h3>
@@ -372,67 +374,59 @@
        FOOTER
   ============================ -->
   <footer id="footer" class="site-footer">
+  <div class="footer-columns">
 
-    <div class="footer-columns">
-
-      <!-- COMPANY -->
-      <div class="footer-col">
-        <h4>Company</h4>
-        <ul>
-          <li><a href="Pages/about.html">About Us</a></li>
-          <li><a href="Pages/partner.html">Partner</a></li>
-          <li><a href="doclist.html">Documents</a></li>
-          <li><a href="Pages/careers.html">Careers</a></li>
-          <li><a href="Pages/faq.html">FAQ</a></li>
-          <li><a href="Pages/support.html">Support</a></li>
-        </ul>
-      </div>
-
-      <!-- SERVICES -->
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul>
-          <li><a href="Pages/remodeling.html">Remodeling</a></li>
-          <li><a href="Pages/landscaping.html">Landscaping</a></li>
-          <li><a href="Pages/junkremoval.html">Junk Removal</a></li>
-        </ul>
-      </div>
-
-      <!-- CONTACT -->
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="Pages/contact.html">Contact Us</a></li>
-          <li><a href="Pages/getquote.html">Request a Quote</a></li>
-        </ul>
-      </div>
-
-      <!-- LEGAL -->
-      <div class="footer-col">
-        <h4>Legal & Social</h4>
-        <ul>
-          <li><a href="Pages/privacy-policy.html">Privacy Policy</a></li>
-          <li><a href="Pages/terms-of-service.html">Terms of Service</a></li>
-          <li><a href="Pages/social-media.html">Social Media</a></li>
-        </ul>
-      </div>
-
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="Pages/about.html">About Us</a></li>
+        <li><a href="Pages/partner.html">Partner With Us</a></li>
+        <li><a href="Pages/careers.html">Careers</a></li>
+        <li><a href="Pages/faq.html">FAQ</a></li>
+        <li><a href="Pages/support.html">Support</a></li>
+      </ul>
     </div>
 
-    <div class="footer-bottom">
-      <div class="footer-bottom-left">
-        <br><br><br><br>
-        <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
-      </div>
-
-      <div class="footer-bottom-right" style="text-align:right; line-height:1.6;">
-        <strong>M–F 8am – 4pm</strong><br>
-        <strong>Saturday 9am – 3pm</strong><br>
-        <strong>+1 (434) - 233 - 0231</strong><br>
-        <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
-      </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="Pages/remodeling.html">Remodeling</a></li>
+        <li><a href="Pages/landscaping.html">Landscaping</a></li>
+        <li><a href="Pages/junkremoval.html">Junk Removal</a></li>
+      </ul>
     </div>
-  </footer>
+
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="Pages/contact.html">Contact Us</a></li>
+        <li><a href="Pages/getquote.html">Request a Quote</a></li>
+        <li><a href="tel:+14342330231">(434) 233-0231</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="Pages/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="Pages/terms-of-service.html">Terms of Service</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-left">
+      <strong>© 2026 Seaside Haven LLC · All Rights Reserved</strong>
+    </div>
+
+    <div class="footer-bottom-right">
+      <strong>Mon–Fri 8am–4pm · Sat 9am–3pm</strong><br>
+      <strong><a href="tel:+14342330231">(434) 233-0231</a> · <a href="mailto:info@seasidehavenllc.com">info@seasidehavenllc.com</a></strong><br>
+      <strong>Serving Lynchburg · Roanoke · Bedford · Smith Mountain Lake</strong>
+    </div>
+  </div>
+</footer>
 
   <!-- ===========================
        BACK TO TOP BUTTON
