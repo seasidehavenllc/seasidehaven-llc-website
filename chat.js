@@ -18,7 +18,7 @@
   // Square booking worker (see worker/README.md). While this is empty the chat
   // sends booking *requests* by email; once set, it shows real open times from
   // Square and books them straight onto the Square calendar.
-  const BOOKING_API = "";
+  const BOOKING_API = "https://seaside-booking.onrender.com";
   const SQUARE_CATEGORY = { "Remodeling": "Remodeling Services", "Landscaping": "Landscape Services", "Junk Removal": "Junk Removal" };
   const SERVICES = ["Remodeling", "Landscaping", "Junk Removal"];
   const SERVICE_LABEL = { "Remodeling": "Home repairs", "Landscaping": "Lawn & landscaping", "Junk Removal": "Junk removal" };

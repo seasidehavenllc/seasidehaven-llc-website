@@ -7,6 +7,7 @@
      SQUARE_TOKEN  — your Square production access token
 
    Endpoints (all JSON):
+     GET  /health                           uptime ping (no Square call)
      GET  /services                         bookable services by category
      GET  /availability?variation=ID&days=7  open times, grouped by day
      POST /book                              create the customer + booking
@@ -35,6 +36,8 @@ export default {
     const reply = (body, status = 200) =>
       new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
 
+    // Uptime ping (keeps the free Render server awake); never touches Square
+    if (new URL(request.url).pathname === "/health") return reply({ ok: true, configured: !!env.SQUARE_TOKEN });
     if (!env.SQUARE_TOKEN) return reply({ error: "Booking is not set up yet." }, 503);
     const sq = squareClient(env.SQUARE_TOKEN);
     const url = new URL(request.url);
