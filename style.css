@@ -956,6 +956,7 @@ h4 { font-size: 1rem; letter-spacing: 0; font-weight: 700; }
 .chat-chip.primary { background: var(--teal); border-color: var(--teal); color: #fff; }
 .chat-chip.primary:hover { background: #18AACB; }
 
+.chat-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .chat-form { display: flex; gap: 8px; padding: 10px 12px; border-top: 1px solid var(--edge); }
 .chat-input {
   flex: 1; min-width: 0;
