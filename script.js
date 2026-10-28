@@ -85,21 +85,6 @@ document.querySelectorAll(".acc-trigger").forEach(btn => {
   });
 });
 
-/* ---------- Reviews carousel ---------- */
-document.querySelectorAll("[data-track]").forEach(wrap => {
-  const track = wrap.querySelector(".reviews-track");
-  const prev = wrap.querySelector(".prev");
-  const next = wrap.querySelector(".next");
-  if (!track) return;
-  const move = dir => {
-    const card = track.querySelector(".review");
-    const amount = card ? card.getBoundingClientRect().width + 20 : track.clientWidth;
-    track.scrollBy({ left: dir * amount, behavior: prefersReducedMotion ? "auto" : "smooth" });
-  };
-  if (prev) prev.addEventListener("click", () => move(-1));
-  if (next) next.addEventListener("click", () => move(1));
-});
-
 /* ---------- Tabs (contact page) ---------- */
 const tabs = Array.from(document.querySelectorAll(".tab"));
 function selectTab(id, focus) {

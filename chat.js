@@ -46,6 +46,7 @@
       <div class="chat-chips" aria-label="Suggested replies"></div>
       <form class="chat-form" autocomplete="on">
         <label class="sr-only" for="chatInput">Type a message</label>
+        <input class="chat-hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
         <input id="chatInput" class="chat-input" type="text" placeholder="Type a message…" maxlength="600" autocomplete="off">
         <button class="chat-send" type="submit" aria-label="Send">
           <svg class="icon" viewBox="0 0 512 512" aria-hidden="true"><path d="M498.1 5.6c10.1 7 15.4 19.1 13.5 31.2l-64 416c-1.5 9.7-7.4 18.2-16 23s-18.9 5.4-28 1.6L284 427.7l-68.5 74.1c-8.9 9.7-22.9 12.9-35.2 8.1S160 493.2 160 480v-83.6c0-4 1.5-7.8 4.2-10.8l167.6-182.8c5.8-6.3 5.6-16-.4-22s-15.7-6.4-22-.7L106 360.8 17.7 316.6C7.1 311.3.3 300.7 0 288.9s5.9-22.8 16.1-28.7l448-256c10.7-6.1 23.9-5.5 34 1.4z"/></svg>
@@ -68,10 +69,26 @@
   let step = null;          // current question in a flow
   let booking = {};
   let busy = false;
+  let question = {};
+
+  /* ---------- Remember the conversation across pages ---------- */
+  const SAVE_KEY = "sh-chat";
+  let chipData = [];
+  function save() {
+    try {
+      const copy = log.cloneNode(true);
+      copy.querySelectorAll(".typing").forEach((n) => n.remove());
+      sessionStorage.setItem(SAVE_KEY, JSON.stringify({
+        log: copy.innerHTML, chips: chipData, flow, step, booking, question, open: !panel.hidden,
+      }));
+    } catch (e) { /* storage unavailable — chat just starts fresh */ }
+  }
+  function clearSaved() { try { sessionStorage.removeItem(SAVE_KEY); } catch (e) {} }
 
   /* ---------- Open / close ---------- */
   function open(mode, service) {
     panel.hidden = false;
+    save();
     requestAnimationFrame(() => root.classList.add("open"));
     launcher.setAttribute("aria-expanded", "true");
     if (!started) { started = true; if (mode !== "book") greet(); }
@@ -81,13 +98,13 @@
   function close() {
     root.classList.remove("open");
     launcher.setAttribute("aria-expanded", "false");
-    setTimeout(() => { panel.hidden = true; }, reduced ? 0 : 260);
+    setTimeout(() => { panel.hidden = true; save(); }, reduced ? 0 : 260);
     launcher.focus({ preventScroll: true });
   }
   launcher.addEventListener("click", () => (panel.hidden ? open() : close()));
   root.querySelector(".chat-close").addEventListener("click", close);
   root.querySelector(".chat-restart").addEventListener("click", () => {
-    log.innerHTML = ""; flow = null; step = null; booking = {}; greet();
+    log.innerHTML = ""; flow = null; step = null; booking = {}; clearSaved(); greet();
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) close(); });
 
@@ -116,6 +133,7 @@
     row.appendChild(bubble);
     log.appendChild(row);
     scroll();
+    save();
     return bubble;
   }
 
@@ -139,6 +157,8 @@
   }
 
   function setChips(list) {
+    chipData = list;
+    save();
     chips.innerHTML = "";
     list.forEach((c) => {
       const el = c.href ? document.createElement("a") : document.createElement("button");
@@ -204,17 +224,18 @@
     const priceHit = findPrice(t);
     const service = detectService(t);
 
+    if (has(t, ["pressure wash", "power wash", "vending", "laundromat", "laundry", "airbnb", "rental turnover", "rental propert"])) return say("That service is coming soon — it isn’t booking yet. I can pass your interest along to the team so they let you know when it launches.", [{ label: "Let me know", value: "#ask", primary: true }, { label: "Main menu", value: "#menu" }]);
     if (has(t, [" book", "schedule", "appointment", " appt", "come out", "come by", "set up a", "availability", "available"])) return startBooking(service);
     if (has(t, [" hi ", " hey ", "hello", "good morning", "good afternoon", "good evening"]) && t.trim().split(" ").length <= 4) return say("Hi there! What can I help you with today?", MENU);
     if (has(t, ["thank", " thx", "appreciate"])) return say("You’re welcome! Anything else I can help with?", anythingElse());
-    if (has(t, ["price", "cost", " how much", " $", "rate", "charge", "estimate", "quote"]) || priceHit) {
+    if (has(t, ["price", "pricing", "cost", " how much", " $", " rate ", " rates ", "charge", "estimate", "quote"]) || priceHit) {
       if (priceHit) return showPrice(priceHit);
       if (service) return servicePrices(service);
       if (has(t, ["quote", "estimate"])) return say(["We give free quotes — most go out the same day or within 24 hours.", `You can <a href="${link("Pages/getquote.html")}">request a written quote</a> with photos, or book a visit right here.`], anythingElse());
       return handle("#prices");
     }
     if (has(t, ["hour", " open", "close", "closed", "sunday", "saturday", "weekend", "what time"])) return answerHours();
-    if (has(t, ["area", "serve", "service ", "travel", "far", "near", "location", "where"]) || DATA.towns.some((x) => t.includes(x.toLowerCase())) || has(t, ["forest", "salem", "vinton", "huddleston", "hardy", "rocky mount", "appomattox", "altavista"])) return answerArea(t);
+    if (has(t, ["area", "serve", "service ", "travel", " far ", " near ", "location", "where"]) || DATA.towns.some((x) => t.includes(x.toLowerCase())) || has(t, ["forest", "salem", "vinton", "huddleston", "hardy", "rocky mount", "appomattox", "altavista"])) return answerArea(t);
     if (has(t, ["insur", "licens", "bonded"])) return faq("insured");
     if (has(t, ["pay", "card", "cash", "venmo", "zelle", "invoice", "check "])) return faq("payment");
     if (has(t, ["deposit", "upfront payment", "down payment"])) return faq("deposit");
@@ -222,7 +243,6 @@
     if (has(t, ["same day", "today", "tomorrow", "how soon", "how fast", "quick"])) return say(["Same-day service is sometimes possible, depending on the job and our schedule.", "Want me to set up a request? Pick “Today” or the soonest day and we’ll confirm what we can do."], anythingElse());
     if (has(t, ["recurring", "weekly", "bi weekly", "biweekly", "every week", "regular"])) return say("Yes! Mowing and lawn care can be scheduled weekly or bi-weekly, plus seasonal spring and fall cleanups.", [{ label: "Book lawn care", value: "#bookas:Landscaping", primary: true }, { label: "Lawn prices", value: "#prices:Landscaping" }]);
     if (has(t, ["job", "hiring", "career", "apply", "work for", "employment"])) return say(`We’re hiring! See open positions and apply on our <a href="${link("Pages/careers.html")}">careers page</a>.`, anythingElse());
-    if (has(t, ["pressure wash", "power wash", "vending", "laundromat", "laundry", "airbnb", "rental turnover"])) return say("That service is coming soon — it isn’t booking yet. I can pass your interest along to the team so they let you know when it launches.", [{ label: "Let me know", value: "#ask", primary: true }, { label: "Main menu", value: "#menu" }]);
     if (has(t, ["human", "person", "someone", "real ", "call", "phone", "talk", "speak", "number", "email", "contact"])) return answerHours();
     if (service) return say(`Sure — ${SERVICE_LABEL[service].toLowerCase()} is one of our main services. Want prices, or should I set up a visit?`, [{ label: "Book a visit", value: "#bookas:" + service, primary: true }, { label: "See prices", value: "#prices:" + service }]);
 
@@ -300,6 +320,7 @@
   function startBooking(service) {
     flow = "book";
     booking = {};
+    flowStarted = Date.now();
     if (service && SERVICES.includes(service)) {
       booking.service = service;
       step = "details";
@@ -401,7 +422,14 @@
     return '<dl class="chat-summary">' + rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("") + "</dl>";
   }
 
+  // Spam guard: bots fill the hidden field or send in a few seconds. Pretend it
+  // worked so they don't retry, but don't email anything.
+  const hp = root.querySelector(".chat-hp");
+  let flowStarted = Date.now();
+  function looksLikeSpam() { return hp.value !== "" || Date.now() - flowStarted < 8000; }
+
   function post(payload) {
+    if (looksLikeSpam()) return Promise.resolve({});
     return fetch(SEND_TO, {
       method: "POST",
       headers: { "Content-Type": "application/json", "Accept": "application/json" },
@@ -425,10 +453,13 @@
       "Name": booking.name,
       "Phone": booking.phone,
       "email": booking.email || "(not given)",
+      // FormSubmit emails this to the customer's address, when they gave one
+      ...(booking.email ? { _autoresponse: `Thanks for booking with Seaside Haven! We got your ${SERVICE_LABEL[booking.service].toLowerCase()} request for ${booking.day} (${booking.time}). We'll call or text ${booking.phone} to confirm the exact time. Questions? Call ${PHONE}.` } : {}),
     }).then(() => {
       sending.remove(); busy = false; flow = null;
       const first = esc(booking.name.split(" ")[0]);
-      say([`✅ You’re all set, ${first}! Your request was sent.`,
+      const mailed = booking.email ? ` A confirmation is on its way to <b>${esc(booking.email)}</b>.` : "";
+      say([`✅ You’re all set, ${first}! Your request was sent.${mailed}`,
            `We’ll call or text <b>${esc(booking.phone)}</b> to confirm the exact time. Requests sent after hours are confirmed the next business day.`],
           [{ label: "Ask something else", value: "#menu" }]);
     }).catch(() => {
@@ -440,9 +471,9 @@
   }
 
   /* ---------- "Send my question" flow ---------- */
-  let question = {};
   function startQuestion() {
     flow = "question"; question = {}; step = "q";
+    flowStarted = Date.now();
     say("Sure — what’s your question?", []);
   }
   function questionStep(text) {
@@ -460,6 +491,20 @@
         .catch(() => { sending.remove(); busy = false; flow = null; say(`Sorry, that didn’t send. Please call <a href="${TEL}">${PHONE}</a>.`, [{ label: "Call now", href: TEL }, { label: "Main menu", value: "#menu" }]); });
     }
   }
+
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(SAVE_KEY) || "null");
+    if (saved && saved.log) {
+      log.innerHTML = saved.log;
+      ({ flow, step } = saved);
+      booking = saved.booking || {};
+      question = saved.question || {};
+      started = true;
+      if (step === "phone") input.type = "tel"; else if (step === "email") input.type = "email";
+      setChips(saved.chips || []);
+      if (saved.open) { panel.hidden = false; root.classList.add("open"); launcher.setAttribute("aria-expanded", "true"); log.scrollTop = log.scrollHeight; }
+    }
+  } catch (e) { /* bad or missing saved chat — start fresh */ }
 
   // Little nudge bubble after a few seconds on the home page (once per visit)
   try {
