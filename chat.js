@@ -15,6 +15,11 @@
   const PHONE = "(434) 233-0231";
   const TEL = "tel:+14342330231";
   const SEND_TO = "https://formsubmit.co/ajax/info@seasidehavenllc.com";
+  // Square booking worker (see worker/README.md). While this is empty the chat
+  // sends booking *requests* by email; once set, it shows real open times from
+  // Square and books them straight onto the Square calendar.
+  const BOOKING_API = "";
+  const SQUARE_CATEGORY = { "Remodeling": "Remodeling Services", "Landscaping": "Landscape Services", "Junk Removal": "Junk Removal" };
   const SERVICES = ["Remodeling", "Landscaping", "Junk Removal"];
   const SERVICE_LABEL = { "Remodeling": "Home repairs", "Landscaping": "Lawn & landscaping", "Junk Removal": "Junk removal" };
   const inPages = location.pathname.includes("/Pages/");
@@ -315,20 +320,76 @@
   }
 
   /* ---------- Booking flow ---------- */
-  const STEPS = ["service", "details", "location", "day", "time", "name", "phone", "email", "confirm"];
+  // With BOOKING_API set:  service → which service → which option → details → address
+  //                        → real open day → real open time → name → phone → email → book in Square
+  // Without it (or if Square can't be reached): the same questions, but day/time are
+  // preferences and the request is emailed for us to confirm.
+
+  function api(path, body) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 12000);
+    return fetch(BOOKING_API.replace(/\/$/, "") + path, {
+      method: body ? "POST" : "GET",
+      headers: body ? { "Content-Type": "application/json" } : {},
+      body: body ? JSON.stringify(body) : undefined,
+      signal: ctrl.signal,
+    }).then((r) => r.json().then((j) => { if (!r.ok) throw new Error(j.error || "HTTP " + r.status); return j; }))
+      .finally(() => clearTimeout(timer));
+  }
+
+  let catalog = null;       // Square services, loaded once per page
+  function loadCatalog() {
+    if (catalog) return Promise.resolve(catalog);
+    return api("/services").then((j) => (catalog = j.categories || {}));
+  }
+
+  // Show a "checking…" bubble while waiting on Square
+  function waitFor(promise, text) {
+    setChips([]);
+    busy = true;
+    const note = addMsg("bot", text);
+    return promise.finally(() => { note.remove(); busy = false; });
+  }
 
   function startBooking(service) {
     flow = "book";
-    booking = {};
+    booking = { live: !!BOOKING_API };
     flowStarted = Date.now();
     if (service && SERVICES.includes(service)) {
       booking.service = service;
-      step = "details";
-      say([`Great — let’s book a visit for <b>${SERVICE_LABEL[service].toLowerCase()}</b>. It takes about a minute.`, promptFor("details")], chipsFor("details"));
+      afterService(`Great — let’s book a visit for <b>${SERVICE_LABEL[service].toLowerCase()}</b>. It takes about a minute.`);
     } else {
       step = "service";
       say(["Let’s get you booked — it takes about a minute.", promptFor("service")], chipsFor("service"));
     }
+  }
+
+  // Square mode asks which exact service; request mode goes straight to details
+  function afterService(preface) {
+    if (!booking.live) return ask("details", preface);
+    waitFor(loadCatalog(), "Checking our services…").then(() => {
+      booking.items = catalog[SQUARE_CATEGORY[booking.service]] || [];
+      if (!booking.items.length) { booking.live = false; return ask("details", preface); }
+      ask("item", preface);
+    }).catch(() => { booking.live = false; ask("details", preface); });
+  }
+
+  function afterAddress() {
+    if (!booking.live) return ask("day");
+    waitFor(api("/availability?variation=" + encodeURIComponent(booking.option.id) + "&days=10"), "Checking open times…")
+      .then((j) => {
+        booking.days = (j.days || []).slice(0, 7);
+        if (!booking.days.length) return goRequestMode("We don’t have open times online for that in the next week or so — tell me what day works and we’ll fit you in.");
+        ask("day");
+      })
+      .catch(() => goRequestMode("I couldn’t load our calendar just now — tell me what day works and we’ll confirm with you."));
+  }
+
+  // Fall back to the email-request version of the day/time questions
+  function goRequestMode(msg) {
+    booking.live = false;
+    delete booking.days; delete booking.slot;
+    ask("day", msg);
   }
 
   function openDays() {
@@ -346,13 +407,23 @@
   }
   function dayValue(d) { return d.toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" }); }
 
+  // Keep the time list short: on-the-hour starts first, at most 8
+  function slotChoices(day) {
+    let slots = day.slots.filter((s) => /:00/.test(s.label));
+    if (slots.length < 3) slots = day.slots;
+    return slots.slice(0, 8);
+  }
+  function money(n) { return n == null ? "" : " · $" + (n % 1 ? n.toFixed(2) : n.toLocaleString("en-US")); }
+
   function promptFor(s) {
     switch (s) {
       case "service": return "What do you need help with?";
+      case "item": return "Which service?";
+      case "option": return "Which one fits best?";
       case "details": return "In a sentence or two, what needs to be done? (Sizes, number of items, or anything else helpful.)";
-      case "location": return "What’s the address or town for the job?";
-      case "day": return "What day works best for you?";
-      case "time": return "And what time of day?";
+      case "location": return "What’s the address for the job?";
+      case "day": return booking.live ? "Here are our next open days. Which works best?" : "What day works best for you?";
+      case "time": return booking.live ? `Open times on ${esc(booking.day)}:` : "And what time of day?";
       case "name": return "Who should we ask for? (Your name)";
       case "phone": return "What’s the best phone number to call or text you?";
       case "email": return "And your email, so we can send the confirmation? (Optional)";
@@ -362,12 +433,17 @@
   function chipsFor(s) {
     switch (s) {
       case "service": return SERVICES.map((x) => ({ label: SERVICE_LABEL[x], value: x }));
-      case "day": return openDays();
+      case "item": return booking.items.map((it, i) => ({ label: it.name, value: "#item:" + i })).concat([{ label: "Something else", value: "#item:other" }]);
+      case "option": return booking.item.options.map((o, i) => ({ label: o.name + money(o.price), value: "#option:" + i }));
+      case "day":
+        if (booking.live) return booking.days.map((d, i) => ({ label: d.short, value: "#day:" + i })).concat([{ label: "None of these work", value: "#day:none" }]);
+        return openDays();
       case "time":
+        if (booking.live) return slotChoices(booking.liveDay).map((sl) => ({ label: sl.label, value: "#slot:" + sl.start_at })).concat([{ label: "Pick another day", value: "#time:back" }]);
         if (/^Saturday/.test(booking.day || "")) return [{ label: "9am – 12pm", value: "Morning (9am–12pm)" }, { label: "12pm – 3pm", value: "Afternoon (12pm–3pm)" }, { label: "Any time", value: "Any time" }];
         return [{ label: "Morning · 8–12", value: "Morning (8am–12pm)" }, { label: "Afternoon · 12–4", value: "Afternoon (12pm–4pm)" }, { label: "Any time", value: "Any time" }];
       case "email": return [{ label: "Skip", value: "" }];
-      case "confirm": return [{ label: "Send request", value: "#send", primary: true }, { label: "Start over", value: "#restart" }, { label: "Cancel", value: "#cancel" }];
+      case "confirm": return [{ label: booking.slot ? "Book it" : "Send request", value: "#send", primary: true }, { label: "Start over", value: "#restart" }, { label: "Cancel", value: "#cancel" }];
       default: return [];
     }
   }
@@ -386,17 +462,45 @@
       case "service": {
         const s = SERVICES.find((x) => x === text) || detectService(" " + text.toLowerCase() + " ");
         if (!s) return say("Sorry, which of these is closest?", chipsFor("service"));
-        booking.service = s; return ask("details");
+        booking.service = s; return afterService();
+      }
+      case "item": {
+        if (text === "#item:other") { booking.live = false; return ask("details", "No problem — describe it and we’ll take a look."); }
+        const it = text.startsWith("#item:") ? booking.items[+text.slice(6)]
+          : booking.items.find((x) => x.name.toLowerCase().includes(text.toLowerCase()));
+        if (!it) return say("Which of these is closest? Or tap “Something else.”", chipsFor("item"));
+        booking.item = it;
+        if (it.options.length === 1) { booking.option = it.options[0]; return ask("details"); }
+        return ask("option");
+      }
+      case "option": {
+        const o = text.startsWith("#option:") ? booking.item.options[+text.slice(8)]
+          : booking.item.options.find((x) => x.name.toLowerCase().includes(text.toLowerCase()));
+        if (!o) return say("Tap the option that fits best — you can add details next.", chipsFor("option"));
+        booking.option = o; return ask("details");
       }
       case "details":
         if (text.length < 3) return say("Could you tell me a little more about the job?", []);
         booking.details = text; return ask("location", "Got it.");
       case "location":
         if (text.length < 3) return say("Please type the street address or at least the town.", []);
-        booking.location = text; return ask("day");
+        booking.location = text; return afterAddress();
       case "day":
+        if (booking.live) {
+          if (text === "#day:none") return goRequestMode("No problem — tell me what works and we’ll confirm with you.");
+          const d = text.startsWith("#day:") ? booking.days[+text.slice(5)] : null;
+          if (!d) return say("Tap one of the open days, or “None of these work.”", chipsFor("day"));
+          booking.liveDay = d; booking.day = d.label; return ask("time");
+        }
         booking.day = text; return ask("time");
       case "time":
+        if (booking.live) {
+          if (text === "#time:back") { delete booking.liveDay; return ask("day"); }
+          const sl = text.startsWith("#slot:") && booking.liveDay.slots.find((x) => x.start_at === text.slice(6));
+          if (!sl) return say("Tap one of the open times.", chipsFor("time"));
+          booking.slot = sl; booking.time = sl.label;
+          return ask("name");
+        }
         booking.time = text; return ask("name");
       case "name":
         booking.name = text; return ask("phone", `Nice to meet you, ${esc(text.split(" ")[0])}!`);
@@ -410,15 +514,23 @@
         booking.email = text;
         step = "confirm";
         input.type = "text";
-        return say(["Here’s your request:" + summary(), "Should I send it to our team? We’ll call or text to confirm the exact time."], chipsFor("confirm"));
+        return say(booking.slot
+          ? ["Here’s your booking:" + summary(), "Should I book it? You’ll get a confirmation, and we’ll call or text if anything needs to change."]
+          : ["Here’s your request:" + summary(), "Should I send it to our team? We’ll call or text to confirm the exact time."], chipsFor("confirm"));
       case "confirm":
         if (text === "#send") return send();
-        return say("Tap “Send request” when you’re ready, or start over to change something.", chipsFor("confirm"));
+        return say(`Tap “${booking.slot ? "Book it" : "Send request"}” when you’re ready, or start over to change something.`, chipsFor("confirm"));
     }
   }
 
+  function serviceName() {
+    if (!booking.item) return SERVICE_LABEL[booking.service];
+    return booking.item.name + (booking.option && booking.item.options.length > 1 ? " — " + booking.option.name : "");
+  }
+
   function summary() {
-    const rows = [["Service", SERVICE_LABEL[booking.service]], ["Job", booking.details], ["Where", booking.location], ["Day", booking.day], ["Time", booking.time], ["Name", booking.name], ["Phone", booking.phone], ["Email", booking.email || "—"]];
+    const rows = [["Service", serviceName()], ["Job", booking.details], ["Where", booking.location], ["Day", booking.day], ["Time", booking.time], ["Name", booking.name], ["Phone", booking.phone], ["Email", booking.email || "—"]];
+    if (booking.option && booking.option.price != null) rows.splice(1, 0, ["Starting price", "$" + booking.option.price.toLocaleString("en-US")]);
     return '<dl class="chat-summary">' + rows.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("") + "</dl>";
   }
 
@@ -438,24 +550,33 @@
       .then((j) => { if (j && (j.success === false || j.success === "false")) throw new Error(j.message || "Not sent"); return j; });
   }
 
-  function send() {
-    setChips([]);
-    busy = true;
-    const sending = addMsg("bot", "Sending your request…");
-    post({
-      _subject: `New appointment request · ${SERVICE_LABEL[booking.service]} · ${booking.day}`,
-      "Request type": "Appointment request (website chat)",
-      "Service": SERVICE_LABEL[booking.service],
+  // The email we (and the customer) get, for both bookings and requests
+  function emailPayload(booked) {
+    const what = serviceName();
+    return {
+      _subject: `${booked ? "New booking (in Square)" : "New appointment request"} · ${what} · ${booking.day}`,
+      "Request type": booked ? "Booked in Square (website chat)" : "Appointment request (website chat)",
+      "Service": what,
       "Job details": booking.details,
       "Address / town": booking.location,
-      "Preferred day": booking.day,
-      "Preferred time": booking.time,
+      [booked ? "Booked day" : "Preferred day"]: booking.day,
+      [booked ? "Booked time" : "Preferred time"]: booking.time,
       "Name": booking.name,
       "Phone": booking.phone,
       "email": booking.email || "(not given)",
       // FormSubmit emails this to the customer's address, when they gave one
-      ...(booking.email ? { _autoresponse: `Thanks for booking with Seaside Haven! We got your ${SERVICE_LABEL[booking.service].toLowerCase()} request for ${booking.day} (${booking.time}). We'll call or text ${booking.phone} to confirm the exact time. Questions? Call ${PHONE}.` } : {}),
-    }).then(() => {
+      ...(booking.email ? { _autoresponse: booked
+        ? `Thanks for booking with Seaside Haven! You're booked for ${what.toLowerCase()} on ${booking.day} at ${booking.time}. We'll call or text ${booking.phone} if anything changes. Questions? Call ${PHONE}.`
+        : `Thanks for booking with Seaside Haven! We got your ${what.toLowerCase()} request for ${booking.day} (${booking.time}). We'll call or text ${booking.phone} to confirm the exact time. Questions? Call ${PHONE}.` } : {}),
+    };
+  }
+
+  function send() {
+    if (booking.slot) return sendBooking();
+    setChips([]);
+    busy = true;
+    const sending = addMsg("bot", "Sending your request…");
+    post(emailPayload(false)).then(() => {
       sending.remove(); busy = false; flow = null;
       const first = esc(booking.name.split(" ")[0]);
       const mailed = booking.email ? ` A confirmation is on its way to <b>${esc(booking.email)}</b>.` : "";
@@ -467,6 +588,39 @@
       say(["Sorry — that didn’t go through. Your details are still here.",
            `Please try again, or call <a href="${TEL}">${PHONE}</a> and we’ll book you right away.`],
           [{ label: "Try again", value: "#send", primary: true }, { label: "Call now", href: TEL }]);
+    });
+  }
+
+  // Book straight into Square. If that fails, send it as a request instead so the
+  // customer is never left without a way through.
+  function sendBooking() {
+    if (looksLikeSpam()) { flow = null; return say("✅ Thanks! We’ll be in touch.", [{ label: "Ask something else", value: "#menu" }]); }
+    waitFor(api("/book", {
+      variation_id: booking.option.id,
+      version: booking.slot.version,
+      team_member_id: booking.slot.team_member_id,
+      minutes: booking.slot.minutes,
+      start_at: booking.slot.start_at,
+      service: serviceName(),
+      details: booking.details,
+      address: booking.location,
+      name: booking.name,
+      phone: booking.phone,
+      email: booking.email,
+      website: hp.value,
+    }), "Booking your visit…").then(() => {
+      flow = null;
+      post(emailPayload(true)).catch(() => {}); // heads-up email; the booking is already in Square
+      const first = esc(booking.name.split(" ")[0]);
+      const mailed = booking.email ? ` A confirmation is on its way to <b>${esc(booking.email)}</b>.` : "";
+      say([`✅ You’re booked, ${first}! <b>${esc(booking.day)} at ${esc(booking.time)}</b>.${mailed}`,
+           `We’ll call or text <b>${esc(booking.phone)}</b> if anything needs to change. Need to reschedule? Call <a href="${TEL}">${PHONE}</a>.`],
+          [{ label: "Ask something else", value: "#menu" }]);
+    }).catch(() => {
+      delete booking.slot;
+      booking.live = false;
+      say("That time couldn’t be booked automatically, so I’ll send it to our team to confirm instead.");
+      send();
     });
   }
 
