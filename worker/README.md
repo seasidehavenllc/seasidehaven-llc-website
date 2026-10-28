@@ -27,6 +27,17 @@ the token never appears in the public website.
 
 Check it: opening `<worker address>/services` in a browser should list your services.
 
+## Hosting on Render instead
+
+The same code runs as a small Node server (`worker/server.js`):
+
+- Build command: `echo ok`  (no packages to install)
+- Start command: `node worker/server.js`
+- Environment variable: `SQUARE_TOKEN` = the token from step 1 (add it in the Render dashboard under **Environment**)
+
+Render's free plan sleeps after 15 minutes without traffic, so the first request after a quiet spell
+can take up to a minute. The Starter plan stays awake.
+
 ## How it behaves
 
 - `GET /services` lists the Square services that are bookable online.
