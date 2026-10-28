@@ -327,7 +327,7 @@
 
   function api(path, body) {
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 12000);
+    const timer = setTimeout(() => ctrl.abort(), 60000); // allows for the free server waking up
     return fetch(BOOKING_API.replace(/\/$/, "") + path, {
       method: body ? "POST" : "GET",
       headers: body ? { "Content-Type": "application/json" } : {},
@@ -336,6 +336,10 @@
     }).then((r) => r.json().then((j) => { if (!r.ok) throw new Error(j.error || "HTTP " + r.status); return j; }))
       .finally(() => clearTimeout(timer));
   }
+
+  // The free booking server sleeps when idle. Nudge it awake as soon as a page
+  // loads so it's ready by the time a customer gets to picking a time.
+  if (BOOKING_API) fetch(BOOKING_API.replace(/\/$/, "") + "/health").catch(() => {});
 
   let catalog = null;       // Square services, loaded once per page
   function loadCatalog() {
@@ -348,7 +352,8 @@
     setChips([]);
     busy = true;
     const note = addMsg("bot", text);
-    return promise.finally(() => { note.remove(); busy = false; });
+    const slow = setTimeout(() => { note.textContent = "Still checking — this can take a few more seconds…"; }, 5000);
+    return promise.finally(() => { clearTimeout(slow); note.parentNode.remove(); busy = false; });
   }
 
   function startBooking(service) {
