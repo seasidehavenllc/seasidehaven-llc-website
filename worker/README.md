@@ -35,6 +35,22 @@ The same code runs as a small Node server (`worker/server.js`):
 - Start command: `node worker/server.js`
 - Environment variable: `SQUARE_TOKEN` = the token from step 1 (add it in the Render dashboard under **Environment**)
 
+## Booking on Square's free Appointments plan
+
+The free plan won't take bookings made with the personal access token ("seller-level").
+It does take bookings made as the customer ("buyer-level"), which needs an OAuth token
+from the same developer app:
+
+1. In the developer app, switch to **Production**, open **OAuth**, set the Redirect URL to
+   `https://seaside-booking.onrender.com/oauth/callback`, and save.
+2. Copy the **Application ID** and **Application secret** into Render as
+   `SQUARE_APP_ID` and `SQUARE_APP_SECRET`.
+3. Open `https://seaside-booking.onrender.com/oauth/start`, sign in to Square, and click **Allow**.
+   The page that comes back shows a refresh token. Save it in Render as `SQUARE_REFRESH_TOKEN`.
+
+The server swaps the refresh token for a fresh access token on its own. `/health` says
+`"booking": "buyer"` once this is set up.
+
 Render's free plan sleeps after 15 minutes without traffic, so the first request after a quiet spell
 can take up to a minute. The Starter plan stays awake.
 

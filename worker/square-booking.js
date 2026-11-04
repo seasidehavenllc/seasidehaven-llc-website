@@ -3,18 +3,30 @@
    Sits between the website chat and Square so the Square
    access token never appears in the public website.
 
-   Setup: see worker/README.md. It needs one secret:
-     SQUARE_TOKEN  — your Square production access token
+   Setup: see worker/README.md. Secrets:
+     SQUARE_TOKEN          your Square production access token (reads only on
+                           the free Appointments plan)
+     SQUARE_APP_ID         } from the same Square developer app; with these the
+     SQUARE_APP_SECRET     } worker books as the customer ("buyer-level"), which
+     SQUARE_REFRESH_TOKEN  } the free plan allows. Get the refresh token by
+                             visiting /oauth/start once.
 
    Endpoints (all JSON):
      GET  /health                           uptime ping (no Square call)
      GET  /services                         bookable services by category
      GET  /availability?variation=ID&days=7  open times, grouped by day
      POST /book                              create the customer + booking
+     GET  /oauth/start, /oauth/callback      one-time Square "Allow" for booking
 ========================================================= */
 
 const LOCATION_ID = "LEZGWR4E97R78";
-const SQUARE = "https://connect.squareup.com/v2";
+const MERCHANT_ID = "MLCE0EVCANZT6";
+const SQUARE_HOST = "https://connect.squareup.com";
+const SQUARE = SQUARE_HOST + "/v2";
+const OAUTH_SCOPES = [
+  "APPOINTMENTS_READ", "APPOINTMENTS_WRITE", "CUSTOMERS_READ", "CUSTOMERS_WRITE",
+  "ITEMS_READ", "MERCHANT_PROFILE_READ",
+];
 const SQUARE_VERSION = "2025-01-23";
 const ALLOWED_ORIGINS = [
   "https://seasidehavenllc.com",
@@ -36,13 +48,16 @@ export default {
     const reply = (body, status = 200) =>
       new Response(JSON.stringify(body), { status, headers: { ...cors, "Content-Type": "application/json" } });
 
-    // Uptime ping (keeps the free Render server awake); never touches Square
-    if (new URL(request.url).pathname === "/health") return reply({ ok: true, configured: !!env.SQUARE_TOKEN });
-    if (!env.SQUARE_TOKEN) return reply({ error: "Booking is not set up yet." }, 503);
-    const sq = squareClient(env.SQUARE_TOKEN);
     const url = new URL(request.url);
+    // Uptime ping (wakes the free Render server); never touches Square
+    if (url.pathname === "/health") {
+      return reply({ ok: true, configured: !!(env.SQUARE_TOKEN || canRefresh(env)), booking: canRefresh(env) || !!oauthCache ? "buyer" : "seller" });
+    }
+    if (url.pathname === "/oauth/start" || url.pathname === "/oauth/callback") return oauth(url, env);
+    if (!env.SQUARE_TOKEN && !canRefresh(env) && !oauthCache) return reply({ error: "Booking is not set up yet." }, 503);
 
     try {
+      const sq = squareClient(await accessToken(env));
       if (request.method === "GET" && url.pathname === "/services") return reply(await services(sq));
       if (request.method === "GET" && url.pathname === "/availability") {
         const variation = url.searchParams.get("variation") || "";
@@ -59,10 +74,104 @@ export default {
       }
       return reply({ error: "Not found" }, 404);
     } catch (err) {
+      console.error(request.method, url.pathname, "failed:", err.message);
       return reply({ error: err.message || "Square request failed" }, 502);
     }
   },
 };
+
+/* ---------- Access token ----------
+   The free Appointments plan only accepts bookings made "as the customer", which needs
+   an OAuth token with APPOINTMENTS_WRITE. Use that when it's set up; otherwise fall
+   back to the personal access token (fine for reading services and open times). */
+let oauthCache = null; // { token, expires }
+function canRefresh(env) { return !!(env.SQUARE_APP_ID && env.SQUARE_APP_SECRET && env.SQUARE_REFRESH_TOKEN); }
+
+async function accessToken(env) {
+  if (oauthCache && oauthCache.expires - Date.now() > 24 * 60 * 60 * 1000) return oauthCache.token;
+  const refresh = (oauthCache && oauthCache.refresh) || env.SQUARE_REFRESH_TOKEN;
+  if (env.SQUARE_APP_ID && env.SQUARE_APP_SECRET && refresh) {
+    try {
+      const t = await tokenRequest(env, { grant_type: "refresh_token", refresh_token: refresh });
+      oauthCache = { token: t.access_token, expires: Date.parse(t.expires_at), refresh: t.refresh_token || refresh };
+      return oauthCache.token;
+    } catch (err) {
+      console.error("Square token refresh failed:", err.message);
+    }
+  }
+  if (env.SQUARE_TOKEN) return env.SQUARE_TOKEN;
+  throw new Error("Booking is not set up yet.");
+}
+
+async function tokenRequest(env, body) {
+  const res = await fetch(SQUARE_HOST + "/oauth2/token", {
+    method: "POST",
+    headers: { "Square-Version": SQUARE_VERSION, "Content-Type": "application/json" },
+    body: JSON.stringify({ client_id: env.SQUARE_APP_ID, client_secret: env.SQUARE_APP_SECRET, ...body }),
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const e = (json.errors && json.errors[0]) || {};
+    throw new Error(e.detail || e.code || json.message || "Square token error " + res.status);
+  }
+  return json;
+}
+
+/* ---------- One-time "Allow" in Square ---------- */
+const oauthStates = new Map(); // state -> created
+async function oauth(url, env) {
+  const page = (title, body, status = 200) => new Response(
+    `<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">` +
+    `<title>${title}</title><body style="font:16px/1.5 system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 16px">` +
+    `<h1 style="font-size:22px">${title}</h1>${body}</body>`,
+    { status, headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "no-store", "Referrer-Policy": "no-referrer" } });
+
+  if (!env.SQUARE_APP_ID || !env.SQUARE_APP_SECRET) {
+    return page("Not ready yet", "<p>Add <b>SQUARE_APP_ID</b> and <b>SQUARE_APP_SECRET</b> in Render first, then open this page again.</p>", 503);
+  }
+  if (url.pathname === "/oauth/start") {
+    const state = crypto.randomUUID();
+    oauthStates.set(state, Date.now());
+    const go = new URL(SQUARE_HOST + "/oauth2/authorize");
+    go.searchParams.set("client_id", env.SQUARE_APP_ID);
+    go.searchParams.set("scope", OAUTH_SCOPES.join(" "));
+    go.searchParams.set("session", "false");
+    go.searchParams.set("state", state);
+    return new Response(null, { status: 302, headers: { Location: go.toString(), "Cache-Control": "no-store" } });
+  }
+
+  // /oauth/callback
+  const state = url.searchParams.get("state") || "";
+  const started = oauthStates.get(state);
+  oauthStates.delete(state);
+  if (!started || Date.now() - started > 15 * 60 * 1000) {
+    return page("Link expired", '<p>Please start again from <a href="/oauth/start">/oauth/start</a>.</p>', 400);
+  }
+  if (!url.searchParams.get("code")) {
+    return page("Not connected", "<p>Square didn't allow access (" + escapeHtml(url.searchParams.get("error_description") || url.searchParams.get("error") || "cancelled") + ").</p>", 400);
+  }
+  let t;
+  try {
+    t = await tokenRequest(env, { grant_type: "authorization_code", code: url.searchParams.get("code") });
+  } catch (err) {
+    return page("Not connected", "<p>Square said: " + escapeHtml(err.message) + "</p>", 502);
+  }
+  if (t.merchant_id !== MERCHANT_ID) {
+    return page("Wrong Square account", "<p>Sign in with the Seaside Haven Square account and try again.</p>", 403);
+  }
+  oauthCache = { token: t.access_token, expires: Date.parse(t.expires_at), refresh: t.refresh_token };
+  return page("Connected to Square ✅",
+    "<p>Booking works now. To keep it working after the server restarts, save this in Render:</p>" +
+    "<ol><li>Open the <b>seaside-booking</b> service in Render → <b>Environment</b>.</li>" +
+    "<li>Add a variable named <b>SQUARE_REFRESH_TOKEN</b> and paste the value below.</li>" +
+    "<li>Save. Render restarts the server on its own.</li></ol>" +
+    '<p><textarea readonly rows="4" style="width:100%;font:14px monospace" onclick="this.select()">' + escapeHtml(t.refresh_token || "") + "</textarea></p>" +
+    "<p>Keep it private and close this page when you're done. Don't paste it into a chat or email.</p>");
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
 
 /* ---------- Square helper ---------- */
 function squareClient(token) {
@@ -185,7 +294,7 @@ function checkBooking(b) {
   if (isNaN(Date.parse(b.start_at || ""))) return "Pick a time first.";
   if (!b.name || String(b.name).trim().length < 2) return "Please add your name.";
   if (String(b.phone || "").replace(/\D/g, "").length < 10) return "Please add a full phone number.";
-  if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) return "That email doesn't look right.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email || "")) return "Please add a valid email.";
   return null;
 }
 
@@ -231,6 +340,7 @@ async function book(sq, b) {
       start_at: b.start_at,
       customer_id: customerId,
       customer_note: note,
+      ...(b.address ? { location_type: "CUSTOMER_LOCATION", address: { address_line_1: String(b.address).slice(0, 200) } } : {}),
       appointment_segments: [{
         service_variation_id: b.variation_id,
         service_variation_version: Number(b.version) || undefined,

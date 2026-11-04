@@ -1,9 +1,14 @@
 /* Runs the same booking worker as a plain Node server (for Render or any Node host).
-   Start: node worker/server.js   (needs SQUARE_TOKEN in the environment) */
+   Start: node worker/server.js   (see README.md for the environment variables) */
 import http from "node:http";
 import worker from "./square-booking.js";
 
-const env = { SQUARE_TOKEN: process.env.SQUARE_TOKEN };
+const env = {
+  SQUARE_TOKEN: process.env.SQUARE_TOKEN,
+  SQUARE_APP_ID: process.env.SQUARE_APP_ID,
+  SQUARE_APP_SECRET: process.env.SQUARE_APP_SECRET,
+  SQUARE_REFRESH_TOKEN: process.env.SQUARE_REFRESH_TOKEN,
+};
 const port = process.env.PORT || 10000;
 
 http.createServer(async (req, res) => {
