@@ -1,0 +1,40 @@
+# Every night, copy the prices from Square onto the website
+# (see scripts/sync-prices.mjs). Reads the booking server's public service
+# list, so no Square token is needed here. Run it any time from the
+# Actions tab with "Run workflow".
+name: Sync prices from Square
+
+on:
+  schedule:
+    - cron: "15 8 * * *" # about 3–4 AM Eastern
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency: sync-prices
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Update prices
+        run: node scripts/sync-prices.mjs | tee sync-log.txt
+      - name: Save changes
+        run: |
+          if git diff --quiet; then
+            echo "Website prices already match Square."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -am "Sync prices from Square" -m "$(sed -n '/^- /p' sync-log.txt | head -40)"
+          git push
+          # Pushes made by this job don't start a Pages build on their own, so ask for one
+          curl -sS -X POST -H "Authorization: Bearer ${{ github.token }}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/pages/builds" || true
