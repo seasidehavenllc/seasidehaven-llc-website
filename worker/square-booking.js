@@ -340,7 +340,6 @@ async function book(sq, b) {
       start_at: b.start_at,
       customer_id: customerId,
       customer_note: note,
-      ...(b.address ? { location_type: "CUSTOMER_LOCATION", address: { address_line_1: String(b.address).slice(0, 200) } } : {}),
       appointment_segments: [{
         service_variation_id: b.variation_id,
         service_variation_version: Number(b.version) || undefined,
