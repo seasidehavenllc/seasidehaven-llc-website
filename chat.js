@@ -406,7 +406,7 @@
     ask("day", msg);
   }
 
-  // "1069 Estates Rd, Moneta, VA 24121" → { line1, city, state, zip }
+  // "1234 General Rd, Moneta, VA 24121" → { line1, city, state, zip }
   const STATES = "AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY".split(" ");
   const TOWNS = DATA.towns.concat(["Huddleston", "Hardy", "Forest", "Vinton", "Salem", "Wirtz", "Penhook", "Union Hall", "Rocky Mount", "Evington", "Thaxton", "Montvale", "Boones Mill"]);
   function parseAddress(text) {
@@ -553,7 +553,7 @@
       case "item": return "Which service?";
       case "option": return "Which one fits best?";
       case "details": return "In a sentence or two, what needs to be done? (Sizes, number of items, or anything else helpful.)";
-      case "location": return "What’s the full address for the job? (Street, city, state and ZIP, like <i>1069 Estates Rd, Moneta, VA 24121</i>)";
+      case "location": return "What’s the full address for the job? (Street, city, state and ZIP, like <i>1234 General Rd, Moneta, VA 24121</i>)";
       case "day": return booking.live ? "Here are our next open days. Which works best?" : "What day works best for you?";
       case "time": return booking.live ? `Open times on ${esc(booking.day)}:` : "And what time of day?";
       case "name": return "Who should we ask for? (Your name)";
@@ -624,14 +624,14 @@
         if (text === "#addr:asis" && booking.unverified) return useAddress(booking.unverified);
         if (text === "#addr:retype") { delete booking.unverified; return say("Sure — type the full address again (street, city, state and ZIP).", []); }
         const a = parseAddress(text);
-        if (!/\d/.test(a.line1)) return say("I need the street address with the house number, like <i>1069 Estates Rd, Moneta, VA 24121</i>.", []);
+        if (!/\d/.test(a.line1)) return say("I need the street address with the house number, like <i>1234 General Rd, Moneta, VA 24121</i>.", []);
         // Check the address against the map; fill in anything missing from a match
         return waitFor(lookupAddress(text), "Checking that address…").then((found) => {
           const num = (a.line1.match(/\d+/) || [""])[0];
           const match = found.find((f) => f.line1.startsWith(num + " ") && (!a.zip || f.zip === a.zip));
           if (match) return useAddress(match);
           const miss = missingFrom(a);
-          if (miss.length) return say(`I couldn’t find that address on the map, and I’m missing the ${listWords(miss)}. Please type the full address, like <i>1069 Estates Rd, Moneta, VA 24121</i>.`, []);
+          if (miss.length) return say(`I couldn’t find that address on the map, and I’m missing the ${listWords(miss)}. Please type the full address, like <i>1234 General Rd, Moneta, VA 24121</i>.`, []);
           booking.unverified = a;
           const near = found.slice(0, 3).map((f, i) => ({ label: "Did you mean " + addrText(f) + "?", value: "#addr:" + i }));
           addrSuggestions = found;
