@@ -333,7 +333,10 @@
       headers: body ? { "Content-Type": "application/json" } : {},
       body: body ? JSON.stringify(body) : undefined,
       signal: ctrl.signal,
-    }).then((r) => r.json().then((j) => { if (!r.ok) throw new Error(j.error || "HTTP " + r.status); return j; }))
+    }).then((r) => r.json().then((j) => {
+      if (!r.ok) { const e = new Error(j.error || "HTTP " + r.status); e.field = j.field; throw e; }
+      return j;
+    }))
       .finally(() => clearTimeout(timer));
   }
 
@@ -379,15 +382,21 @@
     }).catch(() => { booking.live = false; ask("details", preface); });
   }
 
-  function afterAddress() {
-    if (!booking.live) return ask("day");
+  function afterAddress(preface) {
+    if (!booking.live) return ask("day", preface);
     waitFor(api("/availability?variation=" + encodeURIComponent(booking.option.id) + "&days=10"), "Checking open times…")
       .then((j) => {
         booking.days = (j.days || []).slice(0, 7);
         if (!booking.days.length) return goRequestMode("We don’t have open times online for that in the next week or so — tell me what day works and we’ll fit you in.");
-        ask("day");
+        ask("day", preface);
       })
       .catch(() => goRequestMode("I couldn’t load our calendar just now — tell me what day works and we’ll confirm with you."));
+  }
+
+  // A changed service needs fresh open times; otherwise carry on to the job details
+  function afterOption() {
+    if (booking.editing === "service") { booking.editing = "day"; return afterAddress(); }
+    return ask("details");
   }
 
   // Fall back to the email-request version of the day/time questions
@@ -395,6 +404,124 @@
     booking.live = false;
     delete booking.days; delete booking.slot;
     ask("day", msg);
+  }
+
+  // "1069 Estates Rd, Moneta, VA 24121" → { line1, city, state, zip }
+  const STATES = "AL AK AZ AR CA CO CT DE DC FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY".split(" ");
+  const TOWNS = DATA.towns.concat(["Huddleston", "Hardy", "Forest", "Vinton", "Salem", "Wirtz", "Penhook", "Union Hall", "Rocky Mount", "Evington", "Thaxton", "Montvale", "Boones Mill"]);
+  function parseAddress(text) {
+    let rest = text.replace(/\s+/g, " ").trim();
+    let zip = "", state = "", city = "";
+    const z = rest.match(/\b(\d{5})(?:-\d{4})?\b(?!.*\b\d{5}\b)/);
+    if (z) { zip = z[1]; rest = (rest.slice(0, z.index) + rest.slice(z.index + z[0].length)).trim(); }
+    rest = rest.replace(/[,.\s]+$/, "");
+    const st = rest.match(/(?:^|[,\s])(virginia|north carolina|[A-Za-z]{2})\.?$/i);
+    if (st) {
+      const v = st[1].toLowerCase();
+      const code = v === "virginia" ? "VA" : v === "north carolina" ? "NC" : STATES.includes(v.toUpperCase()) ? v.toUpperCase() : "";
+      if (code) { state = code; rest = rest.slice(0, st.index).replace(/[,\s]+$/, ""); }
+    }
+    if (!state && /^2[0-4]/.test(zip)) state = "VA"; // Virginia ZIPs
+    const parts = rest.split(",").map((p) => p.trim()).filter(Boolean);
+    if (parts.length >= 2) city = parts.pop();
+    else {
+      const town = TOWNS.find((x) => rest.toLowerCase().endsWith(" " + x.toLowerCase()));
+      if (town) { city = town; parts[0] = rest.slice(0, -town.length).trim(); }
+    }
+    return { line1: parts.join(", "), city, state, zip };
+  }
+  // Address suggestions and checks use Photon, a free OpenStreetMap search (no key).
+  // Results are kept near our service area.
+  const ADDRESS_SEARCH = "https://photon.komoot.io/api/?limit=5&lang=en&lat=37.24&lon=-79.65&bbox=-81.5,36.5,-77.5,38.5&layer=house&q=";
+  let addrSuggestions = [];
+  function lookupAddress(q) {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 6000);
+    return fetch(ADDRESS_SEARCH + encodeURIComponent(q), { signal: ctrl.signal })
+      .then((r) => r.json())
+      .then((j) => (j.features || []).map((f) => f.properties)
+        .filter((p) => p.countrycode === "US" && p.housenumber && p.street)
+        .map((p) => ({
+          line1: p.housenumber + " " + p.street,
+          city: p.city || p.town || p.village || p.district || p.county || "",
+          state: STATE_CODES[(p.state || "").toLowerCase()] || "",
+          zip: (p.postcode || "").slice(0, 5),
+        }))
+        .filter((a) => a.city && a.state && /^\d{5}$/.test(a.zip)))
+      .catch(() => [])
+      .finally(() => clearTimeout(timer));
+  }
+  const STATE_CODES = { virginia: "VA", "north carolina": "NC", "west virginia": "WV", maryland: "MD", tennessee: "TN", kentucky: "KY", "district of columbia": "DC" };
+  function addrText(a) { return `${a.line1}, ${a.city}, ${a.state} ${a.zip}`; }
+
+  // Suggest addresses as the customer types
+  let addrTimer = null, addrQuery = "";
+  input.addEventListener("input", () => {
+    if (flow !== "book" || step !== "location") return;
+    const q = input.value.trim();
+    clearTimeout(addrTimer);
+    if (q.length < 5 || !/\d/.test(q)) return;
+    addrTimer = setTimeout(() => {
+      addrQuery = q;
+      lookupAddress(q).then((list) => {
+        if (addrQuery !== q || step !== "location" || busy) return;
+        addrSuggestions = list;
+        setChips(list.map((a, i) => ({ label: addrText(a), value: "#addr:" + i })));
+      });
+    }, 350);
+  });
+
+  function useAddress(a) {
+    booking.address = a;
+    booking.location = addrText(a);
+    delete booking.unverified;
+    if (booking.editing) return proceed();
+    return afterAddress();
+  }
+
+  function missingFrom(a) {
+    const miss = [];
+    if (!/\d/.test(a.line1) || a.line1.length < 4) miss.push("street address");
+    if (!a.city) miss.push("city");
+    if (!a.state) miss.push("state");
+    if (!a.zip) miss.push("ZIP code");
+    return miss;
+  }
+  function listWords(xs) { return xs.length < 2 ? xs.join("") : xs.slice(0, -1).join(", ") + " and " + xs[xs.length - 1]; }
+
+  // After a change from the summary, jump straight back to it
+  function proceed(next, preface) {
+    if (booking.editing) { booking.editing = false; return showConfirm("Updated."); }
+    return ask(next, preface);
+  }
+  function showConfirm(preface) {
+    step = "confirm";
+    input.type = "text";
+    const lead = preface ? preface + " " : "";
+    return say(booking.slot
+      ? [lead + "Here’s your booking:" + summary(), "Should I book it? You’ll get a confirmation, and we’ll call or text if anything needs to change."]
+      : [lead + "Here’s your request:" + summary(), "Should I send it to our team? We’ll call or text to confirm the exact time."], chipsFor("confirm"));
+  }
+  const EDITS = [["service", "Service"], ["details", "Job details"], ["location", "Address"], ["day", "Day & time"], ["name", "Name"], ["phone", "Phone"], ["email", "Email"]];
+  function editStep(s, preface) {
+    if (s === "service") {
+      booking.editing = "service";
+      delete booking.slot; delete booking.time; delete booking.option; delete booking.item;
+      catalog = null; // reload in case the service list changed
+      if (!booking.live) return ask("service", preface);
+      return waitFor(loadCatalog(), "Checking our services…").then(() => {
+        booking.items = catalog[SQUARE_CATEGORY[booking.service]] || [];
+        if (!booking.items.length) { booking.live = false; booking.editing = true; return ask("details", "Tell me a bit about the job and we’ll confirm the service with you."); }
+        ask("item", preface);
+      }).catch(() => { booking.live = false; booking.editing = true; ask("details"); });
+    }
+    if (s === "day") {
+      booking.editing = "day";
+      delete booking.slot; delete booking.time;
+      return booking.live ? afterAddress(preface) : ask("day", preface);
+    }
+    booking.editing = true;
+    return ask(s, preface);
   }
 
   function openDays() {
@@ -426,7 +553,7 @@
       case "item": return "Which service?";
       case "option": return "Which one fits best?";
       case "details": return "In a sentence or two, what needs to be done? (Sizes, number of items, or anything else helpful.)";
-      case "location": return "What’s the address for the job?";
+      case "location": return "What’s the full address for the job? (Street, city, state and ZIP, like <i>1069 Estates Rd, Moneta, VA 24121</i>)";
       case "day": return booking.live ? "Here are our next open days. Which works best?" : "What day works best for you?";
       case "time": return booking.live ? `Open times on ${esc(booking.day)}:` : "And what time of day?";
       case "name": return "Who should we ask for? (Your name)";
@@ -447,7 +574,8 @@
         if (booking.live) return slotChoices(booking.liveDay).map((sl) => ({ label: sl.label, value: "#slot:" + sl.start_at })).concat([{ label: "Pick another day", value: "#time:back" }]);
         if (/^Saturday/.test(booking.day || "")) return [{ label: "9am – 12pm", value: "Morning (9am–12pm)" }, { label: "12pm – 3pm", value: "Afternoon (12pm–3pm)" }, { label: "Any time", value: "Any time" }];
         return [{ label: "Morning · 8–12", value: "Morning (8am–12pm)" }, { label: "Afternoon · 12–4", value: "Afternoon (12pm–4pm)" }, { label: "Any time", value: "Any time" }];
-      case "confirm": return [{ label: booking.slot ? "Book it" : "Send request", value: "#send", primary: true }, { label: "Start over", value: "#restart" }, { label: "Cancel", value: "#cancel" }];
+      case "confirm": return [{ label: booking.slot ? "Book it" : "Send request", value: "#send", primary: true }, { label: "Change something", value: "#edit" }, { label: "Start over", value: "#restart" }, { label: "Cancel", value: "#cancel" }];
+      case "edit": return EDITS.map(([s, label]) => ({ label, value: "#edit:" + s })).concat([{ label: "Nothing, looks good", value: "#edit:none" }]);
       default: return [];
     }
   }
@@ -466,7 +594,9 @@
       case "service": {
         const s = SERVICES.find((x) => x === text) || detectService(" " + text.toLowerCase() + " ");
         if (!s) return say("Sorry, which of these is closest?", chipsFor("service"));
-        booking.service = s; return afterService();
+        booking.service = s;
+        if (booking.editing === "service" && !booking.live) { booking.editing = true; return proceed(); }
+        return afterService();
       }
       case "item": {
         if (text === "#item:other") { booking.live = false; return ask("details", "No problem — describe it and we’ll take a look."); }
@@ -474,21 +604,42 @@
           : booking.items.find((x) => x.name.toLowerCase().includes(text.toLowerCase()));
         if (!it) return say("Which of these is closest? Or tap “Something else.”", chipsFor("item"));
         booking.item = it;
-        if (it.options.length === 1) { booking.option = it.options[0]; return ask("details"); }
+        if (it.options.length === 1) { booking.option = it.options[0]; return afterOption(); }
         return ask("option");
       }
       case "option": {
         const o = text.startsWith("#option:") ? booking.item.options[+text.slice(8)]
           : booking.item.options.find((x) => x.name.toLowerCase().includes(text.toLowerCase()));
         if (!o) return say("Tap the option that fits best — you can add details next.", chipsFor("option"));
-        booking.option = o; return ask("details");
+        booking.option = o; return afterOption();
       }
       case "details":
         if (text.length < 3) return say("Could you tell me a little more about the job?", []);
-        booking.details = text; return ask("location", "Got it.");
-      case "location":
-        if (text.length < 3) return say("Please type the street address or at least the town.", []);
-        booking.location = text; return afterAddress();
+        booking.details = text; return proceed("location", "Got it.");
+      case "location": {
+        if (text.startsWith("#addr:")) {
+          const picked = addrSuggestions[+text.slice(6)];
+          if (picked) return useAddress(picked);
+        }
+        if (text === "#addr:asis" && booking.unverified) return useAddress(booking.unverified);
+        if (text === "#addr:retype") { delete booking.unverified; return say("Sure — type the full address again (street, city, state and ZIP).", []); }
+        const a = parseAddress(text);
+        if (!/\d/.test(a.line1)) return say("I need the street address with the house number, like <i>1069 Estates Rd, Moneta, VA 24121</i>.", []);
+        // Check the address against the map; fill in anything missing from a match
+        return waitFor(lookupAddress(text), "Checking that address…").then((found) => {
+          const num = (a.line1.match(/\d+/) || [""])[0];
+          const match = found.find((f) => f.line1.startsWith(num + " ") && (!a.zip || f.zip === a.zip));
+          if (match) return useAddress(match);
+          const miss = missingFrom(a);
+          if (miss.length) return say(`I couldn’t find that address on the map, and I’m missing the ${listWords(miss)}. Please type the full address, like <i>1069 Estates Rd, Moneta, VA 24121</i>.`, []);
+          booking.unverified = a;
+          const near = found.slice(0, 3).map((f, i) => ({ label: "Did you mean " + addrText(f) + "?", value: "#addr:" + i }));
+          addrSuggestions = found;
+          return say([`I couldn’t find <b>${esc(addrText(a))}</b> on the map. Please check the house number and street spelling.`,
+                      "If it’s correct (newer or rural addresses sometimes aren’t listed), you can use it as typed."],
+                     near.concat([{ label: "Use it as typed", value: "#addr:asis", primary: true }, { label: "Re-type it", value: "#addr:retype" }]));
+        });
+      }
       case "day":
         if (booking.live) {
           if (text === "#day:none") return goRequestMode("No problem — tell me what works and we’ll confirm with you.");
@@ -503,27 +654,32 @@
           const sl = text.startsWith("#slot:") && booking.liveDay.slots.find((x) => x.start_at === text.slice(6));
           if (!sl) return say("Tap one of the open times.", chipsFor("time"));
           booking.slot = sl; booking.time = sl.label;
-          return ask("name");
+          return proceed("name");
         }
-        booking.time = text; return ask("name");
+        booking.time = text; return proceed("name");
       case "name":
-        booking.name = text; return ask("phone", `Nice to meet you, ${esc(text.split(" ")[0])}!`);
+        if (text.trim().length < 2) return say("What name should we ask for?", []);
+        booking.name = text; return proceed("phone", `Nice to meet you, ${esc(text.split(" ")[0])}!`);
       case "phone": {
         const digits = text.replace(/\D/g, "");
         if (digits.length < 10) return say("That doesn’t look like a full phone number — could you double-check it? (10 digits, like 434-555-0123)", []);
-        booking.phone = text; return ask("email");
+        booking.phone = text; return proceed("email");
       }
       case "email":
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(text)) return say(text ? "That email doesn’t look quite right. Could you try again?" : "We need an email to send your confirmation. What’s the best one?", []);
         booking.email = text;
-        step = "confirm";
-        input.type = "text";
-        return say(booking.slot
-          ? ["Here’s your booking:" + summary(), "Should I book it? You’ll get a confirmation, and we’ll call or text if anything needs to change."]
-          : ["Here’s your request:" + summary(), "Should I send it to our team? We’ll call or text to confirm the exact time."], chipsFor("confirm"));
+        booking.editing = false;
+        return showConfirm();
       case "confirm":
         if (text === "#send") return send();
-        return say(`Tap “${booking.slot ? "Book it" : "Send request"}” when you’re ready, or start over to change something.`, chipsFor("confirm"));
+        if (text === "#edit") { step = "edit"; return say("What would you like to change?", chipsFor("edit")); }
+        return say(`Tap “${booking.slot ? "Book it" : "Send request"}” when you’re ready, or “Change something” to fix a detail.`, chipsFor("confirm"));
+      case "edit": {
+        if (text === "#edit:none") return showConfirm();
+        const pick = text.startsWith("#edit:") ? text.slice(6) : (EDITS.find(([, label]) => label.toLowerCase().startsWith(text.toLowerCase().trim())) || [])[0];
+        if (!pick || !EDITS.some(([s]) => s === pick)) return say("Tap what you’d like to change.", chipsFor("edit"));
+        return editStep(pick);
+      }
     }
   }
 
@@ -607,7 +763,7 @@
       start_at: booking.slot.start_at,
       service: serviceName(),
       details: booking.details,
-      address: booking.location,
+      address: booking.address,
       name: booking.name,
       phone: booking.phone,
       email: booking.email,
@@ -620,10 +776,17 @@
       say([`✅ You’re booked, ${first}! <b>${esc(booking.day)} at ${esc(booking.time)}</b>.${mailed}`,
            `We’ll call or text <b>${esc(booking.phone)}</b> if anything needs to change. Need to reschedule? Call <a href="${TEL}">${PHONE}</a>.`],
           [{ label: "Ask something else", value: "#menu" }]);
-    }).catch(() => {
+    }).catch((err) => {
+      // Something the customer can fix: explain it and ask just that question again
+      if (err.field === "time") return editStep("day", esc(err.message) + " Here are the open times now.");
+      if (err.field === "service") return editStep("service", esc(err.message));
+      if (["name", "phone", "email", "address"].includes(err.field)) {
+        booking.editing = true;
+        return ask(err.field === "address" ? "location" : err.field, esc(err.message));
+      }
       delete booking.slot;
       booking.live = false;
-      say("That time couldn’t be booked automatically, so I’ll send it to our team to confirm instead.");
+      say("I couldn’t reach our calendar just now, so I’ll send this to our team to confirm instead.");
       send();
     });
   }

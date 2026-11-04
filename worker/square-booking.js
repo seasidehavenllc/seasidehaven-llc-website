@@ -69,8 +69,16 @@ export default {
         if (tooMany(request)) return reply({ error: "Too many requests. Please call us." }, 429);
         const body = await request.json().catch(() => null);
         const problem = checkBooking(body);
-        if (problem) return reply({ error: problem }, 400);
-        return reply(await book(sq, body));
+        if (problem) return reply(problem, 400);
+        try {
+          return reply(await book(sq, body));
+        } catch (err) {
+          // Tell the chat which answer to fix, so the customer can correct it and retry
+          const fix = fixFor(err);
+          console.error("POST /book failed:", err.code || "", err.message, fix ? "-> ask for " + fix.field : "");
+          if (fix) return reply(fix, 409);
+          throw err;
+        }
       }
       return reply({ error: "Not found" }, 404);
     } catch (err) {
@@ -188,7 +196,10 @@ function squareClient(token) {
     const json = await res.json().catch(() => ({}));
     if (!res.ok) {
       const e = (json.errors && json.errors[0]) || {};
-      throw new Error(e.detail || e.code || "Square error " + res.status);
+      const err = new Error(e.detail || e.code || "Square error " + res.status);
+      err.code = e.code;
+      err.field = e.field;
+      throw err;
     }
     return json;
   };
@@ -286,17 +297,46 @@ async function availability(sq, variationId, days) {
 }
 
 /* ---------- POST /book ---------- */
+// Problems the customer can fix come back as { error, field } so the chat can
+// re-ask just that question. field: name | phone | email | address | time
 function checkBooking(b) {
-  if (!b || typeof b !== "object") return "Missing booking details.";
-  if (b.website) return "Request blocked."; // honeypot filled in: a bot
-  if (!/^[A-Z0-9]{10,40}$/.test(b.variation_id || "")) return "Unknown service.";
-  if (!/^[A-Za-z0-9]{6,40}$/.test(b.team_member_id || "")) return "Unknown team member.";
-  if (isNaN(Date.parse(b.start_at || ""))) return "Pick a time first.";
-  if (!b.name || String(b.name).trim().length < 2) return "Please add your name.";
-  if (String(b.phone || "").replace(/\D/g, "").length < 10) return "Please add a full phone number.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email || "")) return "Please add a valid email.";
+  const bad = (field, error) => ({ error, field });
+  if (!b || typeof b !== "object") return { error: "Missing booking details." };
+  if (b.website) return { error: "Request blocked." }; // honeypot filled in: a bot
+  if (!/^[A-Z0-9]{10,40}$/.test(b.variation_id || "")) return bad("service", "Please pick the service again.");
+  if (!/^[A-Za-z0-9]{6,40}$/.test(b.team_member_id || "")) return bad("time", "Please pick a time again.");
+  if (isNaN(Date.parse(b.start_at || ""))) return bad("time", "Please pick a time first.");
+  if (!b.name || String(b.name).trim().length < 2) return bad("name", "I still need your name.");
+  if (String(b.phone || "").replace(/\D/g, "").length < 10) return bad("phone", "I need a full 10-digit phone number.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email || "")) return bad("email", "I need a valid email address for your confirmation.");
+  const a = b.address || {};
+  if (!a.line1 || !a.city || !/^[A-Za-z]{2}$/.test(a.state || "") || !/^\d{5}$/.test(a.zip || "")) {
+    return bad("address", "I need the full address for the visit: street, city, state, and ZIP.");
+  }
   return null;
 }
+
+// Turn a Square refusal into something the customer can fix, or null
+function fixFor(err) {
+  const text = (err.code || "") + " " + (err.field || "") + " " + err.message;
+  if (/email/i.test(text)) return { field: "email", error: "Square didn’t accept that email address. Could you double-check it?" };
+  if (/phone/i.test(text)) return { field: "phone", error: "Square didn’t accept that phone number. Could you double-check it?" };
+  if (/address|postal|locality|district/i.test(text)) return { field: "address", error: "Square couldn’t use that address. Please type the street, city, state, and ZIP." };
+  if (/availab|taken|conflict|overlap|already|start_at|past/i.test(text)) return { field: "time", error: "Sorry, that time was just taken." };
+  if (/service_variation|variation|catalog|bookable|duration/i.test(text)) return { field: "service", error: "That service can’t be booked online right now. Please pick it again or choose a similar one." };
+  return null;
+}
+
+function squareAddress(a) {
+  return {
+    address_line_1: String(a.line1).slice(0, 200),
+    locality: String(a.city).slice(0, 100),
+    administrative_district_level_1: String(a.state).toUpperCase(),
+    postal_code: String(a.zip),
+    country: "US",
+  };
+}
+function addressText(a) { return `${a.line1}, ${a.city}, ${String(a.state).toUpperCase()} ${a.zip}`; }
 
 function e164(phone) {
   const d = String(phone).replace(/\D/g, "");
@@ -318,7 +358,7 @@ async function findOrCreateCustomer(sq, b) {
     family_name: rest.join(" ").slice(0, 100) || undefined,
     phone_number: phone,
     email_address: b.email ? b.email.trim() : undefined,
-    address: b.address ? { address_line_1: String(b.address).slice(0, 200) } : undefined,
+    address: squareAddress(b.address),
     note: "Added by the website booking chat",
   });
   return created.customer.id;
@@ -328,7 +368,7 @@ async function book(sq, b) {
   const customerId = await findOrCreateCustomer(sq, b);
   const note = [
     b.service ? "Service: " + b.service : "",
-    b.address ? "Address: " + b.address : "",
+    "Address: " + addressText(b.address),
     b.details ? "Job details: " + b.details : "",
     "Phone: " + b.phone,
   ].filter(Boolean).join("\n").slice(0, 4000);
@@ -340,6 +380,8 @@ async function book(sq, b) {
       start_at: b.start_at,
       customer_id: customerId,
       customer_note: note,
+      location_type: "CUSTOMER_LOCATION",
+      address: squareAddress(b.address),
       appointment_segments: [{
         service_variation_id: b.variation_id,
         service_variation_version: Number(b.version) || undefined,
@@ -351,7 +393,7 @@ async function book(sq, b) {
   return { ok: true, booking_id: res.booking.id, status: res.booking.status };
 }
 
-/* ---------- Light abuse guard: 5 bookings per IP per 10 minutes ---------- */
+/* ---------- Light abuse guard: 10 tries per IP per 10 minutes ---------- */
 const recent = new Map();
 function tooMany(request) {
   const ip = request.headers.get("CF-Connecting-IP") || "unknown";
@@ -359,5 +401,5 @@ function tooMany(request) {
   const list = (recent.get(ip) || []).filter((t) => now - t < 10 * 60 * 1000);
   list.push(now);
   recent.set(ip, list);
-  return list.length > 5;
+  return list.length > 10;
 }
