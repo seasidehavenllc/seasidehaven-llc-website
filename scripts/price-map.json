@@ -1,0 +1,117 @@
+{
+  "_about": "Links the website's price lists to Square services. Used by scripts/sync-prices.mjs. Rows not listed are matched to the Square option with the same name; 'Item/*' means the full price range of every option of that Square service.",
+
+  "pages": {
+    "Pages/landscaping.html": "Landscape Services",
+    "Pages/remodeling.html": "Remodeling Services",
+    "Pages/junkremoval.html": "Junk Removal"
+  },
+
+  "chatService": {
+    "Landscape Services": "Landscaping",
+    "Remodeling Services": "Remodeling",
+    "Junk Removal": "Junk Removal"
+  },
+
+  "entries": {
+    "p-mowing": { "item": "Mowing" },
+    "p-weed": { "item": "Weed Eater" },
+    "p-edging": { "item": "Edger" },
+    "p-bush": { "item": "Bush Trimming" },
+    "p-aeration": { "item": "Aeration" },
+    "p-fertilization": { "item": "Fertilization" },
+    "p-overseeding": { "item": "Overseeding" },
+    "p-leaf": { "item": "Leaf Removal" },
+    "p-flowerbed": { "item": "Flower Bed Cleanup" },
+    "p-mulch": { "item": "Mulch Installation" },
+    "p-pine": { "item": "Pine Needle Installation" },
+    "p-spring": { "item": "Spring Cleanup" },
+    "p-fall": { "item": "Fall Cleanup" },
+    "p-treetrim": { "item": "Tree Limb Removal" },
+    "p-treeremoval": { "item": "Tree Removal" },
+
+    "p-drywall": { "item": "Drywall Repair" },
+    "p-painting": { "item": "Painting & Touch - Up" },
+    "p-flooring": { "item": "Flooring Installation" },
+    "p-vanity": { "item": "Vanity Replacement" },
+    "p-lightfixtures": { "item": "Light Fixture Swap" },
+    "p-toilets": { "item": "Toilet Replacement" },
+    "p-faucets": { "item": "Faucet Replacement" },
+    "p-doors": { "item": "Door Replacement" },
+    "p-trim": { "item": "Trim & Baseboards" },
+    "p-backsplash": { "item": "Backsplash Installation" },
+    "p-shelving": { "item": "Shelving & Mounting" },
+    "p-caulking": { "item": "Caulking & Sealing" },
+    "p-demo": { "item": "Demolition" },
+    "p-haulaway": { "item": "Haul-Away" },
+
+    "p-basicjunk": { "rows": {
+      "1–3 Item Pick Up": "1 - 3 Item Pick Up/*",
+      "Small Load": "Small Load Pick Up/*",
+      "Medium Load": "Medium Load Pick Up/*",
+      "Large Load": "Large Load Pick Up/*"
+    } },
+    "p-furniture": { "rows": {
+      "Furniture Removal": "Furniture Removal/*",
+      "Mattress Removal": "Mattress Removal/*"
+    } },
+    "p-appliances": { "rows": { "Appliance Removal": "Appliance Removal/*" } },
+    "p-yardjunk": { "rows": { "Yard Waste Load": "Yard Waste Load/*" } },
+    "p-construction": { "rows": { "Construction Debris Load": "Construction Debris Load/*" } },
+    "p-fullcleanout": { "rows": { "Full Property Cleanout": "Full Property Clean Up/*" } }
+  },
+
+  "cards": {
+    "/ job": { "from": "Small drywall patch", "rows": {
+      "Small drywall patch": "Drywall Repair/Small Patch ( 1 - 4 IN )",
+      "Medium drywall patch": "Drywall Repair/Medium Patch ( 4 - 12 IN )",
+      "Bathroom caulk": "Caulking & Sealing/Bathroom Caulk",
+      "Floating shelves": "Shelving & Mounting/Floating Shelves"
+    } },
+    "/ room": { "from": "Room repaint", "rows": {
+      "Room repaint": "Painting & Touch - Up/Room Repaint",
+      "Trim & baseboards, small room": "Trim & Baseboards/Small Room",
+      "Flooring, up to 120 sq ft": "Flooring Installation/Small Room ( Up To 120 SQ FT )",
+      "Single wall repaint": "Painting & Touch - Up/Single Wall Repaint"
+    } },
+    "/ item": { "from": "Bathroom Faucet", "rows": {
+      "Bathroom Faucet": "Faucet Replacement/Bathroom Faucet",
+      "Standard Toilet Swap": "Toilet Replacement/Standard Toilet Swap",
+      "Ceiling Fan Install": "Light Fixture Swap/Ceiling Fan Install",
+      "Standard Vanity": "Vanity Replacement/Standard Vanity"
+    } },
+    "/ visit": { "from": "Small Yard", "rows": {
+      "Small Yard": "Mowing/Small",
+      "Medium Yard": "Mowing/Medium",
+      "Large Yard": "Mowing/Large Yard",
+      "Edging add-on": "Edger/Small Yard"
+    } },
+    "/ cleanup": { "from": "Small property", "rows": {
+      "Small property": "Spring Cleanup/Small Property",
+      "Medium property": "Spring Cleanup/Medium Property",
+      "Leaf removal": "Leaf Removal/Regular",
+      "Bush trimming": "Bush Trimming/Small Yard"
+    } },
+    "/ yard": { "from": "Mulch, per yard installed", "rows": {
+      "Mulch, per yard installed": "Mulch Installation/Per Yard Install",
+      "Full bed refresh": "Mulch Installation/Full Bed Refresh",
+      "Pine needles, per bale": "Pine Needle Installation/Per Bale Install",
+      "Light bed cleanup": "Flower Bed Cleanup/Light Cleanup"
+    } },
+    "/ pickup": { "from": "min", "rows": {
+      "1–3 Item Pick Up": "1 - 3 Item Pick Up/*",
+      "Mattress Removal": "Mattress Removal/*",
+      "Appliance Removal": "Appliance Removal/*",
+      "Furniture Removal": "Furniture Removal/*"
+    } },
+    "/ load": { "from": "Small Load", "rows": {
+      "Small Load": "Small Load Pick Up/*",
+      "Medium Load": "Medium Load Pick Up/*",
+      "Yard Waste Load": "Yard Waste Load/*",
+      "Construction Debris Load": "Construction Debris Load/*"
+    } },
+    "/ property": { "from": "Full property cleanout", "rows": {
+      "Full property cleanout": "Full Property Clean Up/*"
+    } }
+  }
+}
