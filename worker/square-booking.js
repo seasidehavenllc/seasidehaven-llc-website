@@ -59,6 +59,7 @@ export default {
       }
       return reply({ error: "Not found" }, 404);
     } catch (err) {
+      console.error(request.method, url.pathname, "failed:", err.message);
       return reply({ error: err.message || "Square request failed" }, 502);
     }
   },
@@ -185,7 +186,7 @@ function checkBooking(b) {
   if (isNaN(Date.parse(b.start_at || ""))) return "Pick a time first.";
   if (!b.name || String(b.name).trim().length < 2) return "Please add your name.";
   if (String(b.phone || "").replace(/\D/g, "").length < 10) return "Please add a full phone number.";
-  if (b.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)) return "That email doesn't look right.";
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email || "")) return "Please add a valid email.";
   return null;
 }
 
