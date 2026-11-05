@@ -3,12 +3,8 @@
 import http from "node:http";
 import worker from "./square-booking.js";
 
-const env = {
-  SQUARE_TOKEN: process.env.SQUARE_TOKEN,
-  SQUARE_APP_ID: process.env.SQUARE_APP_ID,
-  SQUARE_APP_SECRET: process.env.SQUARE_APP_SECRET,
-  SQUARE_REFRESH_TOKEN: process.env.SQUARE_REFRESH_TOKEN,
-};
+// Every setting comes from Render's Environment tab (see square-booking.js for the list)
+const env = process.env;
 const port = process.env.PORT || 10000;
 
 http.createServer(async (req, res) => {

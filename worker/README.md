@@ -54,12 +54,36 @@ The server swaps the refresh token for a fresh access token on its own. `/health
 Render's free plan sleeps after 15 minutes without traffic, so the first request after a quiet spell
 can take up to a minute. The Starter plan stays awake.
 
+## Deposits, quote requests and review requests
+
+These are set in Render under **Environment**. Each one is optional.
+
+| Name | What it does |
+|---|---|
+| `DEPOSIT_PERCENT` | Deposit for online bookings, as a % of the service price. Default 25. `0` turns deposits off. |
+| `DEPOSIT_MIN` | Smallest deposit in dollars. Default 25. |
+| `RESEND_API_KEY` | Lets the server send email through resend.com (free up to 3,000 a month). |
+| `EMAIL_FROM` | Who the email is from, e.g. `Seaside Haven <info@seasidehavenllc.com>`. The domain must be verified in Resend. |
+| `NOTIFY_EMAIL` | Where quote request alerts go. Default info@seasidehavenllc.com. |
+| `REVIEW_URL` | Your Google review link (Google Business Profile → **Ask for reviews**). |
+| `TASK_SECRET` | Any long random password. Put the same value in GitHub → Settings → Secrets and variables → Actions as `TASK_SECRET`. |
+
+- **Deposits:** after an online booking, the server creates a Square invoice for the deposit and
+  publishes it. Square emails it, takes the card, and sends a reminder the next day. The chat
+  shows a "Pay deposit" button too. Needs `SQUARE_TOKEN`.
+- **Quote requests:** the Get a Quote page saves each request on the customer in Square (note +
+  the "Website quote requests" customer group) and, with Resend set up, emails you an alert.
+- **Review requests:** the "Ask for reviews" GitHub Action runs every evening. Customers whose
+  visit ended in the last day (and wasn't cancelled) get an email with your review link.
+
 ## How it behaves
 
 - `GET /services` lists the Square services that are bookable online.
 - `GET /availability?variation=<id>&days=10` returns open times, in the location's time zone.
 - `POST /book` finds or creates the customer in Square, then creates the booking.
-  The job address and details go in the booking's customer note.
+  The job address and details go in the booking's customer note. Then it sends the deposit invoice.
+- `POST /quote` saves a quote request in Square.
+- `POST /tasks/review-requests` sends review requests (needs `TASK_SECRET`).
 
 If Square can't be reached or a time gets taken, the chat falls back to emailing a
 booking request, so customers always get through.

@@ -1,0 +1,35 @@
+# Every evening, ask customers whose visit ended in the last day for a Google review.
+# The booking server does the work (see worker/square-booking.js, reviewRequests);
+# this just wakes it and calls it. Needs the TASK_SECRET repository secret, the
+# same value as TASK_SECRET in Render.
+name: Ask for reviews
+
+on:
+  schedule:
+    - cron: "0 23 * * *" # about 6–7 PM Eastern
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ask:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send review requests
+        env:
+          TASK_SECRET: ${{ secrets.TASK_SECRET }}
+        run: |
+          if [ -z "$TASK_SECRET" ]; then
+            echo "TASK_SECRET isn't set in GitHub yet, so nothing was sent."
+            exit 0
+          fi
+          # The free server may be asleep; give it a few tries to wake up
+          for i in 1 2 3 4 5 6; do
+            if out=$(curl -sS --fail-with-body --max-time 90 -X POST \
+                 -H "Authorization: Bearer $TASK_SECRET" \
+                 https://seaside-booking.onrender.com/tasks/review-requests); then
+              echo "$out"; exit 0
+            fi
+            echo "Attempt $i: $out"; sleep 20
+          done
+          exit 1

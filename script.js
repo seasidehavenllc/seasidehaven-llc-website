@@ -126,10 +126,13 @@ document.querySelectorAll("[data-apply]").forEach(btn => {
 
 /* =========================================================
    GET A QUOTE WIZARD
-   One real form (#quoteForm) split into 5 steps. It posts to
-   FormSubmit, which emails the request (and photos) to you.
+   One real form (#quoteForm) split into 5 steps. It first saves the
+   request in Square (on the customer, in the "Website quote requests"
+   group) through the booking server, then posts to FormSubmit, which
+   emails the request (and photos) to you.
 ========================================================= */
 const quoteForm = document.getElementById("quoteForm");
+const QUOTE_API = "https://seaside-booking.onrender.com/quote";
 const MAX_UPLOAD_BYTES = 10 * 1024 * 1024; // FormSubmit limit: 10MB total
 
 function val(id) {
@@ -217,7 +220,22 @@ function submitQuote() {
   setError("errorStep5", false);
   const btn = document.getElementById("quoteSubmitBtn");
   if (btn) { btn.disabled = true; btn.textContent = "Sending…"; }
-  quoteForm.submit();
+  const honey = quoteForm.querySelector('[name="_honey"]');
+  const lead = {
+    service: val("selectedService"),
+    details: val("projectDetails") + (photoCount() ? ` (${photoCount()} photo${photoCount() > 1 ? "s" : ""} sent by email)` : ""),
+    name: val("quoteFirstName") + " " + val("quoteLastName"),
+    address: val("quoteAddress"),
+    email: val("quoteEmail"),
+    phone: val("quotePhone"),
+    website: honey ? honey.value : "",
+  };
+  // Save it in Square first (waits at most 8 seconds; the server may be waking up), then email it
+  const ctrl = typeof AbortController === "function" ? new AbortController() : null;
+  const timer = setTimeout(() => ctrl && ctrl.abort(), 8000);
+  fetch(QUOTE_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(lead), signal: ctrl ? ctrl.signal : undefined })
+    .catch(() => {})
+    .finally(() => { clearTimeout(timer); quoteForm.submit(); });
 }
 
 if (quoteForm) {
@@ -225,6 +243,8 @@ if (quoteForm) {
   quoteForm.addEventListener("keydown", e => {
     if (e.key === "Enter" && e.target.tagName === "INPUT") e.preventDefault();
   });
+  // Wake the free booking server now, so it's ready by the time the form is sent
+  fetch(QUOTE_API.replace(/\/quote$/, "/health")).catch(() => {});
   // Pre-select from links like getquote.html?service=Landscaping
   const service = new URLSearchParams(window.location.search).get("service");
   if (["Remodeling", "Landscaping", "Junk Removal"].includes(service)) selectService(service);
