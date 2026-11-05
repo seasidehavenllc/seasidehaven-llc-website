@@ -336,6 +336,8 @@ function squareAddress(a) {
     country: "US",
   };
 }
+// Bookings take the same address without a country (Square rejects that field there).
+function bookingAddress(a) { const { country, ...rest } = squareAddress(a); return rest; }
 function addressText(a) { return `${a.line1}, ${a.city}, ${String(a.state).toUpperCase()} ${a.zip}`; }
 
 function e164(phone) {
@@ -381,7 +383,7 @@ async function book(sq, b) {
       customer_id: customerId,
       customer_note: note,
       location_type: "CUSTOMER_LOCATION",
-      address: squareAddress(b.address),
+      address: bookingAddress(b.address),
       appointment_segments: [{
         service_variation_id: b.variation_id,
         service_variation_version: Number(b.version) || undefined,
