@@ -431,25 +431,49 @@
     return { line1: parts.join(", "), city, state, zip };
   }
   // Address suggestions and checks use Photon, a free OpenStreetMap search (no key).
-  // Results are kept near our service area.
-  const ADDRESS_SEARCH = "https://photon.komoot.io/api/?limit=5&lang=en&lat=37.24&lon=-79.65&bbox=-81.5,36.5,-77.5,38.5&layer=house&q=";
+  // Results are kept near our service area. Many rural houses aren't on the map yet,
+  // so streets count too: the customer's house number is put in front of the street.
+  const ADDRESS_SEARCH = "https://photon.komoot.io/api/?limit=8&lang=en&lat=37.24&lon=-79.65&bbox=-81.5,36.5,-77.5,38.5&layer=house&layer=street&q=";
+  const ZIP_TOWNS = { "24121": "Moneta", "24101": "Hardy", "24184": "Wirtz", "24088": "Penhook", "24176": "Union Hall",
+    "24151": "Rocky Mount", "24523": "Bedford", "24104": "Huddleston", "24095": "Goodview", "24064": "Blue Ridge",
+    "24174": "Thaxton", "24179": "Vinton", "24092": "Glade Hill", "24065": "Boones Mill", "24551": "Forest", "24550": "Evington" };
   let addrSuggestions = [];
   function lookupAddress(q) {
+    const num = (q.match(/^\s*(\d+[A-Za-z]?)\b/) || [])[1];
     const ctrl = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 6000);
     return fetch(ADDRESS_SEARCH + encodeURIComponent(q), { signal: ctrl.signal })
       .then((r) => r.json())
-      .then((j) => (j.features || []).map((f) => f.properties)
-        .filter((p) => p.countrycode === "US" && p.housenumber && p.street)
-        .map((p) => ({
-          line1: p.housenumber + " " + p.street,
-          city: p.city || p.town || p.village || p.district || p.county || "",
-          state: STATE_CODES[(p.state || "").toLowerCase()] || "",
-          zip: (p.postcode || "").slice(0, 5),
-        }))
-        .filter((a) => a.city && a.state && /^\d{5}$/.test(a.zip)))
+      .then((j) => {
+        const seen = new Set();
+        return (j.features || []).map((f) => f.properties)
+          .filter((p) => p.countrycode === "US")
+          .map((p) => {
+            const zip = (p.postcode || "").slice(0, 5);
+            const street = p.housenumber ? p.street : (p.type === "street" ? p.name : "");
+            const house = p.housenumber || num;
+            if (!street || !house) return null;
+            return {
+              line1: house + " " + street,
+              city: p.city || p.town || p.village || ZIP_TOWNS[zip] || p.locality || "",
+              state: STATE_CODES[(p.state || "").toLowerCase()] || "",
+              zip,
+              street,
+            };
+          })
+          .filter((a) => a && a.city && a.state && /^\d{5}$/.test(a.zip))
+          .filter((a) => { const k = addrText(a).toLowerCase(); if (seen.has(k)) return false; seen.add(k); return true; })
+          .slice(0, 5);
+      })
       .catch(() => [])
       .finally(() => clearTimeout(timer));
+  }
+  // Does the typed street name agree with a map result? ("Estates Rd" vs "Estates Road")
+  function sameStreet(typed, a) {
+    const words = (t) => t.toLowerCase().replace(/[^a-z0-9 ]/g, " ").split(/\s+/)
+      .filter((w) => w && !/^\d/.test(w) && !/^(rd|road|st|street|dr|drive|ln|lane|ave|avenue|ct|court|cir|circle|way|trl|trail|pl|place|blvd|hwy|tpke|pkwy|ter|n|s|e|w|ne|nw|se|sw)$/.test(w));
+    const want = words(typed), have = words(a.street || a.line1);
+    return want.length > 0 && want.every((w) => have.some((h) => h.startsWith(w)));
   }
   const STATE_CODES = { virginia: "VA", "north carolina": "NC", "west virginia": "WV", maryland: "MD", tennessee: "TN", kentucky: "KY", "district of columbia": "DC" };
   function addrText(a) { return `${a.line1}, ${a.city}, ${a.state} ${a.zip}`; }
@@ -460,15 +484,16 @@
     if (flow !== "book" || step !== "location") return;
     const q = input.value.trim();
     clearTimeout(addrTimer);
-    if (q.length < 5 || !/\d/.test(q)) return;
+    if (!/^\s*\d+\s+\S{2,}/.test(q)) return;   // start once there's a number and part of a street
     addrTimer = setTimeout(() => {
       addrQuery = q;
       lookupAddress(q).then((list) => {
         if (addrQuery !== q || step !== "location" || busy) return;
+        if (!list.length) return;   // keep the last good suggestions while they keep typing
         addrSuggestions = list;
         setChips(list.map((a, i) => ({ label: addrText(a), value: "#addr:" + i })));
       });
-    }, 350);
+    }, 250);
   });
 
   function useAddress(a) {
@@ -628,7 +653,7 @@
         // Check the address against the map; fill in anything missing from a match
         return waitFor(lookupAddress(text), "Checking that address…").then((found) => {
           const num = (a.line1.match(/\d+/) || [""])[0];
-          const match = found.find((f) => f.line1.startsWith(num + " ") && (!a.zip || f.zip === a.zip));
+          const match = found.find((f) => f.line1.startsWith(num + " ") && sameStreet(a.line1, f) && (!a.zip || f.zip === a.zip));
           if (match) return useAddress(match);
           const miss = missingFrom(a);
           if (miss.length) return say(`I couldn’t find that address on the map, and I’m missing the ${listWords(miss)}. Please type the full address, like <i>1234 General Rd, Moneta, VA 24121</i>.`, []);
