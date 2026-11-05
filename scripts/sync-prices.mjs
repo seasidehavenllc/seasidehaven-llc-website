@@ -223,6 +223,52 @@ function syncCards(file) {
 }
 
 /* ---------- Chat's built-in price list ---------- */
+/* ---------- Google: structured data ----------
+   Each service page gets a schema.org Service block listing every Square service with
+   its price range, so Google can show services and prices. index.html's business block
+   gets the same catalog. Rebuilt from Square on every run. */
+const AREA = ["Lynchburg, VA", "Roanoke, VA", "Bedford, VA", "Smith Mountain Lake, VA", "Moneta, VA", "Goodview, VA"];
+const PROVIDER = { "@type": "HomeAndConstructionBusiness", "name": "Seaside Haven LLC", "url": "https://seasidehavenllc.com/", "telephone": "+1-434-233-0231" };
+function offerCatalog(category) {
+  const list = items.filter((it) => it.category === category).map((it) => {
+    const prices = it.options.map((o) => o.price).filter((n) => n != null && n > 0);
+    const offer = { "@type": "Offer", "itemOffered": { "@type": "Service", "name": it.name } };
+    if (prices.length) {
+      offer.priceSpecification = { "@type": "PriceSpecification", "priceCurrency": "USD", "minPrice": Math.min(...prices) };
+      if (Math.max(...prices) > Math.min(...prices)) offer.priceSpecification.maxPrice = Math.max(...prices);
+    }
+    return offer;
+  });
+  return { "@type": "OfferCatalog", "name": category, "itemListElement": list };
+}
+function setJsonLd(file, id, data) {
+  const html = read(file);
+  const block = `<script type="application/ld+json" id="${id}">\n${JSON.stringify(data, null, 2)}\n</script>`;
+  const re = new RegExp(`<script type="application/ld\\+json" id="${id}">[\\s\\S]*?</script>`);
+  const next = re.test(html) ? html.replace(re, block) : html.replace("</head>", block + "\n</head>");
+  if (next !== html) { write(file, next); changes.push(`${file}: updated Google service info`); }
+}
+function syncSchema() {
+  for (const [file, category] of Object.entries(MAP.pages)) {
+    setJsonLd(file, "square-services", {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": category,
+      "provider": PROVIDER,
+      "areaServed": AREA,
+      "url": "https://seasidehavenllc.com/" + file,
+      "hasOfferCatalog": offerCatalog(category),
+    });
+  }
+  setJsonLd("index.html", "square-catalog", {
+    "@context": "https://schema.org",
+    ...PROVIDER,
+    "priceRange": "$$",
+    "areaServed": AREA,
+    "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Services", "itemListElement": Object.keys(MAP.pages).map((f) => offerCatalog(MAP.pages[f])) },
+  });
+}
+
 function syncChat() {
   const file = "chat.js";
   const js = read(file);
@@ -274,6 +320,7 @@ for (const [file, category] of Object.entries(MAP.pages)) syncPage(file, categor
 const cardFiles = ["index.html", ...fs.readdirSync(path.join(ROOT, "Pages")).filter((f) => f.endsWith(".html")).map((f) => "Pages/" + f)];
 for (const file of cardFiles) syncCards(file);
 syncChat();
+syncSchema();
 
 console.log(changes.length ? "Changes:\n- " + changes.join("\n- ") : "Website prices already match Square.");
 if (warnings.length) console.log("Warnings:\n- " + warnings.join("\n- "));

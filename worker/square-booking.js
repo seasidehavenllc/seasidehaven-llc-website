@@ -10,12 +10,22 @@
      SQUARE_APP_SECRET     } worker books as the customer ("buyer-level"), which
      SQUARE_REFRESH_TOKEN  } the free plan allows. Get the refresh token by
                              visiting /oauth/start once.
+     DEPOSIT_PERCENT       deposit as a % of the service price (default 25)
+     DEPOSIT_MIN           smallest deposit in dollars (default 25); DEPOSIT_PERCENT=0 turns deposits off
+     RESEND_API_KEY        } optional: sends email (quote alerts to you, review requests to
+     EMAIL_FROM            } customers) through resend.com. EMAIL_FROM e.g.
+                             "Seaside Haven <info@seasidehavenllc.com>"
+     NOTIFY_EMAIL          where quote alerts go (default info@seasidehavenllc.com)
+     REVIEW_URL            your Google review link, used in review requests
+     TASK_SECRET           shared with GitHub; protects /tasks/review-requests
 
    Endpoints (all JSON):
      GET  /health                           uptime ping (no Square call)
      GET  /services                         bookable services by category
      GET  /availability?variation=ID&days=7  open times, grouped by day
-     POST /book                              create the customer + booking
+     POST /book                              create the customer + booking (+ deposit invoice)
+     POST /quote                             save a quote request in Square (+ email alert)
+     POST /tasks/review-requests             daily: ask yesterday's customers for a review
      GET  /oauth/start, /oauth/callback      one-time Square "Allow" for booking
 ========================================================= */
 
@@ -34,8 +44,10 @@ const ALLOWED_ORIGINS = [
   "https://seasidehavenllc.github.io",
 ];
 
+let globalEnv = {};
 export default {
   async fetch(request, env) {
+    globalEnv = env;
     const origin = request.headers.get("Origin") || "";
     const cors = {
       "Access-Control-Allow-Origin": ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0],
@@ -70,8 +82,9 @@ export default {
         const body = await request.json().catch(() => null);
         const problem = checkBooking(body);
         if (problem) return reply(problem, 400);
+        let booked;
         try {
-          return reply(await book(sq, body));
+          booked = await book(sq, body);
         } catch (err) {
           // Tell the chat which answer to fix, so the customer can correct it and retry
           const fix = fixFor(err);
@@ -79,6 +92,23 @@ export default {
           if (fix) return reply(fix, 409);
           throw err;
         }
+        // The booking is made; a deposit problem must never undo it
+        booked.deposit = await requestDeposit(env, sq, booked, body).catch((err) => {
+          console.error("Deposit invoice failed:", err.code || "", err.message);
+          return null;
+        });
+        return reply(booked);
+      }
+      if (request.method === "POST" && url.pathname === "/quote") {
+        if (tooMany(request)) return reply({ error: "Too many requests. Please call us." }, 429);
+        const body = await request.json().catch(() => null);
+        const problem = checkQuote(body);
+        if (problem) return reply(problem, 400);
+        return reply(await saveQuote(env, env.SQUARE_TOKEN ? squareClient(env.SQUARE_TOKEN) : sq, body));
+      }
+      if (request.method === "POST" && url.pathname === "/tasks/review-requests") {
+        if (!env.TASK_SECRET || request.headers.get("Authorization") !== "Bearer " + env.TASK_SECRET) return reply({ error: "Not allowed" }, 401);
+        return reply(await reviewRequests(env));
       }
       return reply({ error: "Not found" }, 404);
     } catch (err) {
@@ -183,9 +213,9 @@ function escapeHtml(s) {
 
 /* ---------- Square helper ---------- */
 function squareClient(token) {
-  return async function sq(path, body) {
+  return async function sq(path, body, method) {
     const res = await fetch(SQUARE + path, {
-      method: body ? "POST" : "GET",
+      method: method || (body ? "POST" : "GET"),
       headers: {
         "Authorization": "Bearer " + token,
         "Square-Version": SQUARE_VERSION,
@@ -253,7 +283,7 @@ async function services(sq) {
       (categories[cat] = categories[cat] || []).push({ id: item.id, name: item.item_data.name, options });
     });
 
-  const data = { categories };
+  const data = { categories, deposit: depositPolicy(globalEnv) };
   servicesCache = { at: Date.now(), data };
   return data;
 }
@@ -392,7 +422,190 @@ async function book(sq, b) {
       }],
     },
   });
-  return { ok: true, booking_id: res.booking.id, status: res.booking.status };
+  return { ok: true, booking_id: res.booking.id, status: res.booking.status, customer_id: customerId };
+}
+
+/* ---------- Deposits ----------
+   Square's Bookings API can't take a payment, so after an online booking we send the
+   customer a Square invoice for the deposit. Square emails it, takes the card, sends
+   reminders, and shows it as paid in your dashboard. Invoices need the full personal
+   access token (SQUARE_TOKEN); the customer-level token can't create them. */
+function depositPolicy(env) {
+  const pct = env.DEPOSIT_PERCENT === undefined || env.DEPOSIT_PERCENT === "" ? 25 : Number(env.DEPOSIT_PERCENT);
+  const min = env.DEPOSIT_MIN === undefined || env.DEPOSIT_MIN === "" ? 25 : Number(env.DEPOSIT_MIN);
+  return { percent: isFinite(pct) && pct > 0 ? pct : 0, min: isFinite(min) && min > 0 ? min : 0 };
+}
+function depositFor(env, price) {
+  const { percent, min } = depositPolicy(env);
+  if (!percent || !price) return 0;
+  return Math.min(price, Math.max(min, Math.round(price * percent) / 100)); // dollars
+}
+function todayAt(timeZone) {
+  return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+}
+async function requestDeposit(env, sq, booked, b) {
+  if (!env.SQUARE_TOKEN || !depositPolicy(env).percent) return null;
+  const seller = squareClient(env.SQUARE_TOKEN);
+  const found = await sq("/catalog/object/" + encodeURIComponent(b.variation_id));
+  const money = found.object && found.object.item_variation_data && found.object.item_variation_data.price_money;
+  const amount = Math.round(depositFor(env, money ? money.amount / 100 : 0) * 100); // cents
+  if (!amount) return null;
+  const loc = await getLocation(sq);
+  const what = String(b.service || "your visit").slice(0, 200);
+  const order = await seller("/orders", {
+    idempotency_key: "dep-order-" + booked.booking_id,
+    order: {
+      location_id: LOCATION_ID,
+      customer_id: booked.customer_id,
+      line_items: [{ name: "Deposit: " + what, quantity: "1", base_price_money: { amount, currency: "USD" } }],
+    },
+  });
+  const invoice = (delivery) => seller("/invoices", {
+    idempotency_key: "dep-invoice-" + delivery + "-" + booked.booking_id,
+    invoice: {
+      location_id: LOCATION_ID,
+      order_id: order.order.id,
+      primary_recipient: { customer_id: booked.customer_id },
+      delivery_method: delivery,
+      title: "Deposit to hold your Seaside Haven visit",
+      description: "This deposit holds your booked time. It comes off the final price, and the rest is due after the job.",
+      payment_requests: [{
+        request_type: "BALANCE",
+        due_date: todayAt(loc.timezone || "America/New_York"),
+        reminders: [{ relative_scheduled_days: 1, message: "Friendly reminder: please pay the deposit to hold your booked time." }],
+      }],
+      accepted_payment_methods: { card: true, cash_app_pay: true, square_gift_card: false, bank_account: false, buy_now_pay_later: false },
+    },
+  });
+  // Square emails it when the customer has an email; otherwise the chat's button is the link
+  const created = await invoice("EMAIL").catch((err) => {
+    if (!/email/i.test(err.message)) throw err;
+    return invoice("SHARE_MANUALLY");
+  });
+  const inv = created.invoice;
+  const published = await seller("/invoices/" + inv.id + "/publish", { version: inv.version, idempotency_key: "dep-publish-" + booked.booking_id });
+  return { amount: amount / 100, url: published.invoice.public_url || null };
+}
+
+/* ---------- Quote requests ----------
+   Saves the request on the customer in Square (found by phone or email, or created) and
+   adds them to a "Website quote requests" group, so every lead is in one place. */
+function checkQuote(q) {
+  if (!q || typeof q !== "object") return { error: "Missing details." };
+  if (q.website) return { error: "Request blocked." };
+  if (!q.name || String(q.name).trim().length < 2) return { error: "Missing name." };
+  if (String(q.phone || "").replace(/\D/g, "").length < 10) return { error: "Missing phone." };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(q.email || "")) return { error: "Missing email." };
+  if (!q.details || String(q.details).trim().length < 3) return { error: "Missing project details." };
+  return null;
+}
+let quoteGroupId = null;
+async function quoteGroup(sq) {
+  if (quoteGroupId) return quoteGroupId;
+  const NAME = "Website quote requests";
+  let cursor;
+  do {
+    const page = await sq("/customers/groups" + (cursor ? "?cursor=" + encodeURIComponent(cursor) : ""));
+    const hit = (page.groups || []).find((g) => g.name === NAME);
+    if (hit) return (quoteGroupId = hit.id);
+    cursor = page.cursor;
+  } while (cursor);
+  const made = await sq("/customers/groups", { idempotency_key: crypto.randomUUID(), group: { name: NAME } });
+  return (quoteGroupId = made.group.id);
+}
+async function saveQuote(env, sq, q) {
+  const phone = e164(q.phone);
+  const email = String(q.email).trim();
+  const stamp = new Date().toLocaleDateString("en-US", { timeZone: "America/New_York", month: "short", day: "numeric", year: "numeric" });
+  const entry = [
+    `Quote request ${stamp} (website)`,
+    q.service ? "Service: " + q.service : "",
+    q.address ? "Address: " + q.address : "",
+    "Details: " + q.details,
+  ].filter(Boolean).join("\n");
+
+  let customer = null;
+  for (const filter of [{ phone_number: { exact: phone } }, { email_address: { exact: email.toLowerCase() } }]) {
+    const found = await sq("/customers/search", { query: { filter }, limit: 1 });
+    if (found.customers && found.customers.length) { customer = found.customers[0]; break; }
+  }
+  if (customer) {
+    const note = (entry + (customer.note ? "\n\n" + customer.note : "")).slice(0, 4000);
+    await sq("/customers/" + customer.id, { note, version: customer.version }, "PUT");
+  } else {
+    const [given, ...rest] = String(q.name).trim().split(/\s+/);
+    const made = await sq("/customers", {
+      idempotency_key: crypto.randomUUID(),
+      given_name: given.slice(0, 100),
+      family_name: rest.join(" ").slice(0, 100) || undefined,
+      phone_number: phone,
+      email_address: email,
+      address: q.address ? { address_line_1: String(q.address).slice(0, 200) } : undefined,
+      note: entry.slice(0, 4000),
+    });
+    customer = made.customer;
+  }
+  try {
+    await sq("/customers/" + customer.id + "/groups/" + (await quoteGroup(sq)), undefined, "PUT");
+  } catch (err) { console.error("Quote group failed:", err.message); }
+
+  await sendEmail(env, {
+    to: env.NOTIFY_EMAIL || "info@seasidehavenllc.com",
+    reply_to: email,
+    subject: "New quote request: " + (q.service || "website") + " · " + q.name,
+    html: `<p><b>${escHtml(q.name)}</b> asked for a quote.</p><p>${escHtml(entry).replace(/\n/g, "<br>")}</p>` +
+          `<p>Phone: ${escHtml(q.phone)}<br>Email: ${escHtml(email)}</p><p>Saved in Square under Customers → Website quote requests.</p>`,
+  }).catch((err) => console.error("Quote email failed:", err.message));
+  return { ok: true };
+}
+
+/* ---------- Email (resend.com) ---------- */
+function escHtml(s) { return String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c])); }
+async function sendEmail(env, msg) {
+  if (!env.RESEND_API_KEY) return false;
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: { "Authorization": "Bearer " + env.RESEND_API_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify({ from: env.EMAIL_FROM || "Seaside Haven <info@seasidehavenllc.com>", ...msg }),
+  });
+  if (!res.ok) throw new Error("Email failed: " + res.status + " " + (await res.text()).slice(0, 200));
+  return true;
+}
+
+/* ---------- Review requests ----------
+   Run once a day (GitHub Actions calls this). Emails each customer whose visit ended
+   between 26 and 2 hours ago, wasn't cancelled, and has an email, asking for a review. */
+async function reviewRequests(env) {
+  if (!env.REVIEW_URL || !env.RESEND_API_KEY || !env.SQUARE_TOKEN) return { ok: true, skipped: "REVIEW_URL, RESEND_API_KEY and SQUARE_TOKEN are needed" };
+  const seller = squareClient(env.SQUARE_TOKEN);
+  const now = Date.now(), from = now - 26 * 3600e3, to = now - 2 * 3600e3;
+  const params = new URLSearchParams({ location_id: LOCATION_ID, start_at_min: new Date(from - 12 * 3600e3).toISOString(), start_at_max: new Date(to).toISOString(), limit: "100" });
+  const list = await seller("/bookings?" + params);
+  const done = (list.bookings || []).filter((b) => {
+    if (b.status !== "ACCEPTED") return false;
+    const mins = (b.appointment_segments || []).reduce((n, s) => n + (s.duration_minutes || 0), 0);
+    const end = Date.parse(b.start_at) + mins * 60e3;
+    return end >= from && end < to;
+  });
+  const asked = new Set();
+  let sent = 0;
+  for (const b of done) {
+    if (!b.customer_id || asked.has(b.customer_id)) continue;
+    asked.add(b.customer_id);
+    const { customer } = await seller("/customers/" + b.customer_id);
+    if (!customer || !customer.email_address) continue;
+    const first = escHtml(customer.given_name || "there");
+    await sendEmail(env, {
+      to: customer.email_address,
+      subject: "How did we do, " + (customer.given_name || "neighbor") + "?",
+      html: `<p>Hi ${first},</p><p>Thanks for choosing Seaside Haven! If you were happy with the work, ` +
+            `would you take a minute to leave us a Google review? It helps a small family business more than you'd think.</p>` +
+            `<p><a href="${escHtml(env.REVIEW_URL)}" style="display:inline-block;background:#0e9fb8;color:#fff;padding:10px 18px;border-radius:8px;text-decoration:none;font-weight:600">Leave a review</a></p>` +
+            `<p>If anything wasn't right, just reply to this email or call (434) 233-0231 and we'll make it right.</p><p>The Seaside Haven team</p>`,
+      reply_to: env.NOTIFY_EMAIL || "info@seasidehavenllc.com",
+    }).then(() => sent++).catch((err) => console.error("Review email failed:", err.message));
+  }
+  return { ok: true, checked: done.length, sent };
 }
 
 /* ---------- Light abuse guard: 10 tries per IP per 10 minutes ---------- */
