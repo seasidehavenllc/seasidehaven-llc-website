@@ -60,7 +60,7 @@ These are set in Render under **Environment**. Each one is optional.
 
 | Name | What it does |
 |---|---|
-| `DEPOSIT_PERCENT` | Deposit for online bookings, as a % of the service price. Default 25. `0` turns deposits off. |
+| `DEPOSIT_PERCENT` | Deposit for online bookings, as a % of the service price. Default 50. `0` turns deposits off. |
 | `DEPOSIT_MIN` | Smallest deposit in dollars. Default 25. |
 | `RESEND_API_KEY` | Lets the server send email through resend.com (free up to 3,000 a month). |
 | `EMAIL_FROM` | Who the email is from, e.g. `Seaside Haven <info@seasidehavenllc.com>`. The domain must be verified in Resend. |

@@ -10,7 +10,7 @@
      SQUARE_APP_SECRET     } worker books as the customer ("buyer-level"), which
      SQUARE_REFRESH_TOKEN  } the free plan allows. Get the refresh token by
                              visiting /oauth/start once.
-     DEPOSIT_PERCENT       deposit as a % of the service price (default 25)
+     DEPOSIT_PERCENT       deposit as a % of the service price (default 50)
      DEPOSIT_MIN           smallest deposit in dollars (default 25); DEPOSIT_PERCENT=0 turns deposits off
      RESEND_API_KEY        } optional: sends email (quote alerts to you, review requests to
      EMAIL_FROM            } customers) through resend.com. EMAIL_FROM e.g.
@@ -431,7 +431,7 @@ async function book(sq, b) {
    reminders, and shows it as paid in your dashboard. Invoices need the full personal
    access token (SQUARE_TOKEN); the customer-level token can't create them. */
 function depositPolicy(env) {
-  const pct = env.DEPOSIT_PERCENT === undefined || env.DEPOSIT_PERCENT === "" ? 25 : Number(env.DEPOSIT_PERCENT);
+  const pct = env.DEPOSIT_PERCENT === undefined || env.DEPOSIT_PERCENT === "" ? 50 : Number(env.DEPOSIT_PERCENT);
   const min = env.DEPOSIT_MIN === undefined || env.DEPOSIT_MIN === "" ? 25 : Number(env.DEPOSIT_MIN);
   return { percent: isFinite(pct) && pct > 0 ? pct : 0, min: isFinite(min) && min > 0 ? min : 0 };
 }
