@@ -332,8 +332,3 @@ document.querySelectorAll(".switcher").forEach(sw => {
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => moveThumb(buttons.find(b => b.getAttribute("aria-selected") === "true")));
 });
 
-/* ---------- Seasonal specials: hide offers after their end date ---------- */
-document.querySelectorAll("[data-ends]").forEach(el => {
-  const end = new Date(el.dataset.ends + "T23:59:59");
-  if (!isNaN(end) && Date.now() > end.getTime()) el.remove();
-});
