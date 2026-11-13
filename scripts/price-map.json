@@ -29,6 +29,10 @@
     "p-fall": { "item": "Fall Cleanup" },
     "p-treetrim": { "item": "Tree Limb Removal" },
     "p-treeremoval": { "item": "Tree Removal" },
+    "p-gutter": { "item": "Gutter Cleaning" },
+    "p-snow": { "item": "Snow Removal" },
+    "p-salt": { "item": "Driveway Salting" },
+    "p-winterize": { "item": "Winterizing" },
 
     "p-drywall": { "item": "Drywall Repair" },
     "p-painting": { "item": "Painting & Touch - Up" },
@@ -97,6 +101,22 @@
       "Full bed refresh": "Mulch Installation/Full Bed Refresh",
       "Pine needles, per bale": "Pine Needle Installation/Per Bale Install",
       "Light bed cleanup": "Flower Bed Cleanup/Light Cleanup"
+    } },
+    "/ cleaning": { "from": "One-story home", "rows": {
+      "One-story home": "Gutter Cleaning/One-Story Home",
+      "Two-story home": "Gutter Cleaning/Two-Story Home",
+      "Large or steep roof": "Gutter Cleaning/Large / Steep Roof"
+    } },
+    "/ storm": { "from": "min", "rows": {
+      "Small driveway": "Snow Removal/Small Driveway",
+      "Medium driveway": "Snow Removal/Medium Driveway",
+      "Large driveway": "Snow Removal/Large / Long Driveway",
+      "Driveway salting": "Driveway Salting/Small"
+    } },
+    "/ home": { "from": "Faucets & hoses", "rows": {
+      "Faucets & hoses": "Winterizing/Outdoor Faucets & Hoses",
+      "Sprinkler blowout": "Winterizing/Sprinkler Blowout",
+      "Full outdoor winterize": "Winterizing/Full Outdoor Winterize"
     } },
     "/ pickup": { "from": "min", "rows": {
       "1–3 Item Pick Up": "1 - 3 Item Pick Up/*",
