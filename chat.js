@@ -293,11 +293,12 @@
 
   /* ---------- Prices ---------- */
   const ALIASES = {
-    "mow": "Mowing", "lawn": "Mowing", "grass": "Mowing", "cut": "Mowing",
     "weed": "Weed eating", "edg": "Edging", "bush": "Bush trimming", "hedge": "Bush trimming", "shrub": "Bush trimming",
     "aerat": "Aeration", "fertil": "Fertilization", "overseed": "Overseeding", "seed": "Overseeding", "leaf": "Leaf removal", "leaves": "Leaf removal",
     "flower bed": "Flower bed cleanup", "mulch": "Mulch installation", "pine": "Pine needle installation",
     "spring": "Spring cleanup", "fall clean": "Fall cleanup", "limb": "Tree limb removal", "branch": "Tree limb removal", "tree trim": "Tree limb removal", "tree": "Tree removal", "stump": "Tree removal",
+    // Lawn words go after the specific lawn services, so "lawn aeration" or "grass seed" finds aeration or overseeding, not mowing
+    "mow": "Mowing", "lawn": "Mowing", "grass": "Mowing", "cut": "Mowing",
     "drywall": "Drywall repair", "hole": "Drywall repair", "sheetrock": "Drywall repair", "paint": "Painting",
     "floor": "Flooring", "vinyl": "Flooring", "laminate": "Flooring", "vanity": "Vanity replacement", "sink": "Vanity replacement",
     "light": "Light fixtures & fans", "fan": "Light fixtures & fans", "chandelier": "Light fixtures & fans", "dimmer": "Light fixtures & fans",
