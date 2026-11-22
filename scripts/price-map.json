@@ -21,7 +21,6 @@
     "p-aeration": { "item": "Aeration" },
     "p-fertilization": { "item": "Fertilization" },
     "p-overseeding": { "item": "Overseeding" },
-    "p-leaf": { "item": "Leaf Removal" },
     "p-mulching": { "item": "Leaf Mulching" },
     "p-blowing": { "item": "Leaf Blowing" },
     "p-bagging": { "item": "Leaf Bagging" },
@@ -97,7 +96,7 @@
     "/ cleanup": { "from": "Small property", "rows": {
       "Small property": "Spring Cleanup/Small Property",
       "Medium property": "Spring Cleanup/Medium Property",
-      "Leaf removal": "Leaf Removal/Regular",
+      "Leaf bagging": "Leaf Bagging/Small Yard",
       "Bush trimming": "Bush Trimming/Small Yard"
     } },
     "/ yard": { "from": "Mulch, per yard installed", "rows": {
