@@ -297,11 +297,12 @@
     "leaf blow": "Leaf blowing", "blow leaves": "Leaf blowing", "blow the leaves": "Leaf blowing", "blowing leaves": "Leaf blowing", "blowing the leaves": "Leaf blowing",
     "leaf bag": "Leaf bagging", "bag leaves": "Leaf bagging", "bag the leaves": "Leaf bagging", "bagging leaves": "Leaf bagging", "bagging the leaves": "Leaf bagging",
     "leaf pile": "Leaf pile pickup", "pile of leaves": "Leaf pile pickup", "leaf pickup": "Leaf pile pickup", "leaf pick up": "Leaf pile pickup",
-    "mow": "Mowing", "lawn": "Mowing", "grass": "Mowing", "cut": "Mowing",
     "weed": "Weed eating", "edg": "Edging", "bush": "Bush trimming", "hedge": "Bush trimming", "shrub": "Bush trimming",
     "aerat": "Aeration", "fertil": "Fertilization", "overseed": "Overseeding", "seed": "Overseeding", "leaf": "Leaf bagging", "leaves": "Leaf bagging",
     "flower bed": "Flower bed cleanup", "mulch": "Mulch installation", "pine": "Pine needle installation",
     "spring": "Spring cleanup", "fall clean": "Fall cleanup", "limb": "Tree limb removal", "branch": "Tree limb removal", "tree trim": "Tree limb removal", "tree": "Tree removal", "stump": "Tree removal",
+    // Lawn words go after the specific lawn services, so "lawn aeration" or "grass seed" finds aeration or overseeding, not mowing
+    "mow": "Mowing", "lawn": "Mowing", "grass": "Mowing", "cut": "Mowing",
     "drywall": "Drywall repair", "hole": "Drywall repair", "sheetrock": "Drywall repair", "paint": "Painting",
     "floor": "Flooring", "vinyl": "Flooring", "laminate": "Flooring", "vanity": "Vanity replacement", "sink": "Vanity replacement",
     "light": "Light fixtures & fans", "fan": "Light fixtures & fans", "chandelier": "Light fixtures & fans", "dimmer": "Light fixtures & fans",
