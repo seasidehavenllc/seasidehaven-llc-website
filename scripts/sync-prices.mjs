@@ -109,6 +109,16 @@ function sourceForRow(entryId, label) {
   return opt && opt.price != null ? { low: opt.price, group: false } : null;
 }
 
+// Square options of a mapped service that no row on the website matches yet
+function newOptions(entryId, labels) {
+  const entry = MAP.entries[entryId];
+  if (!entry || !entry.item || entry.rows) return [];
+  const item = findItem(entry.item);
+  if (!item) return [];
+  const matched = new Set(labels.map((l) => findOption(item, l)).filter(Boolean).map((o) => o.id));
+  return item.options.filter((o) => o.price != null && !matched.has(o.id));
+}
+
 function setRow(where, label, oldText, src) {
   if (!src) return oldText;
   const next = newRange(oldText, src);
@@ -147,9 +157,15 @@ function syncPage(file, category) {
       after.push(parseRange(next));
       return `<li><span>${label}</span><span>${next}</span></li>`;
     });
+    // Options added in Square to a service the page already lists (e.g. a new "XL Yard")
+    const labels = [...rows.matchAll(ROW_RE)].map((r) => unescapeHtml(r[1]));
+    const added = newOptions(id, labels).map((o) => {
+      changes.push(`${path.basename(file)} ${unescapeHtml(title)} · new option from Square: ${o.name} ${money(o.price)}+`);
+      return `<li><span>${escapeHtml(o.name)}</span><span>${money(o.price)}+</span></li>`;
+    }).join("");
     const newFrom = startingPrice(from, before, after);
     if (newFrom !== from) changes.push(`${path.basename(file)} ${unescapeHtml(title)} starting price: ${from} → ${newFrom}`);
-    return head + title + mid + newFrom + beforeRows + newRows + close;
+    return head + title + mid + newFrom + beforeRows + newRows + added + close;
   });
 
   // Services in Square that the page doesn't list yet
@@ -288,6 +304,7 @@ function syncChat() {
       return [label, next];
     });
     p.from = startingPrice(p.from, before, after);
+    for (const o of newOptions(id, p.rows.map(([label]) => label))) p.rows.push([o.name, money(o.price) + "+"]);
   }
   // Services the website pages had to add
   for (const it of items.filter((x) => !used.has(x.id))) {
